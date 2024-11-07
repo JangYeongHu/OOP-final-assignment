@@ -1,4 +1,4 @@
-package week9_3self;//그냥연습용으로 하나만들어봤습니다
+package archive;//그냥연습용으로 하나만들어봤습니다
 
 import java.awt.BorderLayout;
 import java.awt.Button;
