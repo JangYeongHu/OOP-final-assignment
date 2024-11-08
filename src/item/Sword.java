@@ -1,8 +1,12 @@
 package src.item;
 
 public class Sword {
-    private int price;
+    private int getPrice;
+
+    private int sellPrice;
     private int possibility;
+
+
 
     private String imageSourcePath;
 
