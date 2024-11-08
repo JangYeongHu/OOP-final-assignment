@@ -5,7 +5,7 @@ import src.screen.interfaces.Screen;
 
 import javax.swing.*;
 
-public class ResetScreen extends JFrame implements Screen {
+public class ResetScreen extends JPanel implements Screen {
 
     private MainController mainController;
 

@@ -5,7 +5,7 @@ import src.screen.interfaces.Screen;
 
 import javax.swing.*;
 
-public class StatisticsScreen extends JFrame implements Screen {
+public class StatisticsScreen extends JPanel implements Screen {
 
     private MainController mainController;
 
