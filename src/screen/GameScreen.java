@@ -15,7 +15,6 @@ public class GameScreen extends JPanel implements Screen {
 
     @Override
     public void initialize() {
-
     }
 
     @Override
@@ -27,4 +26,5 @@ public class GameScreen extends JPanel implements Screen {
     public void hideScreen() {
         setVisible(false);
     }
+
 }

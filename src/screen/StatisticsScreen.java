@@ -16,7 +16,6 @@ public class StatisticsScreen extends JPanel implements Screen {
 
     @Override
     public void initialize() {
-
     }
 
     @Override
