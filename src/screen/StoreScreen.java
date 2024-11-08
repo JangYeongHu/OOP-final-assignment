@@ -1,18 +1,19 @@
-package src.start;
+package src.screen;
 
-import src.interfaces.Screen;
+import src.screen.interfaces.Screen;
 import src.main.MainFrame;
 
 import javax.swing.*;
 
-public class StartScreen extends JPanel implements Screen {
+public class StoreScreen extends JPanel implements Screen {
 
     private MainFrame mainFrame;
 
-    public StartScreen(MainFrame mainFrame) {
+    public StoreScreen(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initialize();
     }
+
     @Override
     public void initialize() {
 

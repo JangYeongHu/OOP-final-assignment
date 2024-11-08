@@ -1,14 +1,14 @@
-package src.game;
+package src.screen;
 
-import src.interfaces.Screen;
+import src.screen.interfaces.Screen;
 import src.main.MainFrame;
 
 import javax.swing.*;
 
-public class GameScreen extends JPanel implements Screen {
-
+public class LoadScreen extends JPanel implements Screen {
     private MainFrame mainFrame;
-    public GameScreen(MainFrame mainFrame) {
+
+    public LoadScreen(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initialize();
     }
@@ -20,11 +20,11 @@ public class GameScreen extends JPanel implements Screen {
 
     @Override
     public void showScreen() {
-
+        setVisible(true);
     }
 
     @Override
     public void hideScreen() {
-
+        setVisible(false);
     }
 }

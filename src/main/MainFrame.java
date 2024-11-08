@@ -1,10 +1,11 @@
 package src.main;
 
-import src.game.GameScreen;
-import src.interfaces.Screen;
-import src.load.LoadScreen;
-import src.start.StartScreen;
-import src.store.StoreScreen;
+import src.screen.GameScreen;
+import src.screen.interfaces.Screen;
+import src.screen.LoadScreen;
+import src.screen.SettingScreen;
+import src.screen.StartScreen;
+import src.screen.StoreScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +27,7 @@ public class MainFrame extends JFrame {
         addScreen("Start", new StartScreen(this));
         addScreen("Game", new GameScreen(this));
         addScreen("Store", new StoreScreen(this));
+        addScreen("Setting", new SettingScreen(this));
 
         add(mainPanel);
         setSize(1080, 720);
@@ -45,7 +47,7 @@ public class MainFrame extends JFrame {
             if (name.equals(screenName)) {
                 screen.showScreen();
             } else {
-                screen.showScreen();
+                screen.hideScreen();
             }
         });
         cardLayout.show(mainPanel, screenName);
