@@ -22,7 +22,6 @@ public class ResetScreen extends JFrame implements Screen {
     public void showScreen() {
         setVisible(true);
     }
-
     @Override
     public void hideScreen() {
         setVisible(false);

@@ -25,6 +25,7 @@ public class MainController extends JFrame {
         addScreen("Store", new StoreScreen(this));
         addScreen("Setting", new SettingScreen(this));
         addScreen("Reset", new ResetScreen(this));
+        addScreen("Statistics", new StatisticsScreen(this ));
 
         add(mainPanel);
         setSize(1080, 720);
@@ -48,5 +49,13 @@ public class MainController extends JFrame {
             }
         });
         cardLayout.show(mainPanel, screenName);
+    }
+
+    public void loadSettingData() {
+
+    }
+
+    public void saveData() {
+
     }
 }

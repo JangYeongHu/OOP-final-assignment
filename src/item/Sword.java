@@ -9,4 +9,8 @@ public class Sword {
     private String name;
 
     private String description;
+
+    public String upGradeSword() {
+        return "Success";
+    }
 }

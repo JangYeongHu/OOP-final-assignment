@@ -20,11 +20,22 @@ public class Player {
         return singletonPlayer;
     }
 
-    public void addItem(Item item) {
+    public void loadPlayerData() {
 
+    }
+
+    public void addItem(Item item) {
     }
 
     public Item useItem(Item item) {
         return null;
+    }
+
+    public void doUpgradeSword() {
+
+    }
+
+    public void soldSword() {
+
     }
 }

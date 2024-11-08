@@ -13,6 +13,10 @@ public class LoadScreen extends JPanel implements Screen {
         initialize();
     }
 
+    private void loadData() {
+
+    }
+
     @Override
     public void initialize() {
 
