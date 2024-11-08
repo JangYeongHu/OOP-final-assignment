@@ -1,6 +1,6 @@
 package src.player;
 
-import src.interfaces.Item;
+import src.item.interfaces.Item;
 import src.item.Sword;
 
 import java.util.ArrayList;

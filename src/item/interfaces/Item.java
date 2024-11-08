@@ -1,4 +1,4 @@
-package src.interfaces;
+package src.item.interfaces;
 
 public interface Item {
     String name = null;

@@ -1,16 +1,16 @@
 package src.screen;
 
 import src.screen.interfaces.Screen;
-import src.main.MainFrame;
+import src.main.MainController;
 
 import javax.swing.*;
 
 public class StoreScreen extends JPanel implements Screen {
 
-    private MainFrame mainFrame;
+    private MainController mainController;
 
-    public StoreScreen(MainFrame mainFrame) {
-        this.mainFrame = mainFrame;
+    public StoreScreen(MainController mainController) {
+        this.mainController = mainController;
         initialize();
     }
 

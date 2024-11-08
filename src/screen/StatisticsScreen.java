@@ -1,14 +1,15 @@
 package src.screen;
 
-import src.screen.interfaces.Screen;
 import src.main.MainController;
+import src.screen.interfaces.Screen;
 
 import javax.swing.*;
 
-public class GameScreen extends JPanel implements Screen {
+public class StatisticsScreen extends JFrame implements Screen {
 
     private MainController mainController;
-    public GameScreen(MainController mainController) {
+
+    public StatisticsScreen(MainController mainController) {
         this.mainController = mainController;
         initialize();
     }

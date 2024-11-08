@@ -1,15 +1,15 @@
 package src.screen;
 
 import src.screen.interfaces.Screen;
-import src.main.MainFrame;
+import src.main.MainController;
 
 import javax.swing.*;
 
 public class LoadScreen extends JPanel implements Screen {
-    private MainFrame mainFrame;
+    private MainController mainController;
 
-    public LoadScreen(MainFrame mainFrame) {
-        this.mainFrame = mainFrame;
+    public LoadScreen(MainController mainController) {
+        this.mainController = mainController;
         initialize();
     }
 

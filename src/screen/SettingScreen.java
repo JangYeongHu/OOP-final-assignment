@@ -1,7 +1,7 @@
 package src.screen;
 
 import src.screen.interfaces.Screen;
-import src.main.MainFrame;
+import src.main.MainController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,10 +10,10 @@ import java.awt.event.ActionListener;
 
 public class SettingScreen extends JPanel implements Screen {
 
-    private MainFrame mainFrame;
+    private MainController mainController;
 
-    public SettingScreen(MainFrame mainFrame) {
-        this.mainFrame = mainFrame;
+    public SettingScreen(MainController mainController) {
+        this.mainController = mainController;
         initialize();
     }
 
@@ -25,11 +25,11 @@ public class SettingScreen extends JPanel implements Screen {
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(titleLabel, BorderLayout.CENTER);
 
-        JButton backButton = new JButton("Go to Start Screen");
+        JButton backButton = new JButton("Start Screen으로 이동");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainFrame.switchTo("Start");
+                mainController.switchTo("Start");
             }
         });
         add(backButton, BorderLayout.SOUTH);

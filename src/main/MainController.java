@@ -1,11 +1,7 @@
 package src.main;
 
-import src.screen.GameScreen;
+import src.screen.*;
 import src.screen.interfaces.Screen;
-import src.screen.LoadScreen;
-import src.screen.SettingScreen;
-import src.screen.StartScreen;
-import src.screen.StoreScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,12 +9,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class MainFrame extends JFrame {
+public class MainController extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private Map<String, Screen> screens;
 
-    public MainFrame() {
+    public MainController() {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         screens = new HashMap<>();
@@ -28,6 +24,7 @@ public class MainFrame extends JFrame {
         addScreen("Game", new GameScreen(this));
         addScreen("Store", new StoreScreen(this));
         addScreen("Setting", new SettingScreen(this));
+        addScreen("Reset", new ResetScreen(this));
 
         add(mainPanel);
         setSize(1080, 720);
