@@ -20,6 +20,10 @@ public class Player {
         return singletonPlayer;
     }
 
+    public void savePlayerData() {
+    }
+
+
     public void loadPlayerData() {
     }
 
