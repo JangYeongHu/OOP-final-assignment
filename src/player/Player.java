@@ -8,10 +8,9 @@ import java.util.ArrayList;
 public class Player {
 
     private static Player singletonPlayer;
+
     private int money = 0;
-
     private Sword nowSword = null;
-
     ArrayList<Item> inventory = new ArrayList<>();
 
     public static Player getInstance() {
@@ -41,4 +40,29 @@ public class Player {
     public void soldSword() {
 
     }
+
+
+    //Getter
+    public int getMoney() {
+        return money;
+    }
+
+    public Sword getNowSword() {
+        return nowSword;
+    }
+
+    public ArrayList<Item> getInventory() {
+        return inventory;
+    }
+
+    //Setter
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public void setNowSword(Sword nowSword) {
+        this.nowSword = nowSword;
+    }
+
+
 }
