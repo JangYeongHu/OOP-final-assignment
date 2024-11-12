@@ -9,6 +9,7 @@ public class Player {
 
     private static Player singletonPlayer;
 
+
     private int money = 0;
     private Sword nowSword = null;
     ArrayList<Item> inventory = new ArrayList<>();
@@ -19,7 +20,9 @@ public class Player {
         return singletonPlayer;
     }
 
-    public void savePlayerData() {
+
+    public Player() {
+        loadPlayerData();
     }
 
 
@@ -38,7 +41,6 @@ public class Player {
     }
 
     public void soldSword() {
-
     }
 
 
