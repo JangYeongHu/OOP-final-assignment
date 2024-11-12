@@ -33,30 +33,35 @@ public class GameScreen extends JPanel implements Screen {
         j.add(MainButton, BorderLayout.LINE_START);
         j.add(money, BorderLayout.CENTER);
         money.setFont(money.getFont().deriveFont(24.0f));
-        j.add(SaveButton, BorderLayout.LINE_END);
+        j.add(SaveButton, BorderLayout.PAGE_END);
     }
     void midPanel(){
-        JPanel mid = new JPanel(new GridLayout(1,2));
+        JPanel mid = new JPanel(new GridLayout(3,3));
 
-        ImageIcon imageicon = new ImageIcon("res/1.png");//
-        Image image = imageicon.getImage();
-        int newWidth = 400;
-        int newHeight = 400;
-        Image resizedImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-        ImageIcon resizedIcon = new ImageIcon(resizedImage);
-        JLabel ja =new JLabel(resizedIcon);
-
+        midbutton(mid);
+        add(mid, BorderLayout.SOUTH);
+    }
+    void midbutton(Container c){//파괴방지권,판매하기,강화하기
         JButton SwordSave = new JButton("파괴방지권 사용");
-        SwordSave.setPreferredSize(new Dimension(100,100));
-        add(SwordSave);
-        mid.add(ja);
-        add(mid, BorderLayout.CENTER);
-    }
-    void midbutton(Container c){//색깔로 사용유무확인
+        SwordSave.setPreferredSize(new Dimension(140,50));
+//
+//        ImageIcon imageicon = new ImageIcon("res/1.png");//따로 소드에서 구현한걸 쓸예정
+//        Image image = imageicon.getImage();
+//        int newWidth = 300;
+//        int newHeight = 300;
+//        Image resizedImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+//        ImageIcon resizedIcon = new ImageIcon(resizedImage);
+//        JLabel ja =new JLabel(resizedIcon);
+
+        c.add(new JButton("강화하기"));
+        c.add(SwordSave);
+        c.add(new JButton("판매하기"));
     }
 
-    void bottomPanel(){
+    void bottomPanel(){//인벤토리,상점
 
+    }
+    void bottombutton(Container c){
     }
 
     @Override
