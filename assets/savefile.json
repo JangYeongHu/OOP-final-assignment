@@ -1,7 +1,8 @@
 [
 	{
+		"index" : 1,
 		"create_date": "2024-11-01",
-		"last_date": "2024-11-03",
+		"latest_date": "2024-11-03",
 		"sword": "검이름",
 		"money": 1248888,
 		"item": [
@@ -14,11 +15,15 @@
 				"quantity": 5
 			}
 		],
-		"log": ""
+		"statistics" : [
+			{"success": 10, "fail" : 2},
+			{"success": 8, "fail": 3}
+		]
 	},
 	{
+		"index" : 2,
 		"create_date": "2024-11-04",
-		"last_date": "2024-11-06",
+		"latest_date": "2024-11-06",
 		"sword": "천둥검",
 		"money": 2395000,
 		"item": [
@@ -31,11 +36,12 @@
 				"quantity": 2
 			}
 		],
-		"log": ""
+		"statistics" : []
 	},
 	{
+		"index" : 3,
 		"create_date": "2024-11-07",
-		"last_date": "2024-11-10",
+		"latest_date": "2024-11-10",
 		"sword": "파멸검",
 		"money": 3550000,
 		"item": [
@@ -48,6 +54,6 @@
 				"quantity": 4
 			}
 		],
-		"log": ""
+		"statistics" : []
 	}
 ]
