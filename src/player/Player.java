@@ -41,6 +41,9 @@ public class Player {
 
     }
 
+    public Sword getNowSword(Sword s) {
+        return nowSword;
+    }
 
     //Getter
     public int getMoney() {
@@ -57,7 +60,7 @@ public class Player {
 
     //Setter
     public void setMoney(int money) {
-        this.money = money;
+        this.money += money;
     }
 
     public void setNowSword(Sword nowSword) {
