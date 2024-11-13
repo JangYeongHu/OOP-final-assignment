@@ -62,6 +62,9 @@ public class Player {
     public void setMoney(int money) {
         this.money = money;
     }
+    public void addMoney(int money) {
+        this.money = money;
+    }
 
     public void setNowSword(Sword nowSword) {
         this.nowSword = nowSword;

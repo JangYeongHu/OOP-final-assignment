@@ -66,22 +66,24 @@ public class GameScreen extends JPanel implements Screen {
     }
 
     private void midPanel(){
-        JPanel mid = new JPanel(new GridLayout(3,1));
-
+        JPanel mid = new JPanel();
         midbutton(mid);
-        add(mid, BorderLayout.SOUTH);
+        add(mid, BorderLayout.CENTER);
     }
 
     JButton SwordUp = new JButton("강화하기");
+    JButton SwordSell = (new JButton("판매하기"));
 
     private void midbutton(Container c){//파괴방지권,판매하기,강화하기
 
-        JPanel buttonList = new JPanel();
-        buttonList.setLayout(new FlowLayout(FlowLayout.CENTER,200,20));
 
+        JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         Sword sword = Slist[number];//첫번째검
         JLabel SwordImage = new JLabel(sword.imageicon());
-        c.add(SwordImage, BorderLayout.CENTER);
+        imagePanel.add(SwordImage, BorderLayout.CENTER);
+
+        JPanel buttonList = new JPanel();
+        buttonList.setLayout(new GridLayout(1,3,150,130)); // 간격 조정
 
         JButton SwordSave = new JButton("파괴방지권 사용");
         buttonSetSize(SwordSave);
@@ -89,10 +91,12 @@ public class GameScreen extends JPanel implements Screen {
 
         buttonList.add(UpButton(SwordImage));
 
-        JButton SwordSell = SellButton(new JButton("판매하기"),SwordImage);
-        buttonList.add(SwordSell);
+        buttonList.add(SellButton(SwordSell,SwordImage));
 
-        c.add(buttonList);
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.add(imagePanel, BorderLayout.CENTER);
+        mainPanel.add(buttonList, BorderLayout.PAGE_END);
+        c.add(mainPanel);
     }
     private void ticket(){
 
@@ -108,6 +112,7 @@ public class GameScreen extends JPanel implements Screen {
                 if(Slist[number].upgrade_probability()){
                     Sword Upsword = Slist[++number];
                     SwordUp.setText(Slist[number].getName()+" 강화하기");
+                    SwordSell.setText((Slist[number].getsellPrice()+"원 \n판매하기"));
                     Image.setIcon(Upsword.imageicon());
                 }else{
                     number = 0;
@@ -126,10 +131,11 @@ public class GameScreen extends JPanel implements Screen {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {//player에 돈넣어주는것추가하기
-                player.setMoney(Slist[number].getSellPrice());
+                player.setMoney(Slist[number].getsellPrice());
                 number = 0;
                 money.setText("돈 : "+player.getMoney());
                 SwordUp.setText("강화하기");
+                SwordSell.setText((Slist[number].getsellPrice()+"원 \n판매하기"));
                 Image.setIcon(Slist[number].imageicon());
             }
         });
@@ -139,16 +145,26 @@ public class GameScreen extends JPanel implements Screen {
 
 
     private void buttonSetSize(Container c){
-        c.setPreferredSize(new Dimension(200,50));
+        c.setPreferredSize(new Dimension(300,150));
     }
 
+    private void bottomPanel() {
+        JPanel bottom = new JPanel();
+        bottom.add(new JLabel("a"));
+        bottom.setBackground(Color.black);
+        bottom.setPreferredSize(new Dimension(1200,100));
+        add(bottom, BorderLayout.PAGE_END);
+    }
 
     @Override
     public void initialize() {
+        setLayout(new BorderLayout());
         CreateSword();
         topPanel();
         midPanel();
+        bottomPanel();
     }
+
 
     @Override
     public void showScreen() {
