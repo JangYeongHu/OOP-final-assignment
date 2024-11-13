@@ -52,7 +52,6 @@ public class MainController extends JFrame {
     }
 
     public void loadSettingData() {
-
     }
 
     public void saveData() {
