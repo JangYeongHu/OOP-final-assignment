@@ -60,7 +60,7 @@ public class Player {
 
     //Setter
     public void setMoney(int money) {
-        this.money += money;
+        this.money = money;
     }
 
     public void setNowSword(Sword nowSword) {
