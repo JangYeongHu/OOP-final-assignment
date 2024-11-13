@@ -75,8 +75,6 @@ public class GameScreen extends JPanel implements Screen {
     JButton SwordSell = (new JButton("판매하기"));
 
     private void midbutton(Container c){//파괴방지권,판매하기,강화하기
-
-
         JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         Sword sword = Slist[number];//첫번째검
         JLabel SwordImage = new JLabel(sword.imageicon());
@@ -85,8 +83,7 @@ public class GameScreen extends JPanel implements Screen {
         JPanel buttonList = new JPanel();
         buttonList.setLayout(new GridLayout(1,3,150,130)); // 간격 조정
 
-        JButton SwordSave = new JButton("파괴방지권 사용");
-        buttonSetSize(SwordSave);
+        JButton SwordSave = ticket(new JButton("파괴방지 비활성화"));
         buttonList.add(SwordSave);
 
         buttonList.add(UpButton(SwordImage));
@@ -98,14 +95,32 @@ public class GameScreen extends JPanel implements Screen {
         mainPanel.add(buttonList, BorderLayout.PAGE_END);
         c.add(mainPanel);
     }
-    private void ticket(){
-
+    private JButton ticket(JButton button){
+        buttonSetSize(button);
+        button.setBackground(Color.gray);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {//누르면 색깔변경 초록색
+                if(ticketActivate(button)){
+                    button.setBackground(Color.GREEN);
+                    button.setText("파괴방지 활성화");
+                }
+                else{
+                    button.setBackground(Color.gray);
+                    button.setText("파괴방지 비활성화");
+                }
+            }
+        });
+        return button;
     }
-    private JButton UpButton(JLabel Image){
+    private boolean ticketActivate(JButton button){
+        return button.getBackground() != Color.GREEN;
+    }
 
+
+    private JButton UpButton(JLabel Image){
         SwordUp.setBackground(Color.yellow);
         buttonSetSize(SwordUp);
-
         SwordUp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,7 +137,6 @@ public class GameScreen extends JPanel implements Screen {
                 }
             }
         });
-
         return SwordUp;
     }
 
@@ -149,10 +163,27 @@ public class GameScreen extends JPanel implements Screen {
     }
 
     private void bottomPanel() {
-        JPanel bottom = new JPanel();
-        bottom.add(new JLabel("a"));
-        bottom.setBackground(Color.black);
+        JPanel bottom = new JPanel(new GridLayout(1,2));
+        bottom.setBackground(Color.cyan);
         bottom.setPreferredSize(new Dimension(1200,100));
+
+
+        JButton GoStore = new JButton("상점으로");
+        bottom.add(GoStore);
+        GoStore.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainController.switchTo("Store");
+            }
+        });
+        JButton GoInventory = new JButton("인벤토리");
+        GoInventory.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainController.switchTo("Inventory");
+            }
+        });
+        bottom.add(GoInventory);
         add(bottom, BorderLayout.PAGE_END);
     }
 
@@ -174,16 +205,5 @@ public class GameScreen extends JPanel implements Screen {
     @Override
     public void hideScreen() {
         setVisible(false);
-    }
-}
-class Forges {
-    //미리 검을 만드는 방법 vs 검을 강화를 성공을 하면 만드는것 임시로 검만드는 위치를 여기로했습니다
-    //검이름과 설명을 읽는 작업이 필요함
-    //검이름, 검의 이미지 임시로 이름을 1,2,---,20으로 정함 !!임시!!
-    //대장간안에 검이 있다는 느낌으로 여기있는 검을 움직일것
-    static ArrayList<Sword> Slist = new ArrayList<>();
-
-    String imageSword(int i){
-        return "";
     }
 }

@@ -55,7 +55,6 @@ public class Sword {
     }
     public int setSellPrice(){//특정강화도 이상부터 판매가설정
         // = 100*possibility;
-        System.out.println(possibility);
         if (possibility == 1)
             return 0;
         if (possibility > 4)
