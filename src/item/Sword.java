@@ -30,7 +30,7 @@ public class Sword {
         int n = rand.nextInt(1,101);// 성공
         if(n > num){
             FailureCount++;
-            possibility = 0;
+            possibility = 1;
             return false;
         }
         SuccessCount++;
@@ -50,11 +50,9 @@ public class Sword {
     }
 
 
-    public Sword (String n, String d,String img){//검만들기 검이름과 이미지파일 이름을넣는다
-        name = n;
-        description = d;
+    public Sword (String img, int i){//검만들기 검이름과 이미지파일 이름을넣는다
         imageSourcePath = img;
-        possibility = 0;
+        possibility = i;
     }
     public int getSellPrice(){//특정강화도 이상부터 판매가설정
         // = 100*possibility;
@@ -73,8 +71,13 @@ public class Sword {
     }
 
 
-    public void getter(){
-
+    public String SetswordName(String name){
+        this.name = name;
+        return this.name;
+    }
+    public String SetswordDescription(String description){
+        this.description = description;
+        return this.description;
     }
     public String getName() {
         return name;

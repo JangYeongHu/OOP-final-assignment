@@ -17,7 +17,9 @@ public class GameScreen extends JPanel implements Screen {
     static int number = 0;//현재강화도
     static void CreateSword(){
         for (int i = 1; i < 21; i++){
-            Slist[i-1] =  new Sword(i+"검",i+"번째 검이다.","res/"+i+".png");
+            Slist[i-1] =  new Sword("res/"+i+".png",i);
+            Slist[i-1].SetswordDescription(i+"번째 검의 설명");
+            Slist[i-1].SetswordName(i+"번째 검");
         }
     }
 
@@ -121,7 +123,6 @@ public class GameScreen extends JPanel implements Screen {
 
     private JButton SellButton(JButton button, JLabel Image){
         buttonSetSize(button);
-
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {//player에 돈넣어주는것추가하기
