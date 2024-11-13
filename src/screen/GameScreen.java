@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class GameScreen extends JPanel implements Screen {
+    //test
     static Sword[] Slist = new Sword[20];
     static int number = 0;//현재강화도
     static void CreateSword(){
