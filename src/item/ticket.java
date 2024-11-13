@@ -3,7 +3,10 @@ package src.item;
 import src.item.interfaces.Item;
 
 public class ticket implements Item{
-
+    private boolean activate = false;
+    public void activatTicket(){
+        activate = true;
+    }
     /*
     10강 이후 파편(아이템1)
     파편은 모아서 검을 구매
