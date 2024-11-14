@@ -15,6 +15,7 @@ public class GameScreen extends JPanel implements Screen {
     //test
     static Sword[] Slist = new Sword[20];
     static int number = 0;//현재강화도
+
     static void CreateSword(){
         for (int i = 1; i < 21; i++){
             Slist[i-1] =  new Sword("res/"+i+".png",i);
@@ -25,7 +26,7 @@ public class GameScreen extends JPanel implements Screen {
 
     Player player = new Player();
     JLabel money = new JLabel("돈 : "+player.getMoney());
-
+    //player.getnowSword()으로 지금 검 상태를 갖고와야하는데 시작검 상태가 없다 생성자로 하나를 넣는다?
     private MainController mainController;
     public GameScreen(MainController mainController) {
         this.mainController = mainController;
@@ -71,24 +72,28 @@ public class GameScreen extends JPanel implements Screen {
         add(mid, BorderLayout.CENTER);
     }
 
-    JButton SwordUp = new JButton("강화하기");
-    JButton SwordSell = (new JButton("판매하기"));
+    JButton SwordUp;
+    JButton SwordSell;
+    JButton SwordSave;
 
     private void midbutton(Container c){//파괴방지권,판매하기,강화하기
         JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        Sword sword = Slist[number];//첫번째검
+        Sword sword = Slist[number];//player에서 현재검 강화도를 가져올예정
         JLabel SwordImage = new JLabel(sword.imageicon());
         imagePanel.add(SwordImage, BorderLayout.CENTER);
 
         JPanel buttonList = new JPanel();
         buttonList.setLayout(new GridLayout(1,3,150,130)); // 간격 조정
 
-        JButton SwordSave = ticket(new JButton("파괴방지 비활성화"));
+        SwordSave = ticket(new JButton("파괴방지 비활성화"));
         buttonList.add(SwordSave);
 
-        buttonList.add(UpButton(SwordImage));
+        SwordUp = new JButton("강화하기");
+        buttonList.add(UpButton(SwordImage, SwordSave));
 
+        SwordSell = new JButton("판매하기");
         buttonList.add(SellButton(SwordSell,SwordImage));
+
 
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(imagePanel, BorderLayout.CENTER);
@@ -118,27 +123,44 @@ public class GameScreen extends JPanel implements Screen {
     }
 
 
-    private JButton UpButton(JLabel Image){
+    private JButton UpButton(JLabel Image, JButton button){
         SwordUp.setBackground(Color.yellow);
         buttonSetSize(SwordUp);
         SwordUp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //number = 19;
+                if (number <= 19) {//게임클리어 화면을만들거나 강화를 못하게 하거나 할것임\
+                    //GameClearScreen.Clear();
+                    System.out.println("게임클리어");
+                }
                 if(Slist[number].upgrade_probability()){
                     Sword Upsword = Slist[++number];
+                    player.setNowSword(Upsword);
                     SwordUp.setText(Slist[number].getName()+" 강화하기");
                     SwordSell.setText((Slist[number].getsellPrice()+"원 \n판매하기"));
                     Image.setIcon(Upsword.imageicon());
                 }else{
-                    number = 0;
-                    Sword Upsword = Slist[number];
-                    SwordUp.setText("강화하기");
-                    Image.setIcon(Upsword.imageicon());
+                    FallS(Image,button);
                 }
             }
         });
         return SwordUp;
     }
+    private void FallS(JLabel Image,JButton button){
+        if(ticketActivate(button)){//초록색이 아니면 = 비활성화
+            number = 0;
+            SwordUp.setText("강화하기");
+            Sword Upsword = Slist[number];
+            Image.setIcon(Upsword.imageicon());
+        }
+        else{//나중에 인벤토리안에 있는 티켓에서 -1 하고 색깔을 다시 그레이색으로 바꾼다
+            button.setBackground(Color.gray);
+            button.setText("파괴방지 비활성화");
+            System.out.println("파괴방어!!");
+        }
+    }
+
 
     private JButton SellButton(JButton button, JLabel Image){
         buttonSetSize(button);
@@ -207,3 +229,12 @@ public class GameScreen extends JPanel implements Screen {
         setVisible(false);
     }
 }
+//class GameClearScreen extends JPanel{
+//    public static void Clear() {
+//
+//    }
+//    public void setting(){
+//        setLayout(new BorderLayout());
+//        
+//    }
+//}클리어화면 만들고싶다
