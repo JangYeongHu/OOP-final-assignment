@@ -1,5 +1,6 @@
 package com.screen;
 
+<<<<<<< HEAD
 <<<<<<< HEAD:src/screen/GameScreen.java
 import src.item.Sword;
 import src.player.Player;
@@ -37,6 +38,17 @@ import com.screen.interfaces.Screen;
 
 public class ResetScreen extends JPanel implements Screen {
 >>>>>>> jang-je:src/main/java/com/screen/ResetScreen.java
+=======
+
+
+import com.app.MainController;
+
+import javax.swing.*;
+
+import com.screen.interfaces.Screen;
+
+public class ResetScreen extends JPanel implements Screen {
+>>>>>>> jang-je
 
     private MainController mainController;
 
@@ -44,6 +56,7 @@ public class ResetScreen extends JPanel implements Screen {
         this.mainController = mainController;
         initialize();
     }
+<<<<<<< HEAD
 <<<<<<< HEAD:src/screen/GameScreen.java
 
     private void topPanel(){
@@ -241,6 +254,13 @@ public class ResetScreen extends JPanel implements Screen {
     }
 
 
+=======
+    @Override
+    public void initialize() {
+
+    }
+
+>>>>>>> jang-je
     @Override
     public void showScreen() {
         setVisible(true);
@@ -250,6 +270,7 @@ public class ResetScreen extends JPanel implements Screen {
         setVisible(false);
     }
 }
+<<<<<<< HEAD
 <<<<<<< HEAD:src/screen/GameScreen.java
 //class GameClearScreen extends JPanel{
 //    public static void Clear() {
@@ -262,3 +283,5 @@ public class ResetScreen extends JPanel implements Screen {
 //}클리어화면 만들고싶다
 =======
 >>>>>>> jang-je:src/main/java/com/screen/ResetScreen.java
+=======
+>>>>>>> jang-je

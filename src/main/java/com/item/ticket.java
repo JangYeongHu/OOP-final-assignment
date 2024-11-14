@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:src/main/java/com/item/ticket.java
 package src.item;
+========
+package com.item.interfaces;
+>>>>>>>> jang-je:src/main/java/com/item/interfaces/Item.java
 
 import src.item.interfaces.Item;
 
