@@ -31,7 +31,7 @@ public class MainController extends JFrame {
         setSize(1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        switchTo("Game");
+        switchTo("Start");
     }
 
     private void addScreen(String name, Screen screen) {
