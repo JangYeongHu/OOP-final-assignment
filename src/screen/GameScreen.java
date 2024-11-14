@@ -9,12 +9,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class GameScreen extends JPanel implements Screen {
     //test
     static Sword[] Slist = new Sword[20];
-    static int number = 0;//현재강화도
+
+    static Player player = new Player();
+    JLabel money = new JLabel("돈 : "+player.getMoney());
 
     static void CreateSword(){
         for (int i = 1; i < 21; i++){
@@ -22,11 +23,9 @@ public class GameScreen extends JPanel implements Screen {
             Slist[i-1].SetswordDescription(i+"번째 검의 설명");
             Slist[i-1].SetswordName(i+"번째 검");
         }
+        player.setNowSword(Slist[0]);
     }
 
-    Player player = new Player();
-    JLabel money = new JLabel("돈 : "+player.getMoney());
-    //player.getnowSword()으로 지금 검 상태를 갖고와야하는데 시작검 상태가 없다 생성자로 하나를 넣는다?
     private MainController mainController;
     public GameScreen(MainController mainController) {
         this.mainController = mainController;
@@ -78,7 +77,7 @@ public class GameScreen extends JPanel implements Screen {
 
     private void midbutton(Container c){//파괴방지권,판매하기,강화하기
         JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        Sword sword = Slist[number];//player에서 현재검 강화도를 가져올예정
+        Sword sword = Slist[0];//player에서 현재검 강화도를 가져올예정
         JLabel SwordImage = new JLabel(sword.imageicon());
         imagePanel.add(SwordImage, BorderLayout.CENTER);
 
@@ -130,16 +129,17 @@ public class GameScreen extends JPanel implements Screen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //number = 19;
-                if (number <= 19) {//게임클리어 화면을만들거나 강화를 못하게 하거나 할것임\
+                int number = player.getNowSword().getpossibility();
+                if (player.getNowSword().getpossibility() <= 19) {//게임클리어 화면을만들거나 강화를 못하게 하거나 할것임\
                     //GameClearScreen.Clear();
                     System.out.println("게임클리어");
                 }
                 if(Slist[number].upgrade_probability()){
-                    Sword Upsword = Slist[++number];
-                    player.setNowSword(Upsword);
-                    SwordUp.setText(Slist[number].getName()+" 강화하기");
-                    SwordSell.setText((Slist[number].getsellPrice()+"원 \n판매하기"));
-                    Image.setIcon(Upsword.imageicon());
+                    Sword Upsword = Slist[++number];//다음검뽑아오기
+                    player.setNowSword(Upsword);//다음검을 플레이어 객체에넣기
+                    SwordUp.setText(Slist[number].getName()+" 강화하기");//버튼텍스트변경
+                    SwordSell.setText((Slist[number].getsellPrice()+"원 \n판매하기"));//버튼텍스트변경
+                    Image.setIcon(Upsword.imageicon());//이미지변경
                 }else{
                     FallS(Image,button);
                 }
@@ -148,6 +148,8 @@ public class GameScreen extends JPanel implements Screen {
         return SwordUp;
     }
     private void FallS(JLabel Image,JButton button){
+
+        int number = player.getNowSword().getpossibility();
         if(ticketActivate(button)){//초록색이 아니면 = 비활성화
             number = 0;
             SwordUp.setText("강화하기");
@@ -165,6 +167,7 @@ public class GameScreen extends JPanel implements Screen {
     private JButton SellButton(JButton button, JLabel Image){
         buttonSetSize(button);
         button.addActionListener(new ActionListener() {
+            int number = player.getNowSword().getpossibility();
             @Override
             public void actionPerformed(ActionEvent e) {//player에 돈넣어주는것추가하기
                 player.setMoney(Slist[number].getsellPrice());

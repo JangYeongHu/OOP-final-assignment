@@ -12,16 +12,6 @@ public class Player {
     private int money = 0;
     private Sword nowSword = null;
     ArrayList<Item> inventory = new ArrayList<>();
-//    private int Sword_possibility = 0;
-//
-//    public int getSword_possibility() {
-//        return Sword_possibility;
-//    }
-//    public int setSword_possibility(int i) {
-//        Sword_possibility = i;
-//        return this.Sword_possibility;
-//    }
-
 
     public static Player getInstance() {
         if(singletonPlayer == null)
@@ -70,9 +60,6 @@ public class Player {
 
     //Setter
     public void setMoney(int money) {
-        this.money = money;
-    }
-    public void addMoney(int money) {
         this.money = money;
     }
 
