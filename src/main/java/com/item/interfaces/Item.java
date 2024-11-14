@@ -1,4 +1,4 @@
-package src.item.interfaces;
+package com.item.interfaces;
 
 public interface Item {
 

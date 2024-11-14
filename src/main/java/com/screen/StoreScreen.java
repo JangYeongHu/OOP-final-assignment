@@ -1,18 +1,22 @@
-package src.screen;
+package com.screen;
 
-import src.main.MainController;
-import src.screen.interfaces.Screen;
+
+
+import com.app.MainController;
 
 import javax.swing.*;
 
-public class ResetScreen extends JPanel implements Screen {
+import com.screen.interfaces.Screen;
+
+public class StoreScreen extends JPanel implements Screen {
 
     private MainController mainController;
 
-    public ResetScreen(MainController mainController) {
+    public StoreScreen(MainController mainController) {
         this.mainController = mainController;
         initialize();
     }
+
     @Override
     public void initialize() {
 
@@ -20,10 +24,9 @@ public class ResetScreen extends JPanel implements Screen {
 
     @Override
     public void showScreen() {
-        setVisible(true);
     }
+
     @Override
     public void hideScreen() {
-        setVisible(false);
     }
 }

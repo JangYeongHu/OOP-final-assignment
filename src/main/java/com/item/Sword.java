@@ -1,4 +1,4 @@
-package src.item;
+package com.item;
 
 public class Sword {
     private int getPrice;

@@ -1,29 +1,30 @@
-package src.screen;
+package com.screen;
 
-import src.screen.interfaces.Screen;
-import src.main.MainController;
+import com.app.MainController;
+import com.screen.interfaces.Screen;
 
 import javax.swing.*;
 
-public class StoreScreen extends JPanel implements Screen {
+public class GameScreen extends JPanel implements Screen {
 
     private MainController mainController;
-
-    public StoreScreen(MainController mainController) {
+    public GameScreen(MainController mainController) {
         this.mainController = mainController;
         initialize();
     }
 
     @Override
     public void initialize() {
-
     }
 
     @Override
     public void showScreen() {
+        setVisible(true);
     }
 
     @Override
     public void hideScreen() {
+        setVisible(false);
     }
+
 }

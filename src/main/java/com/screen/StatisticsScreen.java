@@ -1,14 +1,13 @@
-package src.screen;
+package com.screen;
 
-import src.item.Sword;
-import src.screen.interfaces.Screen;
-import src.main.MainController;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import com.app.MainController;
+import com.screen.interfaces.Screen;
 
 public class StatisticsScreen extends JPanel implements Screen {
 
