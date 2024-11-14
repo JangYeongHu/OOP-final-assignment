@@ -1,11 +1,11 @@
 package com.item;
 
-
 import com.item.interfaces.Item;
 
 public class Ticket implements Item {
     private boolean activate = false;
-    public void activatTicket(){
+
+    public void activatTicket() {
         activate = true;
     }
     /*
