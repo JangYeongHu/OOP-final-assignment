@@ -75,22 +75,22 @@ public class LoadScreen extends JPanel implements Screen {
 
 
 
-    public static void main(String[] args) {
-        //테스트를 위한 메인
-        MainController mainController = null; // 실제 구현에 따라 초기화
-
-        // JFrame 생성
-        JFrame frame = new JFrame("Load Screen Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1200, 800);
-
-        // LoadScreen 패널 추가
-        LoadScreen loadScreen = new LoadScreen(mainController);
-        frame.add(loadScreen);
-
-        // 화면 표시
-        frame.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        //테스트를 위한 메인
+//        MainController mainController = null; // 실제 구현에 따라 초기화
+//
+//        // JFrame 생성
+//        JFrame frame = new JFrame("Load Screen Example");
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setSize(1200, 800);
+//
+//        // LoadScreen 패널 추가
+//        LoadScreen loadScreen = new LoadScreen(mainController);
+//        frame.add(loadScreen);
+//
+//        // 화면 표시
+//        frame.setVisible(true);
+//    }
 
 
 
