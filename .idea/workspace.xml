@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="935f1b50-b2ef-4fcb-95f8-8b2cb3655bf9" name="변경" comment="상점은 일요일안에 만들어보겠습니다">
+      <change beforePath="$PROJECT_DIR$/src/screen/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/screen/GameScreen.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="OOP-final-assignment" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="lee-kyo" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;sdd5-lee&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Jang-Je/OOP-final-assignment.git&quot;,
+    &quot;accountId&quot;: &quot;40202a1e-9cbf-4202-8573-9789ff1cbaea&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2okGiGmGTMcmcv6QC8yvq2oz2QY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Gradle.OOP-final-assignment [:com.app.Main.main()].executor": "Run",
+    "Gradle.OOP-final-assignment 빌드.executor": "Run",
+    "Notification.DisplayName-DoNotAsk-WindowsDefender": "Microsoft Defender 구성",
+    "Notification.DoNotAsk-WindowsDefender": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true",
+    "애플리케이션.Main.executor": "Run",
+    "애플리케이션.ones.executor": "Run"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="src.main.Main" />
+      <module name="OOP-final-assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="애플리케이션.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="935f1b50-b2ef-4fcb-95f8-8b2cb3655bf9" name="변경" comment="" />
+      <created>1731406286566</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731406286566</updated>
+      <workItem from="1731406287719" duration="15157000" />
+      <workItem from="1731459453065" duration="15293000" />
+      <workItem from="1731479474883" duration="169000" />
+      <workItem from="1731479976612" duration="166000" />
+      <workItem from="1731480423561" duration="75000" />
+      <workItem from="1731480535000" duration="17667000" />
+      <workItem from="1731539408004" duration="7480000" />
+      <workItem from="1731578891446" duration="17605000" />
+      <workItem from="1731629395191" duration="5796000" />
+      <workItem from="1731643376503" duration="331000" />
+      <workItem from="1731643885890" duration="22000" />
+      <workItem from="1731643912340" duration="1305000" />
+    </task>
+    <task id="LOCAL-00001" summary="대장장이클래스추가 검만드는역할&#10;게임스크린 이미지 추가&#10;검클래스에서 가격,판매가,강화,&#10;getname등 필드얻을수있는 매서드추가&#10;&#10;게임스크린은 아직더만들어야합니다&#10;그리고 검은 어디서만들게 하는게 좋을까요?&#10;일단 대장장이클래스에서 만들게 했는데 게임스크린에서 만드는게 좋을까요?">
+      <option name="closed" value="true" />
+      <created>1731419887427</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731419887427</updated>
+    </task>
+    <task id="LOCAL-00002" summary="대장장이클래스추가 검만드는역할&#10;게임스크린 이미지 추가&#10;검클래스에서 가격,판매가,강화,&#10;getname등 필드얻을수있는 매서드추가&#10;&#10;게임스크린은 아직더만들어야합니다&#10;그리고 검은 어디서만들게 하는게 좋을까요?&#10;일단 대장장이클래스에서 만들게 했는데 게임스크린에서 만드는게 좋을까요?">
+      <option name="closed" value="true" />
+      <created>1731420450927</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731420450927</updated>
+    </task>
+    <task id="LOCAL-00003" summary="대장장이클래스추가 검만드는역할&#10;게임스크린 이미지 추가&#10;검클래스에서 가격,판매가,강화,&#10;getname등 필드얻을수있는 매서드추가&#10;&#10;게임스크린은 아직더만들어야합니다&#10;그리고 검은 어디서만들게 하는게 좋을까요?&#10;일단 대장장이클래스에서 만들게 했는데 게임스크린에서 만드는게 좋을까요? 커밋이안되네요">
+      <option name="closed" value="true" />
+      <created>1731421574765</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731421574765</updated>
+    </task>
+    <task id="LOCAL-00004" summary="대장장이클래스추가 검만드는역할&#10;게임스크린 강화,판매,메인화면버튼 완성&#10;검클래스에서 가격,판매가,강화도등 추가 getter 추가&#10;&#10;게임스크린은 아직더만들어야합니다.">
+      <option name="closed" value="true" />
+      <created>1731479371260</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1731479371260</updated>
+    </task>
+    <task id="LOCAL-00005" summary="대장장이클래스추가 검만드는역할&#10;게임스크린 강화,판매,메인화면버튼 완성&#10;검클래스에서 가격,판매가,강화도등 추가 getter 추가&#10;&#10;게임스크린은 아직더만들어야합니다.">
+      <option name="closed" value="true" />
+      <created>1731480603553</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1731480603553</updated>
+    </task>
+    <task id="LOCAL-00006" summary="대장장이클래스추가 검만드는역할&#10;게임스크린 강화,판매,메인화면버튼 완성&#10;검클래스에서 가격,판매가,강화도등 추가 getter 추가&#10;&#10;게임스크린은 아직더만들어야합니다.">
+      <option name="closed" value="true" />
+      <created>1731480648803</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731480648803</updated>
+    </task>
+    <task id="LOCAL-00007" summary="대장장이클래스추가 검만드는역할&#10;게임스크린 강화,판매,메인화면버튼 완성&#10;검클래스에서 가격,판매가,강화도등 추가 getter 추가&#10;&#10;게임스크린은 아직더만들어야합니다.">
+      <option name="closed" value="true" />
+      <created>1731480722547</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1731480722547</updated>
+    </task>
+    <task id="LOCAL-00008" summary="검이름,검설명을 넣는 매소드추가">
+      <option name="closed" value="true" />
+      <created>1731483204729</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1731483204729</updated>
+    </task>
+    <task id="LOCAL-00009" summary="게임패널 조정&#10;강화도 possibiltiy를 조정">
+      <option name="closed" value="true" />
+      <created>1731496481879</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1731496481879</updated>
+    </task>
+    <task id="LOCAL-00010" summary="인벤,상점가는버튼추가&#10;다음에는 상점,인벤을만들예정">
+      <option name="closed" value="true" />
+      <created>1731499608703</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1731499608703</updated>
+    </task>
+    <task id="LOCAL-00011" summary="ticket 클래스&#10;아이템들은 플레이어나 인벤토리 게임스크린&#10;셋중하나에서 만들예정입니다">
+      <option name="closed" value="true" />
+      <created>1731501342648</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1731501342648</updated>
+    </task>
+    <task id="LOCAL-00012" summary="게임스크린 기능 강화,판매,파괴방지(하락방지) 구현완료&#10;&#10;새로운 의견으로 게임클리어 스크린을 만드는게 좋을까요?">
+      <option name="closed" value="true" />
+      <created>1731548548071</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1731548548071</updated>
+    </task>
+    <task id="LOCAL-00013" summary="게임스크린 기능 강화,판매,파괴방지(하락방지) 구현완료&#10;&#10;새로운 의견으로 게임클리어 스크린을 만드는게 좋을까요?">
+      <option name="closed" value="true" />
+      <created>1731548599160</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1731548599160</updated>
+    </task>
+    <task id="LOCAL-00014" summary="게임스크린 기능 강화,판매,파괴방지(하락방지) 구현완료&#10;&#10;새로운 의견으로 게임클리어 스크린을 만드는게 좋을까요?">
+      <option name="closed" value="true" />
+      <created>1731582635035</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1731582635035</updated>
+    </task>
+    <task id="LOCAL-00015" summary="player에있던 자잘자잘한것 전부삭제했습니다">
+      <option name="closed" value="true" />
+      <created>1731582674522</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1731582674522</updated>
+    </task>
+    <task id="LOCAL-00016" summary="검을만들때 player의 검이 null일경우에만 첫번째검을 만들도록 수정했습니다&#10;상점스크린안에 showScreen,hideScreen안에 아무것도없어서 새로추가했습니다&#10;게임스크린 게임클리어 쪽 조건문 실수 수정했습니다&#10;인벤토리스크린 기본형태 만들었습니다">
+      <option name="closed" value="true" />
+      <created>1731602785048</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1731602785048</updated>
+    </task>
+    <task id="LOCAL-00017" summary="인벤토리스크린 기본형태 보강및 버튼추가메소드추가 버튼을만드는 매서드추가">
+      <option name="closed" value="true" />
+      <created>1731642037513</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1731642037513</updated>
+    </task>
+    <task id="LOCAL-00018" summary="상점은 일요일안에 만들어보겠습니다">
+      <option name="closed" value="true" />
+      <created>1731642270586</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1731642270586</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="user">
+                    <value>
+                      <list>
+                        <option value="*" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="대장장이클래스추가 검만드는역할&#10;게임스크린 이미지 추가&#10;검클래스에서 가격,판매가,강화,&#10;getname등 필드얻을수있는 매서드추가&#10;&#10;게임스크린은 아직더만들어야합니다&#10;그리고 검은 어디서만들게 하는게 좋을까요?&#10;일단 대장장이클래스에서 만들게 했는데 게임스크린에서 만드는게 좋을까요?" />
+    <MESSAGE value="대장장이클래스추가 검만드는역할&#10;게임스크린 이미지 추가&#10;검클래스에서 가격,판매가,강화,&#10;getname등 필드얻을수있는 매서드추가&#10;&#10;게임스크린은 아직더만들어야합니다&#10;그리고 검은 어디서만들게 하는게 좋을까요?&#10;일단 대장장이클래스에서 만들게 했는데 게임스크린에서 만드는게 좋을까요? 커밋이안되네요" />
+    <MESSAGE value="대장장이클래스추가 검만드는역할&#10;게임스크린 강화,판매,메인화면버튼 완성&#10;검클래스에서 가격,판매가,강화도등 추가 getter 추가&#10;&#10;게임스크린은 아직더만들어야합니다." />
+    <MESSAGE value="검이름,검설명을 넣는 매소드추가" />
+    <MESSAGE value="게임패널 조정&#10;강화도 possibiltiy를 조정" />
+    <MESSAGE value="인벤,상점가는버튼추가&#10;다음에는 상점,인벤을만들예정" />
+    <MESSAGE value="ticket 클래스&#10;아이템들은 플레이어나 인벤토리 게임스크린&#10;셋중하나에서 만들예정입니다" />
+    <MESSAGE value="게임스크린 기능 강화,판매,파괴방지(하락방지) 구현완료&#10;&#10;새로운 의견으로 게임클리어 스크린을 만드는게 좋을까요?" />
+    <MESSAGE value="player에있던 자잘자잘한것 전부삭제했습니다" />
+    <MESSAGE value="검을만들때 player의 검이 null일경우에만 첫번째검을 만들도록 수정했습니다&#10;상점스크린안에 showScreen,hideScreen안에 아무것도없어서 새로추가했습니다&#10;게임스크린 게임클리어 쪽 조건문 실수 수정했습니다&#10;인벤토리스크린 기본형태 만들었습니다" />
+    <MESSAGE value="인벤토리스크린 기본형태 보강및 버튼추가메소드추가 버튼을만드는 매서드추가" />
+    <MESSAGE value="상점은 일요일안에 만들어보겠습니다" />
+    <option name="LAST_COMMIT_MESSAGE" value="상점은 일요일안에 만들어보겠습니다" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
