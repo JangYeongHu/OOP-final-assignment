@@ -26,12 +26,13 @@ public class MainController extends JFrame {
         addScreen("Setting", new SettingScreen(this));
         addScreen("Reset", new ResetScreen(this));
         addScreen("Statistics", new StatisticsScreen(this));
+        addScreen("Inventory", new InventoryScreen(this));
 
         add(mainPanel);
         setSize(1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        switchTo("Start");
+        switchTo("Game");
     }
 
     private void addScreen(String name, Screen screen) {
