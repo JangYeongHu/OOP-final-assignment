@@ -1,7 +1,17 @@
+<<<<<<<< HEAD:src/main/java/com/item/interfaces/Item.java
 package com.item.interfaces;
+========
+package com.item;
+>>>>>>>> main:src/main/java/com/item/Ticket.java
 
-public interface Item {
+import com.item.interfaces.Item;
 
+public class Ticket implements Item {
+    private boolean activate = false;
+
+    public void activatTicket() {
+        activate = true;
+    }
     /*
     10강 이후 파편(아이템1)
     파편은 모아서 검을 구매
@@ -15,6 +25,4 @@ public interface Item {
     확정 업 아이템? (아이템5) 20강 -> 21강
      */
 
-    String name = null;
-    String price = null;
 }
