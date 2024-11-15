@@ -26,6 +26,7 @@ public class MainController extends JFrame {
         addScreen("Setting", new SettingScreen(this));
         addScreen("Reset", new ResetScreen(this));
         addScreen("Statistics", new StatisticsScreen(this));
+        addScreen("Inventory", new InventoryScreen(this));
 
         add(mainPanel);
         setSize(1200, 800);
