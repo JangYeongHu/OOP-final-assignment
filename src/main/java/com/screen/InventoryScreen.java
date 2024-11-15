@@ -1,14 +1,15 @@
-package src.screen;
+package com.screen;
 
-import src.screen.interfaces.Screen;
-import src.main.MainController;
+import com.app.MainController;
 
 import javax.swing.*;
 
-public class GameScreen extends JPanel implements Screen {
+import com.screen.interfaces.Screen;
+
+public class InventoryScreen extends JPanel implements Screen {
 
     private MainController mainController;
-    public GameScreen(MainController mainController) {
+    public InventoryScreen(MainController mainController) {
         this.mainController = mainController;
         initialize();
     }
@@ -26,5 +27,4 @@ public class GameScreen extends JPanel implements Screen {
     public void hideScreen() {
         setVisible(false);
     }
-
 }

@@ -1,7 +1,7 @@
-package src.main;
+package com.app;
 
-import src.screen.*;
-import src.screen.interfaces.Screen;
+import com.screen.*;
+import com.screen.interfaces.Screen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,10 +28,10 @@ public class MainController extends JFrame {
         addScreen("Statistics", new StatisticsScreen(this));
 
         add(mainPanel);
-        setSize(1080, 720);
+        setSize(1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        switchTo("Statistics");
+        switchTo("Game");
     }
 
     private void addScreen(String name, Screen screen) {

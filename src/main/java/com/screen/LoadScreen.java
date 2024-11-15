@@ -1,20 +1,25 @@
-package src.screen;
+package com.screen;
 
-import src.main.MainController;
-import src.screen.interfaces.Screen;
+import com.app.MainController;
+import com.screen.interfaces.Screen;
 
 import javax.swing.*;
 
-public class InventoryScreen extends JPanel implements Screen {
-
+public class LoadScreen extends JPanel implements Screen {
     private MainController mainController;
-    public InventoryScreen(MainController mainController) {
+
+    public LoadScreen(MainController mainController) {
         this.mainController = mainController;
         initialize();
     }
 
+    private void loadData() {
+
+    }
+
     @Override
     public void initialize() {
+
     }
 
     @Override

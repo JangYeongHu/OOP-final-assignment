@@ -1,7 +1,7 @@
-package src.player;
+package com.player;
 
-import src.item.interfaces.Item;
-import src.item.Sword;
+import com.item.interfaces.Item;
+import com.item.Sword;
 
 import java.util.ArrayList;
 
@@ -43,6 +43,9 @@ public class Player {
     public void soldSword() {
     }
 
+    public Sword getNowSword(Sword s) {
+        return nowSword;
+    }
 
     //Getter
     public int getMoney() {
@@ -65,6 +68,7 @@ public class Player {
     public void setNowSword(Sword nowSword) {
         this.nowSword = nowSword;
     }
+
 
 
 }

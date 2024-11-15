@@ -1,34 +1,37 @@
-package src.screen;
+package com.screen;
 
-import src.screen.interfaces.Screen;
-import src.main.MainController;
+
+import com.app.MainController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StartScreen extends JPanel implements Screen {
+import com.screen.interfaces.Screen;
+
+public class SettingScreen extends JPanel implements Screen {
 
     private MainController mainController;
 
-    public StartScreen(MainController mainController) {
+    public SettingScreen(MainController mainController) {
         this.mainController = mainController;
         initialize();
     }
+
     @Override
     public void initialize() {
         setLayout(new BorderLayout());
 
-        JLabel titleLabel = new JLabel("Start Screen");
+        JLabel titleLabel = new JLabel("Setting Screen");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(titleLabel, BorderLayout.CENTER);
 
-        JButton backButton = new JButton("Setting Screen으로 이동");
+        JButton backButton = new JButton("Start Screen으로 이동");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainController.switchTo("Setting");
+                mainController.switchTo("Start");
             }
         });
         add(backButton, BorderLayout.SOUTH);
