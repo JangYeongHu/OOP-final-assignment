@@ -56,6 +56,7 @@ public class Player {
     }
 
     public ArrayList<Item> getInventory() {
+
         return inventory;
     }
 
@@ -65,6 +66,7 @@ public class Player {
     }
 
     public void setNowSword(Sword nowSword) {
+
         this.nowSword = nowSword;
     }
 
