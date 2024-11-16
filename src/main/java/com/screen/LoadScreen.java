@@ -8,6 +8,8 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 
 public class LoadScreen extends JPanel implements Screen {
@@ -141,27 +143,33 @@ public class LoadScreen extends JPanel implements Screen {
         // 나중에 배경을 이미지 파일로 변경
         JButton jb = new JButton();
         jb.setText("돌아가기");
+        jb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainController.switchTo("Game");
+            }
+        });
         return jb;
     }
 
 
 
-    public static void main(String[] args) {
-        //테스트를 위한 메인
-        MainController mainController = null; // 실제 구현에 따라 초기화
-
-        // JFrame 생성
-        JFrame frame = new JFrame("Load Screen Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1200, 800);
-
-        // LoadScreen 패널 추가
-        LoadScreen loadScreen = new LoadScreen(mainController);
-        frame.add(loadScreen);
-
-        // 화면 표시
-        frame.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        //테스트를 위한 메인
+//        MainController mainController = null; // 실제 구현에 따라 초기화
+//
+//        // JFrame 생성
+//        JFrame frame = new JFrame("Load Screen Example");
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setSize(1200, 800);
+//
+//        // LoadScreen 패널 추가
+//        LoadScreen loadScreen = new LoadScreen(mainController);
+//        frame.add(loadScreen);
+//
+//        // 화면 표시
+//        frame.setVisible(true);
+//    }
 
 
 
