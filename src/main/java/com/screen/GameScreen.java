@@ -48,11 +48,13 @@ public class GameScreen extends JPanel implements Screen {
         j.add(money, BorderLayout.CENTER);
         money.setFont(money.getFont().deriveFont(24.0f));
         j.add(SaveButton, BorderLayout.PAGE_END);
+        SaveButton(SaveButton);
     }
     private void SaveButton(JButton button){
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {//저장하는법 알아내고 작성
+                mainController.switchTo("Load");
             }
         });
     }
