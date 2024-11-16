@@ -1,5 +1,6 @@
 package com.player;
 
+import com.app.UserData;
 import com.item.interfaces.Item;
 import com.item.Sword;
 
@@ -27,6 +28,8 @@ public class Player {
 
 
     public void loadPlayerData() {
+        UserData ud = new UserData();
+        ud.setPlayer(this);
     }
 
     public void addItem(Item item) {
@@ -41,10 +44,6 @@ public class Player {
     }
 
     public void soldSword() {
-    }
-
-    public Sword getNowSword(Sword s) {
-        return nowSword;
     }
 
     //Getter
@@ -68,6 +67,8 @@ public class Player {
     public void setNowSword(Sword nowSword) {
         this.nowSword = nowSword;
     }
+
+    public void setInventory(ArrayList<Item> inventory) {}
 
 
 
