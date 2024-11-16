@@ -39,11 +39,15 @@ public class Player {
         return null;
     }
 
-    public void doUpgradeSword() {
+    public void doUpgradeSword(Sword upGradeSword) {
+        nowSword = upGradeSword;
+//        money -= nowSword.getUpgradeFee(); - 강화 비용을 돌려주는 메소드 필요
+   }
 
-    }
-
-    public void soldSword() {
+    public void soldSword(Sword initSword) {
+        //SList[0] 을 넣어서 호출
+        money += nowSword.getsellPrice();
+        nowSword = initSword;
     }
 
     //Getter
