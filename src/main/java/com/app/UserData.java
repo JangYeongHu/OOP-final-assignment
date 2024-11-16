@@ -26,6 +26,7 @@ public class UserData {
 
     public UserData() {
         rowUsers = readRowUserData();
+        setPlayerProfile(playerIdx);
     }
 
     public JSONArray readRowUserData() {
@@ -49,6 +50,7 @@ public class UserData {
     public void setPlayerProfile(int playerIdx) {
         this.playerIdx = playerIdx;
         user = rowUsers.getJSONObject(playerIdx);
+
     }
 
     public void setPlayerLoad(Player player) {

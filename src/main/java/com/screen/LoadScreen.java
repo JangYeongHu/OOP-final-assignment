@@ -27,9 +27,6 @@ public class LoadScreen extends JPanel implements Screen {
 
     private void loadData() {
 
-        UserData ud = new UserData();
-
-
     }
 
     @Override
@@ -101,6 +98,7 @@ public class LoadScreen extends JPanel implements Screen {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+
             }
 
         });
@@ -108,9 +106,6 @@ public class LoadScreen extends JPanel implements Screen {
         panel.add(f1);
         panel.add(f2);
         panel.add(f3);
-
-
-
 
 
     }
