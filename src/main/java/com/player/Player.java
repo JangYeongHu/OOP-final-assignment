@@ -29,7 +29,7 @@ public class Player {
 
     public void loadPlayerData() {
         UserData ud = new UserData();
-        ud.setPlayer(this);
+        ud.setPlayerLoad(this);
     }
 
     public void addItem(Item item) {
