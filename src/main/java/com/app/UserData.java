@@ -1,5 +1,6 @@
 package com.app;
 
+import com.player.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.InputStream;
@@ -15,6 +16,7 @@ public class UserData {
 
     private String[] lableKeys = {"statistics", "log"};
     private JSONArray rowUsers;
+    private JSONObject user;
     private int playerIdx = 0; //0, 1, 2 존재
 
 
@@ -44,18 +46,23 @@ public class UserData {
         return jsonArray;
     }
 
-    public void setPlayerIdx(int playerIdx) {
+    public void setPlayerProfile(int playerIdx) {
         this.playerIdx = playerIdx;
+        user = rowUsers.getJSONObject(playerIdx);
     }
 
+    public void setPlayerLoad(Player player) {
+        //player.setNowSword();
+        // 검 객체 + GameScreen 에서 검 이름으로 검 객체를 검색하는 기능이 필요함
+        player.setMoney(user.getInt("money"));
+
+    }
 
     public List<Map<String, Integer>> getInfo(int keyValue) { //key - 0은 statistics, key - 1은 log
         //2차원 배열로 받길 원하시면 수정하겠습니다
 
         List<Map<String, Integer>> mapList = new ArrayList<>();
-
-        JSONObject jo = rowUsers.getJSONObject(playerIdx);
-        JSONArray ja = jo.getJSONArray(lableKeys[keyValue]);
+        JSONArray ja = user.getJSONArray(lableKeys[keyValue]);
 
         for (int i = 0; i < ja.length(); i++) {
             JSONObject jsonObject = ja.getJSONObject(i);
