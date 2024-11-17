@@ -1,5 +1,6 @@
 package com.player;
 
+import com.app.UserData;
 import com.item.interfaces.Item;
 import com.item.Sword;
 
@@ -27,6 +28,8 @@ public class Player {
 
 
     public void loadPlayerData() {
+        UserData ud = new UserData();
+        ud.setPlayerLoad(this);
     }
 
     public void addItem(Item item) {
@@ -36,15 +39,15 @@ public class Player {
         return null;
     }
 
-    public void doUpgradeSword() {
+    public void doUpgradeSword(Sword upGradeSword) {
+        nowSword = upGradeSword;
+//        money -= nowSword.getUpgradeFee(); - 강화 비용을 돌려주는 메소드 필요
+   }
 
-    }
-
-    public void soldSword() {
-    }
-
-    public Sword getNowSword(Sword s) {
-        return nowSword;
+    public void soldSword(Sword initSword) {
+        //SList[0] 을 넣어서 호출
+        money += nowSword.getsellPrice();
+        nowSword = initSword;
     }
 
     //Getter
@@ -57,6 +60,7 @@ public class Player {
     }
 
     public ArrayList<Item> getInventory() {
+
         return inventory;
     }
 
@@ -66,8 +70,11 @@ public class Player {
     }
 
     public void setNowSword(Sword nowSword) {
+
         this.nowSword = nowSword;
     }
+
+    public void setInventory(ArrayList<Item> inventory) {}
 
 
 

@@ -1,6 +1,7 @@
 package com.screen;
 
 import com.app.MainController;
+import com.app.UserData;
 import com.screen.interfaces.Screen;
 
 import javax.swing.*;
@@ -10,11 +11,14 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 
 public class LoadScreen extends JPanel implements Screen {
     private MainController mainController;
     private boolean isLoadRequest = false;
+
 
     public LoadScreen(MainController mainController) {
         this.mainController = mainController;
@@ -50,9 +54,7 @@ public class LoadScreen extends JPanel implements Screen {
         panel2.setLayout(new GridLayout(3, 1, 15, 15));
         panel2.setBorder(new EmptyBorder(30, 30, 30, 30));
 
-        panel2.add(filepanel());
-        panel2.add(filepanel());
-        panel2.add(filepanel());
+        filePans(panel2);
 
 
     }
@@ -87,6 +89,27 @@ public class LoadScreen extends JPanel implements Screen {
         return tp;
     }
 
+    public void filePans(JPanel panel) {
+        JPanel f1 = filepanel();
+        JPanel f2 = filepanel();
+        JPanel f3 = filepanel();
+
+        f1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+            }
+
+        });
+
+        panel.add(f1);
+        panel.add(f2);
+        panel.add(f3);
+
+
+    }
+
 
 
 
@@ -103,7 +126,6 @@ public class LoadScreen extends JPanel implements Screen {
 
         // 검 이미지 패널
         JPanel leftPanel = new JPanel(new BorderLayout());
-
         ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("/1.png"));
         Image scaledImage = backgroundIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
@@ -136,6 +158,29 @@ public class LoadScreen extends JPanel implements Screen {
         fp.revalidate();
         fp.repaint();
 
+        fp.setBackground(Color.WHITE);
+        leftPanel.setBackground(Color.WHITE);
+        rightPanel.setBackground(Color.WHITE);
+
+        fp.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                fp.setBackground(Color.WHITE);
+                leftPanel.setBackground(Color.WHITE);
+                rightPanel.setBackground(Color.WHITE);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                fp.setBackground(new Color(192, 192, 192));
+                leftPanel.setBackground(new Color(192, 192, 192));
+                rightPanel.setBackground(new Color(192, 192, 192));
+
+            }
+        });
+
         return fp;
     }
 
@@ -154,22 +199,22 @@ public class LoadScreen extends JPanel implements Screen {
 
 
 
-//    public static void main(String[] args) {
-//        //테스트를 위한 메인
-//        MainController mainController = null; // 실제 구현에 따라 초기화
-//
-//        // JFrame 생성
-//        JFrame frame = new JFrame("Load Screen Example");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(1200, 800);
-//
-//        // LoadScreen 패널 추가
-//        LoadScreen loadScreen = new LoadScreen(mainController);
-//        frame.add(loadScreen);
-//
-//        // 화면 표시
-//        frame.setVisible(true);
-//    }
+    public static void main(String[] args) {
+        //테스트를 위한 메인
+        MainController mainController = null; // 실제 구현에 따라 초기화
+
+        // JFrame 생성
+        JFrame frame = new JFrame("Load Screen Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1200, 800);
+
+        // LoadScreen 패널 추가
+        LoadScreen loadScreen = new LoadScreen(mainController);
+        frame.add(loadScreen);
+
+        // 화면 표시
+        frame.setVisible(true);
+    }
 
 
 
