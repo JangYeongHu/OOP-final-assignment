@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 public class GameScreen extends JPanel implements Screen {
     //test
     static Sword[] Slist = new Sword[20];
-    static Player player = new Player();
+    static Player player = Player.getInstance();
     JLabel money = new JLabel("돈 : "+player.getMoney());
 
     static void CreateSword(){
@@ -35,34 +35,36 @@ public class GameScreen extends JPanel implements Screen {
     private void TopPanel(){
         JPanel top = new JPanel(new GridLayout(1, 3));
         top.setPreferredSize(new Dimension(1200, 50));
-
         top.setBackground(Color.green);
         Topbutton(top);
         add(top, BorderLayout.PAGE_START);
     }
 
     private void Topbutton(Container j){
-        JButton MainButton = new JButton("메인으로 돌아가기");
-        JButton SaveButton = new JButton("저장하기");
+        JButton MainButton = MainButton(new JButton("메인으로 돌아가기"));
+        JButton SaveButton = SaveButton(new JButton("저장하기"));
         j.add(MainButton, BorderLayout.LINE_START);
         j.add(money, BorderLayout.CENTER);
         money.setFont(money.getFont().deriveFont(24.0f));
         j.add(SaveButton, BorderLayout.PAGE_END);
     }
-    private void SaveButton(JButton button){
+    private JButton SaveButton(JButton button){
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {//저장하는법 알아내고 작성
+                System.out.println("저장하기");
             }
         });
+        return button;
     }
-    private void MainButton(JButton button){
+    private JButton MainButton(JButton button){
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainController.switchTo("Start");
             }
         });
+        return button;
     }
 
     private void MidPanel(){

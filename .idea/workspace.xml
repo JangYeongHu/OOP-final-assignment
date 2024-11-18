@@ -4,8 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="935f1b50-b2ef-4fcb-95f8-8b2cb3655bf9" name="변경" comment="상점은 일요일안에 만들어보겠습니다">
-      <change beforePath="$PROJECT_DIR$/src/screen/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/screen/GameScreen.java" afterDir="false" />
+    <list default="true" id="935f1b50-b2ef-4fcb-95f8-8b2cb3655bf9" name="변경" comment="전체적인 수정및 player생성방법변경&#10;startScreen으로 가는 버튼 활성화&#10;파일변경에 맞는 png파일 보이게수정&#10;item인터페이스에 getitem 추가">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GameScreen$1.class.uniqueId1" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GameScreen$1.class.uniqueId1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GameScreen$2.class.uniqueId5" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GameScreen$2.class.uniqueId5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GameScreen$3.class.uniqueId7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GameScreen$4.class.uniqueId2" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GameScreen$4.class.uniqueId2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GameScreen$5.class.uniqueId8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GameScreen$6.class.uniqueId6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GameScreen$7.class.uniqueId3" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GameScreen$7.class.uniqueId3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GameScreen.class.uniqueId4" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GameScreen.class.uniqueId4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/item/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/item/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/item/interfaces/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/item/interfaces/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/screen/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/screen/GameScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/screen/InventoryScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/screen/InventoryScreen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +69,6 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -84,6 +103,7 @@
     "Notification.DoNotAsk-WindowsDefender": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "lee-kyu",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -93,30 +113,10 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true",
-    "애플리케이션.Main.executor": "Run",
+    "애플리케이션.Main.executor": "Coverage",
     "애플리케이션.ones.executor": "Run"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="src.main.Main" />
-      <module name="OOP-final-assignment" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="src.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="애플리케이션.Main" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -145,6 +145,7 @@
       <workItem from="1731643376503" duration="331000" />
       <workItem from="1731643885890" duration="22000" />
       <workItem from="1731643912340" duration="1305000" />
+      <workItem from="1731923886230" duration="2737000" />
     </task>
     <task id="LOCAL-00001" summary="대장장이클래스추가 검만드는역할&#10;게임스크린 이미지 추가&#10;검클래스에서 가격,판매가,강화,&#10;getname등 필드얻을수있는 매서드추가&#10;&#10;게임스크린은 아직더만들어야합니다&#10;그리고 검은 어디서만들게 하는게 좋을까요?&#10;일단 대장장이클래스에서 만들게 했는데 게임스크린에서 만드는게 좋을까요?">
       <option name="closed" value="true" />
@@ -352,10 +353,16 @@
     <MESSAGE value="검을만들때 player의 검이 null일경우에만 첫번째검을 만들도록 수정했습니다&#10;상점스크린안에 showScreen,hideScreen안에 아무것도없어서 새로추가했습니다&#10;게임스크린 게임클리어 쪽 조건문 실수 수정했습니다&#10;인벤토리스크린 기본형태 만들었습니다" />
     <MESSAGE value="인벤토리스크린 기본형태 보강및 버튼추가메소드추가 버튼을만드는 매서드추가" />
     <MESSAGE value="상점은 일요일안에 만들어보겠습니다" />
-    <option name="LAST_COMMIT_MESSAGE" value="상점은 일요일안에 만들어보겠습니다" />
+    <MESSAGE value="전체적인 수정및 player생성방법변경&#10;startScreen으로 가는 버튼 활성화&#10;파일변경에 맞는 png파일 보이게수정&#10;item인터페이스에 getitem 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="전체적인 수정및 player생성방법변경&#10;startScreen으로 가는 버튼 활성화&#10;파일변경에 맞는 png파일 보이게수정&#10;item인터페이스에 getitem 추가" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/OOP_final_assignment$Main.ic" NAME="Main 커버리지 결과" MODIFIED="1731924025086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.app.*</FILTER>
+    </SUITE>
   </component>
 </project>

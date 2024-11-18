@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class InventoryScreen extends JPanel implements Screen {
-    Player player = new Player();
+    Player player = Player.getInstance();
 
     private MainController mainController;
     public InventoryScreen(MainController mainController) {
@@ -49,11 +49,16 @@ public class InventoryScreen extends JPanel implements Screen {
         //파괴방지권은 인벤토리에 따로넣지않기
         Random r = new Random();
         ArrayList<Item> ItemList = p.getInventory();
+
         JPanel NamePanel = new JPanel();
         JLabel IName = new JLabel("아이템 이름");//1번패널
         NamePanel.add(IName);
         c.add(NamePanel);
         NamePanel.setBackground(new Color(232, 113, 64));
+        for (Item i : ItemList) {
+            i.Getitem();
+        }
+
 
 
         JPanel buttonPanel = new JPanel(new GridLayout(1,2));

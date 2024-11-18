@@ -5,8 +5,23 @@ import com.item.interfaces.Item;
 
 public class Ticket implements Item {
     private boolean activate = false;
+    String name;
+    int price;
     public void activatTicket(){
-        activate = true;
+        if(activate)
+            activate = false;
+        else
+            activate = true;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public int getPrice() {
+        return this.price;
     }
     /*
     10강 이후 파편(아이템1)
