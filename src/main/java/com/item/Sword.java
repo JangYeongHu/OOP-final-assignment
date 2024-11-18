@@ -83,7 +83,7 @@ public class Sword {
     public String getDescription() {
         return description;
     }
-    public int SuccessCount(){
+    public int getSuccessCount(){
         return SuccessCount;
     }
     public int getFailureCount(){
@@ -95,7 +95,7 @@ public class Sword {
     }
     public int getSuccessRate(){//실제 성공확률
         int a = getTotalAttempts();
-        return 0;
+        return getSuccessCount()/a;
     }
     public int getsellPrice(){
         return this.sellPrice;

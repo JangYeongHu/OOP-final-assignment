@@ -96,10 +96,9 @@ public class StatisticsScreen extends JPanel implements Screen {
         for (Sword sword : GameScreen.Slist) {
             statisticsTableModel.addRow(new Object[]{
                     sword.getName(),
-                    sword.SuccessCount(),
+                    sword.getSuccessCount(),
                     sword.getFailureCount(),
                     sword.getTotalAttempts(),
-
             });
         }
         statisticsTable.setIntercellSpacing(new Dimension(1,2));
