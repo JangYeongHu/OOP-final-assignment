@@ -13,7 +13,7 @@ public class GameScreen extends JPanel implements Screen {
     //testss
     static Sword[] Slist = new Sword[20];
     static Player player = new Player();
-    JLabel money = new JLabel("돈 : "+player.getMoney());
+    static JLabel money = new JLabel("돈 : "+player.getMoney());
 
     static void CreateSword(){
         for (int i = 1; i < 21; i++){
@@ -23,6 +23,8 @@ public class GameScreen extends JPanel implements Screen {
         }
         if(player.getNowSword() == null){
             player.setNowSword(Slist[0]);//초기 플레이어 검생성
+            player.setMoney(0);
+            money.setText("돈 : "+player.getMoney());
         }
     }
 
@@ -48,9 +50,10 @@ public class GameScreen extends JPanel implements Screen {
         j.add(money, BorderLayout.CENTER);
         money.setFont(money.getFont().deriveFont(24.0f));
         j.add(SaveButton, BorderLayout.PAGE_END);
-        SaveButton(SaveButton);
+        SaveButton_E(SaveButton);
+        MainButton_E(MainButton);
     }
-    private void SaveButton(JButton button){
+    private void SaveButton_E(JButton button){
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {//저장하는법 알아내고 작성
@@ -58,7 +61,7 @@ public class GameScreen extends JPanel implements Screen {
             }
         });
     }
-    private void MainButton(JButton button){
+    private void MainButton_E(JButton button){
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
