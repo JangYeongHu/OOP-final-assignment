@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class InventoryScreen extends JPanel implements Screen {
-    Player player = new Player();
+    Player player = Player.getInstance();
 
     private MainController mainController;
     public InventoryScreen(MainController mainController) {
@@ -26,40 +26,37 @@ public class InventoryScreen extends JPanel implements Screen {
     //중 : 5*5 로 패널들을 배치시키기
     //중패널: 2:1 로 배치해서 위에는 이름만갖는
     //하 : 따로필요없다.
-    public void openInventory(){
-
-    }
     public void CenterPanelCreate(){
         int MRows = 5;
         int MCols = 5;
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(MRows,MCols,40,40));
+        ArrayList<Item> ItemList = player.getInventory();
+
         for (int i = 0; i < MRows; i++) {
             for (int j = 0; j < MCols; j++) {
+                //Item item = ItemList.get(i+j);
                 JPanel MiniPanel = new JPanel(new GridLayout(2,1));
-                MiniPanel = ItemPanelCreate(player, MiniPanel);
+                //MiniPanel = ItemPanelCreate(MiniPanel,item);
+               MiniPanel = ItemPanelCreate(MiniPanel);
                 panel.add(MiniPanel);
             }
         }
         add(panel);
     }
-    public JPanel ItemPanelCreate(Player p,JPanel c){
-        //getItemName()
-        //getItemCount()각각 인벤토리 인터페이스에 추가예정
-        //파괴방지권은 인벤토리에 따로넣지않기
+    public JPanel ItemPanelCreate(JPanel c/*,Item i*/){
         Random r = new Random();
-        ArrayList<Item> ItemList = p.getInventory();
         JPanel NamePanel = new JPanel();
-        JLabel IName = new JLabel("아이템 이름");//1번패널
-        NamePanel.add(IName);
+        //JLabel IName = new JLabel(i.getName());//1번패널
+        JLabel IName = new JLabel("아이템이름");//1번패널
         c.add(NamePanel);
         NamePanel.setBackground(new Color(232, 113, 64));
 
-
         JPanel buttonPanel = new JPanel(new GridLayout(1,2));
-        JButton ActivateButton = new JButton("사용하기");//사용버튼
-        //int count = p.getInventory().getItemCount();//아이템갯수
+        JButton ActivateButton = null;//사용버튼
+        ActivateButton = AButton(new JButton());
         int count = r.nextInt(200);
+        //JLabel CountLabel= new JLabel(i.getCount()+"개");//2번패널
         JLabel CountLabel= new JLabel(count+"개");//2번패널
         CountLabel.setHorizontalAlignment(JLabel.CENTER);
         buttonPanel.setBackground(Color.green);
@@ -69,6 +66,19 @@ public class InventoryScreen extends JPanel implements Screen {
         c.add(buttonPanel);
         return c;
     }
+
+    private JButton AButton(JButton Button) {
+        JLabel A = new JLabel("사용하기");
+        Button.add(A);
+        Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("아이템사용");
+            }
+        });
+        return Button;
+    }
+
     public void goGameScreen(){
         JButton GoGame = new JButton("게임창으로 돌아가기");
         GoGame.setPreferredSize(new Dimension(0,70));

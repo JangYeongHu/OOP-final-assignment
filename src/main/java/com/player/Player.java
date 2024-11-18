@@ -70,7 +70,6 @@ public class Player {
     }
 
     public void setNowSword(Sword nowSword) {
-
         this.nowSword = nowSword;
     }
 

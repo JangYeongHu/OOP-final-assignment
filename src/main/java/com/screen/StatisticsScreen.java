@@ -96,10 +96,9 @@ public class StatisticsScreen extends JPanel implements Screen {
         for (Sword sword : GameScreen.Slist) {
             statisticsTableModel.addRow(new Object[]{
                     sword.getName(),
-                    sword.SuccessCount(),
+                    sword.getSuccessCount(),
                     sword.getFailureCount(),
                     sword.getTotalAttempts(),
-
             });
         }
         statisticsTable.setIntercellSpacing(new Dimension(1,2));
@@ -124,20 +123,19 @@ public class StatisticsScreen extends JPanel implements Screen {
                     //String.format("%.2f", sword.getSuccessRate())
             });
 */
-            for (int i = 0; i < 30; i++) {
-                logTableModel.addRow(new Object[]{
-                        "짱센검",
-                        1,
-                        2,
-                        3
-                });
-            }
-            logTable.setIntercellSpacing(new Dimension(1, 2));
-            logTable.setGridColor(Color.lightGray);
-
-            logScrollPane = new JScrollPane(logTable);
-
-            tablePanel.add(logScrollPane, "log");
+        for (int i = 0; i < 30; i++) {
+            logTableModel.addRow(new Object[]{
+                    "짱센검",
+                    1,
+                    2,
+                    3
+            });
         }
+        logTable.setIntercellSpacing(new Dimension(1, 2));
+        logTable.setGridColor(Color.lightGray);
+
+        logScrollPane = new JScrollPane(logTable);
+
+        tablePanel.add(logScrollPane, "log");
     }
 }
