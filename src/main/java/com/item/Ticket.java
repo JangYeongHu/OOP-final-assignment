@@ -7,6 +7,7 @@ public class Ticket implements Item {
     private boolean activate = false;
     String name;
     int price;
+    int count = 0;
     public void activatTicket(){
         if(activate)
             activate = false;
@@ -22,6 +23,11 @@ public class Ticket implements Item {
     @Override
     public int getPrice() {
         return this.price;
+    }
+
+    @Override
+    public int getCount() {
+        return this.count;
     }
     /*
     10강 이후 파편(아이템1)
