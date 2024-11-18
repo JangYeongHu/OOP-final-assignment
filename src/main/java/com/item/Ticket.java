@@ -29,6 +29,22 @@ public class Ticket implements Item {
     public int getCount() {
         return this.count;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void addCount(int count) {
+        this.count += count;
+    }
+
+    public void setActivate(boolean activate) {
+        this.activate = activate;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
     /*
     10강 이후 파편(아이템1)
     파편은 모아서 검을 구매
