@@ -107,24 +107,24 @@ public class GameScreen extends JPanel implements Screen {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {//누르면 색깔변경 초록색
-                if(TicketActivate(button)){
-                    button.setBackground(Color.GREEN);
-                    button.setText("파괴방지 활성화");
-                }
-                else{
-                    button.setBackground(Color.gray);
-                    button.setText("파괴방지 비활성화");
-                }
+                TicketActivate(button);
             }
         });
         return button;
     }
-    private boolean TicketActivate(JButton button){
-        return button.getBackground() != Color.GREEN;
+    private void TicketActivate(JButton button){
+        if(button.getBackground() != Color.GREEN){
+            button.setBackground(Color.GREEN);
+            button.setText("파괴방지 활성화");
+        }
+        else{
+            button.setBackground(Color.gray);
+            button.setText("파괴방지 비활성화");
+        }
     }
 
 
-    private JButton UpButton(JLabel Image, JButton button){
+    private JButton UpButton(JLabel Image, JButton button){//save버튼
         SwordUp.setBackground(Color.yellow);
         ButtonSetSize(SwordUp);
         SwordUp.addActionListener(new ActionListener() {
@@ -135,13 +135,13 @@ public class GameScreen extends JPanel implements Screen {
                 if (number >= 19) {//게임클리어 화면을만들거나 강화를 못하게 하거나 할것임\
                     //GameClearScreen.Clear();
                     System.out.println("게임클리어");
-                    player.setNowSword(Slist[0]);//다음검을 플레이어 객체에넣기
+                    player.setNowSword(Slist[0]);
                 }
-                if(Slist[number].UpgradeProbability()){
+                if(player.getNowSword().UpgradeProbability()){
                     Sword Upsword = Slist[number];//다음검뽑아오기
                     player.setNowSword(Upsword);//다음검을 플레이어 객체에넣기
-                    SwordUp.setText(Slist[number].getName()+" 강화하기");//버튼텍스트변경
-                    SwordSell.setText((Slist[number].getsellPrice()+"원 \n판매하기"));//버튼텍스트변경
+                    SwordUp.setText(player.getNowSword().getName()+" 강화하기");//버튼텍스트변경
+                    SwordSell.setText(player.getNowSword().getsellPrice()+"원 \n판매하기");//버튼텍스트변경
                     Image.setIcon(Upsword.Imageicon());//이미지변경
                 }else{
                     Fall(Image,button);
@@ -150,9 +150,9 @@ public class GameScreen extends JPanel implements Screen {
         });
         return SwordUp;
     }
-    private void Fall(JLabel Image,JButton button){
+    private void Fall(JLabel Image,JButton button){//save버튼
         int number = player.getNowSword().getpossibility();
-        if(TicketActivate(button)){//초록색이 아니면 = 비활성화
+        if(button.getBackground() != Color.GREEN){//초록색이 아니면 = 비활성화
             number = 0;
             Sword Upsword = Slist[number];
             player.setNowSword(Slist[0]);
@@ -171,15 +171,14 @@ public class GameScreen extends JPanel implements Screen {
     private JButton SellButton(JButton button, JLabel Image){
         ButtonSetSize(button);
         button.addActionListener(new ActionListener() {
-            int number = player.getNowSword().getpossibility();
             @Override
             public void actionPerformed(ActionEvent e) {//player에 돈넣어주는것추가하기
-                player.setMoney(player.getNowSword().getsellPrice());//나중에 addMoney로 바꾸기
-                number = 0;
+                player.setMoney(player.getNowSword().getsellPrice()+player.getMoney());//나중에 addMoney로 바꾸기
+                player.setNowSword(Slist[0]);
                 money.setText("돈 : "+player.getMoney());
                 SwordUp.setText("강화하기");
-                SwordSell.setText((Slist[number].getsellPrice()+"원 \n판매하기"));
-                Image.setIcon(Slist[number].Imageicon());
+                SwordSell.setText((player.getNowSword().getsellPrice()+"원 \n판매하기"));
+                Image.setIcon(player.getNowSword().Imageicon());
             }
         });
         return button;
