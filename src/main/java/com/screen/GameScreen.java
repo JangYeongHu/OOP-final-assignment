@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class GameScreen extends JPanel implements Screen {
-    //test
+    //testss
     static Sword[] Slist = new Sword[20];
     static Player player = new Player();
     JLabel money = new JLabel("돈 : "+player.getMoney());
