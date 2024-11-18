@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Sword {
 
-    private int upgradeFee;//강화비용
+    private int upgradeFee = 0;//강화비용
     private int sellPrice = 0;//판매가
     private int possibility = 0;//강화도
 
@@ -51,6 +51,7 @@ public class Sword {
         possibility = i;
         SetSellPrice();
     }
+
     public int SetSellPrice(){//특정강화도 이상부터 판매가설정
         // = 100*possibility;
         if (possibility == 1)
@@ -68,6 +69,22 @@ public class Sword {
         return sellPrice;
     }
 
+    public int SetupgradeFee(){//특정강화도 이상부터 판매가설정
+        // = 100*possibility;
+        if (possibility == 1)
+            return 0;
+        if (possibility > 4)
+            upgradeFee = 100*possibility;
+        if (possibility > 8)
+            upgradeFee = 200*possibility;
+        if (possibility > 12)
+            upgradeFee = 300*possibility;
+        if (possibility > 16)
+            upgradeFee = 400*possibility;
+        else
+            upgradeFee = 50*possibility;
+        return upgradeFee;
+    }
 
     public String setSwordName(String name){
         this.name = name;
@@ -96,6 +113,9 @@ public class Sword {
     public int getSuccessRate(){//실제 성공확률
         int a = getTotalAttempts();
         return getSuccessCount()/a;
+    }
+    public int getUpgradeFee(){
+        return upgradeFee;
     }
     public int getsellPrice(){
         return this.sellPrice;
