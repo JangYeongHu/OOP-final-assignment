@@ -15,7 +15,6 @@ public interface Item {
     확정 업 아이템? (아이템5) 20강 -> 21강
      */
 
-    String getName();
-    int getPrice();
-    int getCount();
+    String name = null;
+    String price = null;
 }

@@ -1,7 +1,10 @@
 package com.app;
 
+import com.item.Sword;
+import com.player.Player;
 import com.screen.*;
 import com.screen.interfaces.Screen;
+import org.json.JSONArray;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,7 +35,7 @@ public class MainController extends JFrame {
         setSize(1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        switchTo("Game");
+        switchTo("Load");
     }
 
     private void addScreen(String name, Screen screen) {
@@ -56,7 +59,8 @@ public class MainController extends JFrame {
 
     }
 
-    public void saveData() {
-
+    //로드할 파일 선택시 로드해주는 메소드
+    public void loadData() {
+        Player player = new Player();
     }
 }

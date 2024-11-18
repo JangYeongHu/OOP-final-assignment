@@ -1,12 +1,10 @@
 package com.screen;
 
 
-
 import com.app.MainController;
+import com.screen.interfaces.Screen;
 
 import javax.swing.*;
-
-import com.screen.interfaces.Screen;
 
 public class ResetScreen extends JPanel implements Screen {
 
