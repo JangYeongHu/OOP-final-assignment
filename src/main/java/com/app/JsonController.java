@@ -4,7 +4,6 @@ import com.player.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
 import java.util.ArrayList;
@@ -12,24 +11,44 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserData {
+public class JsonController {
 
-    private String[] lableKeys = {"statistics", "log"};
-    private JSONArray rowUsers;
-    private JSONObject user;
-    private int playerIdx = 0; //0, 1, 2 존재
+    private static JsonController singletonJsonController;
+
+    private Player player = Player.getInstance();
+
+    private JSONObject playerData;
+    private JSONObject statisticsData;
+
+    private JSONObject logData;
 
 
-    public JSONArray getRowUsers() {
-        return rowUsers;
+    //싱글톤으로 관리해주는 메소드
+    public static JsonController getInstance() {
+        if(singletonJsonController == null)
+            singletonJsonController = new JsonController();
+        return singletonJsonController;
     }
 
-    public UserData() {
-        rowUsers = readRowUserData();
-        setPlayerProfile(playerIdx);
+
+    //파일에서 플레이어 데이터를 읽어와 저장하는 메소드
+    private void loadPlayerDataInJson(JSONObject jsonData) {
+        playerData = jsonData.getJSONObject("player_data");
+        setPlayerData();
     }
 
-    public JSONArray readRowUserData() {
+    //파일에서 통계 데이터를 읽어와 저장하는 메소드
+    private void loadStatisticsDataInJson(JSONObject jsonData) {
+        statisticsData = jsonData.getJSONObject("statistics");
+    }
+
+    //파일에서 로그 데이터를 읽어와 저장하는 메소드
+    private void loadLogDataInJson(JSONObject jsonData) {
+        logData = jsonData.getJSONObject("statistics");
+    }
+
+    //로드 클릭 시 해당 인덱스의 데이터를 가져오는 메소드
+    public JSONObject loadJsonDataWithIndex(int index) {
         JSONArray jsonArray = null;
         try {
             // JSON 파일 읽기
@@ -44,22 +63,23 @@ public class UserData {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return jsonArray;
+        JSONObject jsonData = jsonArray.getJSONObject(index);
+
+        loadPlayerDataInJson(jsonData);
+        loadStatisticsDataInJson(jsonData);
+        loadLogDataInJson(jsonData);
+
+        return jsonData;
     }
 
-    public void setPlayerProfile(int playerIdx) {
-        this.playerIdx = playerIdx;
-        user = rowUsers.getJSONObject(playerIdx);
 
+    //플레이어 데이터 설정하기
+    private void setPlayerData() {
+        player.setMoney(playerData.getInt("money"));
+        player.setNowSword(MainController.findSwordByName(playerData.getString("sword")));
     }
 
-    public void setPlayerLoad(Player player) {
-        //player.setNowSword();
-        // 검 객체 + GameScreen 에서 검 이름으로 검 객체를 검색하는 기능이 필요함
-        player.setMoney(user.getInt("money"));
-
-    }
-
+    /* 이 함수를 참고해서 좀 더 사용하기 쉬운 로직으로 변경했습니다.
     public List<Map<String, Integer>> getInfo(int keyValue) { //key - 0은 statistics, key - 1은 log
         //2차원 배열로 받길 원하시면 수정하겠습니다
 
@@ -76,8 +96,7 @@ public class UserData {
 
         return mapList;
     }
-
-
+    */
 
 
 //    public static void main(String[] args) {

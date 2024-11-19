@@ -1,7 +1,6 @@
 package com.screen;
 
 import com.app.MainController;
-import com.app.UserData;
 import com.screen.interfaces.Screen;
 
 import javax.swing.*;
@@ -13,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.net.URL;
 
 public class LoadScreen extends JPanel implements Screen {
     private MainController mainController;
@@ -24,11 +22,6 @@ public class LoadScreen extends JPanel implements Screen {
         this.mainController = mainController;
         initialize();
     }
-
-    private void loadData() {
-
-    }
-
     @Override
     public void initialize() {
         setLayout(new BorderLayout());
@@ -98,7 +91,6 @@ public class LoadScreen extends JPanel implements Screen {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-
             }
 
         });

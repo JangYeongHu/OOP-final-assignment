@@ -36,7 +36,7 @@ public class Sword {
         return true;
     }
 
-    public ImageIcon Imageicon(){
+    public ImageIcon imageIcon(){
         ImageIcon imageicon = new ImageIcon(imageSourcePath);//
         Image image = imageicon.getImage();
         int newWidth = 400;

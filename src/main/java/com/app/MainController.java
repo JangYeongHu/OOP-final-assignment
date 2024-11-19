@@ -26,7 +26,8 @@ public class MainController extends JFrame {
         mainPanel = new JPanel(cardLayout);
         screens = new HashMap<>();
         createSword();
-        loadData();
+
+        JsonController.getInstance();
 
         addScreen("Load", new LoadScreen(this));
         addScreen("Start", new StartScreen(this));
@@ -42,6 +43,13 @@ public class MainController extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         switchTo("Load");
+    }
+
+    public static Sword findSwordByName(String swordName) {
+        for(Sword sword: swordList) {
+            if(sword.getName().equals(swordName)) return sword;
+        }
+        return null;
     }
 
     private void addScreen(String name, Screen screen) {
@@ -63,11 +71,6 @@ public class MainController extends JFrame {
 
     public void loadSettingData() {
 
-    }
-
-    //로드할 파일 선택시 로드해주는 메소드
-    public void loadData() {
-        Player player = Player.getInstance();
     }
 
     static void createSword(){
