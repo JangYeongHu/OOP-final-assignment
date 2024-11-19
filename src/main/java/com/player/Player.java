@@ -1,13 +1,15 @@
-package src.player;
+package com.player;
 
-import src.item.interfaces.Item;
-import src.item.Sword;
+import com.app.UserData;
+import com.item.interfaces.Item;
+import com.item.Sword;
 
 import java.util.ArrayList;
 
 public class Player {
 
     private static Player singletonPlayer;
+
 
     private int money = 0;
     private Sword nowSword = null;
@@ -19,11 +21,15 @@ public class Player {
         return singletonPlayer;
     }
 
-    public void savePlayerData() {
+
+    public Player() {
+        loadPlayerData();
     }
 
 
     public void loadPlayerData() {
+        UserData ud = new UserData();
+        ud.setPlayerLoad(this);
     }
 
     public void addItem(Item item) {
@@ -33,14 +39,16 @@ public class Player {
         return null;
     }
 
-    public void doUpgradeSword() {
+    public void doUpgradeSword(Sword upGradeSword) {
+        nowSword = upGradeSword;
+//        money -= nowSword.getUpgradeFee(); - 강화 비용을 돌려주는 메소드 필요
+   }
 
+    public void soldSword(Sword initSword) {
+        //SList[0] 을 넣어서 호출
+        money += nowSword.getsellPrice();
+        nowSword = initSword;
     }
-
-    public void soldSword() {
-
-    }
-
 
     //Getter
     public int getMoney() {
@@ -52,6 +60,7 @@ public class Player {
     }
 
     public ArrayList<Item> getInventory() {
+
         return inventory;
     }
 
@@ -63,6 +72,9 @@ public class Player {
     public void setNowSword(Sword nowSword) {
         this.nowSword = nowSword;
     }
+
+    public void setInventory(ArrayList<Item> inventory) {}
+
 
 
 }

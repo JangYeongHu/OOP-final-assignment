@@ -1,4 +1,4 @@
-package src.screen.interfaces;
+package com.screen.interfaces;
 
 public interface Screen {
     void initialize();
