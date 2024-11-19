@@ -93,7 +93,7 @@ public class StatisticsScreen extends JPanel implements Screen {
         String[] columnNames = {"칼 이름", "성공 횟수", "실패 횟수", "총 횟수", "성공 확률 (%)"};
         DefaultTableModel statisticsTableModel = new DefaultTableModel(columnNames, 0);
         JTable statisticsTable = new JTable(statisticsTableModel);
-        for (Sword sword : GameScreen.Slist) {
+        for (Sword sword : MainController.swordList) {
             statisticsTableModel.addRow(new Object[]{
                     sword.getName(),
                     sword.getSuccessCount(),

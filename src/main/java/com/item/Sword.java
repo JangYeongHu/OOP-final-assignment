@@ -17,6 +17,8 @@ public class Sword {
 
     private String imageSourcePath;
 
+    private int id;
+
     private String name;
 
     private String description;
@@ -36,7 +38,7 @@ public class Sword {
         return true;
     }
 
-    public ImageIcon Imageicon(){
+    public ImageIcon imageIcon(){
         ImageIcon imageicon = new ImageIcon(imageSourcePath);//
         Image image = imageicon.getImage();
         int newWidth = 400;
@@ -48,6 +50,7 @@ public class Sword {
 
     public Sword (String img, int i){//검만들기 검이름과 이미지파일 이름을넣는다
         imageSourcePath = img;
+        id = i;
         possibility = i;
         SetSellPrice();
     }
@@ -114,6 +117,11 @@ public class Sword {
         int a = getTotalAttempts();
         return getSuccessCount()/a;
     }
+
+    public int getId() {
+        return id;
+    }
+
     public int getUpgradeFee(){
         return upgradeFee;
     }

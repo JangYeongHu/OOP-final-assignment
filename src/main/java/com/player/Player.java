@@ -1,35 +1,47 @@
 package com.player;
 
-import com.app.UserData;
+import com.app.MainController;
+import com.app.JsonController;
 import com.item.interfaces.Item;
 import com.item.Sword;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class Player {
 
-    private static Player singletonPlayer;
+    private static Player[] instances = new Player[3];
 
+    private static int nowPlayer = 0;
 
     private int money = 0;
-    private Sword nowSword = null;
+    private Sword nowSword;
     ArrayList<Item> inventory = new ArrayList<>();
 
+    private String updatedDate;
+
+    private String updatedTime;
+
+
+    //현재 플레이어가 선택중인 프로필을 반환
     public static Player getInstance() {
-        if(singletonPlayer == null)
-            singletonPlayer = new Player();
-        return singletonPlayer;
+        if(instances[0] == null) {
+            for(int i = 0; i < 3; i++) instances[i] = new Player();
+        }
+        return instances[nowPlayer];
     }
 
-
-    public Player() {
-        loadPlayerData();
+    //플레이어가 어떤 프로필을 골랐는지와 별개로 index번째 프로필을 반환
+    public static Player getInstance(int index) {
+        if(instances[0] == null) {
+            for(int i = 0; i < 3; i++) instances[i] = new Player();
+        }
+        return instances[index];
     }
 
-
-    public void loadPlayerData() {
-        UserData ud = new UserData();
-        ud.setPlayerLoad(this);
+    //플레이어가 선택한 프로필을 갱신
+    public static void setNowPlayer(int changePlayer) {
+        nowPlayer = changePlayer;
     }
 
     public void addItem(Item item) {
@@ -64,6 +76,14 @@ public class Player {
         return inventory;
     }
 
+    public String getUpdateDate() {
+        return updatedDate;
+    }
+
+    public String getUpdatedTime() {
+        return updatedTime;
+    }
+
     //Setter
     public void setMoney(int money) {
         this.money = money;
@@ -71,6 +91,14 @@ public class Player {
 
     public void setNowSword(Sword nowSword) {
         this.nowSword = nowSword;
+    }
+
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public void setUpdatedTime(String updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
     public void setInventory(ArrayList<Item> inventory) {}
