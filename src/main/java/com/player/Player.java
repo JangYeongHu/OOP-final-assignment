@@ -20,6 +20,8 @@ public class Player {
 
     private String updatedDate;
 
+    private String updatedTime;
+
 
     //현재 플레이어가 선택중인 프로필을 반환
     public static Player getInstance() {
@@ -74,6 +76,14 @@ public class Player {
         return inventory;
     }
 
+    public String getUpdateDate() {
+        return updatedDate;
+    }
+
+    public String getUpdatedTime() {
+        return updatedTime;
+    }
+
     //Setter
     public void setMoney(int money) {
         this.money = money;
@@ -87,8 +97,8 @@ public class Player {
         this.updatedDate = updatedDate;
     }
 
-    public String getUpdateDate() {
-        return updatedDate;
+    public void setUpdatedTime(String updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
     public void setInventory(ArrayList<Item> inventory) {}

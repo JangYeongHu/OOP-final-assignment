@@ -26,7 +26,6 @@ public class MainController extends JFrame {
         mainPanel = new JPanel(cardLayout);
         screens = new HashMap<>();
         createSword();
-
         JsonController.getInstance();
 
         addScreen("Load", new LoadScreen(this));

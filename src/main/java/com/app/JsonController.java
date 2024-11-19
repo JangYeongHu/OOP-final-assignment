@@ -32,23 +32,6 @@ public class JsonController {
         loadJsonDataWithIndex(2);
     }
 
-
-    //파일에서 플레이어 데이터를 읽어와 저장하는 메소드
-    private void loadPlayerDataInJson(JSONObject jsonData,int index) {
-        JSONObject playerData = jsonData.getJSONObject("player_data");
-        setPlayerData(playerData,index);
-    }
-
-    //파일에서 통계 데이터를 읽어와 저장하는 메소드
-    private void loadStatisticsDataInJson(JSONObject jsonData) {
-        statisticsData = jsonData.getJSONArray("statistics");
-    }
-
-    //파일에서 로그 데이터를 읽어와 저장하는 메소드
-    private void loadLogDataInJson(JSONObject jsonData) {
-        logData = jsonData.getJSONArray("log");
-    }
-
     //로드 클릭 시 해당 인덱스의 데이터를 가져오는 메소드
     public JSONObject loadJsonDataWithIndex(int index) {
         JSONArray jsonArray = null;
@@ -67,10 +50,27 @@ public class JsonController {
         }
         JSONObject jsonData = jsonArray.getJSONObject(index);
         loadPlayerDataInJson(jsonData, index);
+        //어쩌면 통계와 로그 데이터도 싸그리 플레이어 클래스에서 관리해야 할 수 있습니다.
         loadStatisticsDataInJson(jsonData);
         loadLogDataInJson(jsonData);
-
         return jsonData;
+    }
+
+
+    //파일에서 플레이어 데이터를 읽어와 저장하는 메소드
+    private void loadPlayerDataInJson(JSONObject jsonData,int index) {
+        JSONObject playerData = jsonData.getJSONObject("player_data");
+        setPlayerData(playerData,index);
+    }
+
+    //파일에서 통계 데이터를 읽어와 저장하는 메소드
+    private void loadStatisticsDataInJson(JSONObject jsonData) {
+        statisticsData = jsonData.getJSONArray("statistics");
+    }
+
+    //파일에서 로그 데이터를 읽어와 저장하는 메소드
+    private void loadLogDataInJson(JSONObject jsonData) {
+        logData = jsonData.getJSONArray("log");
     }
 
 
