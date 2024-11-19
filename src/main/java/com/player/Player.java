@@ -1,5 +1,6 @@
 package com.player;
 
+import com.app.MainController;
 import com.app.UserData;
 import com.item.interfaces.Item;
 import com.item.Sword;
@@ -30,6 +31,8 @@ public class Player {
     public void loadPlayerData() {
         UserData ud = new UserData();
         ud.setPlayerLoad(this);
+        //임시 검 설정
+        setNowSword(MainController.swordList[0]);
     }
 
     public void addItem(Item item) {
