@@ -18,6 +18,10 @@ public class Player {
     private Sword nowSword;
     ArrayList<Item> inventory = new ArrayList<>();
 
+    private String updatedDate;
+
+
+    //현재 플레이어가 선택중인 프로필을 반환
     public static Player getInstance() {
         if(instances[0] == null) {
             for(int i = 0; i < 3; i++) instances[i] = new Player();
@@ -25,6 +29,7 @@ public class Player {
         return instances[nowPlayer];
     }
 
+    //플레이어가 어떤 프로필을 골랐는지와 별개로 index번째 프로필을 반환
     public static Player getInstance(int index) {
         if(instances[0] == null) {
             for(int i = 0; i < 3; i++) instances[i] = new Player();
@@ -32,14 +37,9 @@ public class Player {
         return instances[index];
     }
 
-
-    public Player() {
-        loadPlayerData();
-    }
-
-
-    public void loadPlayerData() {
-
+    //플레이어가 선택한 프로필을 갱신
+    public static void setNowPlayer(int changePlayer) {
+        nowPlayer = changePlayer;
     }
 
     public void addItem(Item item) {
@@ -81,7 +81,14 @@ public class Player {
 
     public void setNowSword(Sword nowSword) {
         this.nowSword = nowSword;
-        System.out.println(nowSword + "로 현재 설정 변경함!!!!!!!!!!");
+    }
+
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public String getUpdateDate() {
+        return updatedDate;
     }
 
     public void setInventory(ArrayList<Item> inventory) {}

@@ -36,7 +36,6 @@ public class JsonController {
     //파일에서 플레이어 데이터를 읽어와 저장하는 메소드
     private void loadPlayerDataInJson(JSONObject jsonData,int index) {
         JSONObject playerData = jsonData.getJSONObject("player_data");
-        System.out.println("플레이어 검 설정");
         setPlayerData(playerData,index);
     }
 
@@ -77,13 +76,13 @@ public class JsonController {
 
     //플레이어 데이터 설정하기
     private void setPlayerData(JSONObject playerData,int index) {
-        System.out.println(index+"번째 플레이어 설정");
         Player player = Player.getInstance(index);
         player.setMoney(playerData.getInt("money"));
         player.setNowSword(MainController.findSwordById(playerData.getInt("sword_id")));
+        player.setUpdatedDate(playerData.getString("latest_date"));
     }
 
-    /* 이 함수를 참고해서 좀 더 사용하기 쉬운 로직으로 변경했습니다.
+    /* 클래스를 통으로 재설계하는 과정에서 불가피하게 빠졌습니다. 어떻게 잘 수정해서 쓰고 싶은데 지금은 시간이 없어서 보류하겠습니다.
     public List<Map<String, Integer>> getInfo(int keyValue) { //key - 0은 statistics, key - 1은 log
         //2차원 배열로 받길 원하시면 수정하겠습니다
 

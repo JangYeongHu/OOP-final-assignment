@@ -92,6 +92,26 @@ public class LoadScreen extends JPanel implements Screen {
         f1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                Player.setNowPlayer(0);
+                mainController.switchTo("Start");
+                super.mouseClicked(e);
+            }
+        });
+
+        f2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Player.setNowPlayer(1);
+                mainController.switchTo("Start");
+                super.mouseClicked(e);
+            }
+        });
+
+        f3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Player.setNowPlayer(2);
+                mainController.switchTo("Start");
                 super.mouseClicked(e);
             }
         });
@@ -107,7 +127,7 @@ public class LoadScreen extends JPanel implements Screen {
     private JPanel filepanel(int index) {
         // 데이터가 없으면 빈화면으로 뜨게 할 생각
         // 나중에 메소드 분리해서 검 객체로부터 받아오도록 할게요
-        Sword sword = Player.getInstance(index).getNowSword();
+        Player player = Player.getInstance(index);
 
         JPanel fp = new JPanel(new BorderLayout());
 
@@ -119,7 +139,7 @@ public class LoadScreen extends JPanel implements Screen {
 
         // 검 이미지 패널
         JPanel leftPanel = new JPanel(new BorderLayout());
-        ImageIcon backgroundIcon = sword.imageIcon();
+        ImageIcon backgroundIcon = player.getNowSword().imageIcon();
         Image scaledImage = backgroundIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
@@ -135,14 +155,14 @@ public class LoadScreen extends JPanel implements Screen {
         rightPanel.setLayout(new GridLayout(3, 1, 0, 10)); // 세로로 배치, 행 간격 10px
 
         // 정보 라벨
-        JLabel nameLabel = new JLabel("검 이름");
-        JLabel strengthLabel = new JLabel("강화도 : 3");
-        JLabel moneyLabel = new JLabel("돈 :");
-        JLabel dateLabel = new JLabel("저장일");
+        JLabel nameLabel = new JLabel("검 이름: " + player.getNowSword().getName());
+        //JLabel strengthLabel = new JLabel("강화도 :"); 강화도가 뭔지 몰라서 일단 뺐습니다.
+        JLabel moneyLabel = new JLabel("돈 : " + player.getMoney());
+        JLabel dateLabel = new JLabel("저장일: " + player.getUpdateDate());
 
         // 오른쪽 패널에 라벨 추가
         rightPanel.add(nameLabel);
-        rightPanel.add(strengthLabel);
+        //rightPanel.add(strengthLabel);
         rightPanel.add(moneyLabel);
         rightPanel.add(dateLabel);
 
