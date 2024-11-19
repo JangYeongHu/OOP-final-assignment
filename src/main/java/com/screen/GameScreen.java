@@ -15,19 +15,6 @@ public class GameScreen extends JPanel implements Screen {
     static Player player = new Player();
     static JLabel money = new JLabel("돈 : "+player.getMoney());
 
-    static void CreateSword(){
-        for (int i = 1; i < 21; i++){
-            Slist[i-1] =  new Sword("src/main/resources/"+i+".png",i);
-            Slist[i-1].setSwordDescription(i+"번째 검의 설명");
-            Slist[i-1].setSwordName(i+"번째 검");
-        }
-        if(player.getNowSword() == null){
-            player.setNowSword(Slist[0]);//초기 플레이어 검생성
-            player.setMoney(0);
-            money.setText("돈 : "+player.getMoney());
-        }
-    }
-
     private MainController mainController;
     public GameScreen(MainController mainController) {
         this.mainController = mainController;
@@ -220,7 +207,7 @@ public class GameScreen extends JPanel implements Screen {
     @Override
     public void initialize() {
         setLayout(new BorderLayout());
-        CreateSword();
+        money.setText("돈 : "+player.getMoney());
         TopPanel();
         MidPanel();
         BottomPanel();

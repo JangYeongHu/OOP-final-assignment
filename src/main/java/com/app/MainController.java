@@ -17,10 +17,16 @@ public class MainController extends JFrame {
     private JPanel mainPanel;
     private Map<String, Screen> screens;
 
+    private static Player player;
+
+    public static Sword[] swordList = new Sword[20];
+
     public MainController() {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         screens = new HashMap<>();
+        createSword();
+        loadData();
 
         addScreen("Load", new LoadScreen(this));
         addScreen("Start", new StartScreen(this));
@@ -61,6 +67,14 @@ public class MainController extends JFrame {
 
     //로드할 파일 선택시 로드해주는 메소드
     public void loadData() {
-        Player player = new Player();
+        Player player = Player.getInstance();
+    }
+
+    static void createSword(){
+        for (int i = 1; i < 21; i++){
+            swordList[i-1] =  new Sword("src/main/resources/"+i+".png",i);
+            swordList[i-1].setSwordDescription(i+"번째 검의 설명");
+            swordList[i-1].setSwordName(i+"번째 검");
+        }
     }
 }
