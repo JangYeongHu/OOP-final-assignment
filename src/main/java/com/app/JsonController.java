@@ -14,13 +14,9 @@ import java.util.Map;
 public class JsonController {
 
     private static JsonController singletonJsonController;
+    private JSONArray statisticsData;
 
-    private Player player = Player.getInstance();
-
-    private JSONObject playerData;
-    private JSONObject statisticsData;
-
-    private JSONObject logData;
+    private JSONArray logData;
 
 
     //싱글톤으로 관리해주는 메소드
@@ -30,21 +26,28 @@ public class JsonController {
         return singletonJsonController;
     }
 
+    public JsonController() {
+        loadJsonDataWithIndex(0);
+        loadJsonDataWithIndex(1);
+        loadJsonDataWithIndex(2);
+    }
+
 
     //파일에서 플레이어 데이터를 읽어와 저장하는 메소드
-    private void loadPlayerDataInJson(JSONObject jsonData) {
-        playerData = jsonData.getJSONObject("player_data");
-        setPlayerData();
+    private void loadPlayerDataInJson(JSONObject jsonData,int index) {
+        JSONObject playerData = jsonData.getJSONObject("player_data");
+        System.out.println("플레이어 검 설정");
+        setPlayerData(playerData,index);
     }
 
     //파일에서 통계 데이터를 읽어와 저장하는 메소드
     private void loadStatisticsDataInJson(JSONObject jsonData) {
-        statisticsData = jsonData.getJSONObject("statistics");
+        statisticsData = jsonData.getJSONArray("statistics");
     }
 
     //파일에서 로그 데이터를 읽어와 저장하는 메소드
     private void loadLogDataInJson(JSONObject jsonData) {
-        logData = jsonData.getJSONObject("statistics");
+        logData = jsonData.getJSONArray("log");
     }
 
     //로드 클릭 시 해당 인덱스의 데이터를 가져오는 메소드
@@ -64,8 +67,7 @@ public class JsonController {
             e.printStackTrace();
         }
         JSONObject jsonData = jsonArray.getJSONObject(index);
-
-        loadPlayerDataInJson(jsonData);
+        loadPlayerDataInJson(jsonData, index);
         loadStatisticsDataInJson(jsonData);
         loadLogDataInJson(jsonData);
 
@@ -74,9 +76,11 @@ public class JsonController {
 
 
     //플레이어 데이터 설정하기
-    private void setPlayerData() {
+    private void setPlayerData(JSONObject playerData,int index) {
+        System.out.println(index+"번째 플레이어 설정");
+        Player player = Player.getInstance(index);
         player.setMoney(playerData.getInt("money"));
-        player.setNowSword(MainController.findSwordByName(playerData.getString("sword")));
+        player.setNowSword(MainController.findSwordById(playerData.getInt("sword_id")));
     }
 
     /* 이 함수를 참고해서 좀 더 사용하기 쉬운 로직으로 변경했습니다.

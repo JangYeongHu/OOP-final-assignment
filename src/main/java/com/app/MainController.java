@@ -45,9 +45,9 @@ public class MainController extends JFrame {
         switchTo("Load");
     }
 
-    public static Sword findSwordByName(String swordName) {
+    public static Sword findSwordById(int swordId) {
         for(Sword sword: swordList) {
-            if(sword.getName().equals(swordName)) return sword;
+            if(sword.getId() == swordId) return sword;
         }
         return null;
     }
@@ -75,7 +75,7 @@ public class MainController extends JFrame {
 
     static void createSword(){
         for (int i = 1; i < 21; i++){
-            swordList[i-1] =  new Sword("src/main/resources/"+i+".png",i);
+            swordList[i-1] = new Sword("src/main/resources/"+i+".png",i);
             swordList[i-1].setSwordDescription(i+"번째 검의 설명");
             swordList[i-1].setSwordName(i+"번째 검");
         }

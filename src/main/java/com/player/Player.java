@@ -10,17 +10,26 @@ import java.util.ArrayList;
 
 public class Player {
 
-    private static Player singletonPlayer;
+    private static Player[] instances = new Player[3];
 
+    private static int nowPlayer = 0;
 
     private int money = 0;
-    private Sword nowSword = null;
+    private Sword nowSword;
     ArrayList<Item> inventory = new ArrayList<>();
 
     public static Player getInstance() {
-        if(singletonPlayer == null)
-            singletonPlayer = new Player();
-        return singletonPlayer;
+        if(instances[0] == null) {
+            for(int i = 0; i < 3; i++) instances[i] = new Player();
+        }
+        return instances[nowPlayer];
+    }
+
+    public static Player getInstance(int index) {
+        if(instances[0] == null) {
+            for(int i = 0; i < 3; i++) instances[i] = new Player();
+        }
+        return instances[index];
     }
 
 
@@ -72,6 +81,7 @@ public class Player {
 
     public void setNowSword(Sword nowSword) {
         this.nowSword = nowSword;
+        System.out.println(nowSword + "로 현재 설정 변경함!!!!!!!!!!");
     }
 
     public void setInventory(ArrayList<Item> inventory) {}

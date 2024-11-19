@@ -1,6 +1,8 @@
 package com.screen;
 
 import com.app.MainController;
+import com.item.Sword;
+import com.player.Player;
 import com.screen.interfaces.Screen;
 
 import javax.swing.*;
@@ -83,31 +85,30 @@ public class LoadScreen extends JPanel implements Screen {
     }
 
     public void filePans(JPanel panel) {
-        JPanel f1 = filepanel();
-        JPanel f2 = filepanel();
-        JPanel f3 = filepanel();
+        JPanel f1 = filepanel(0);
+        JPanel f2 = filepanel(1);
+        JPanel f3 = filepanel(2);
 
         f1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
             }
-
         });
 
         panel.add(f1);
         panel.add(f2);
         panel.add(f3);
-
-
     }
 
 
 
 
-    private JPanel filepanel() {
+    private JPanel filepanel(int index) {
         // 데이터가 없으면 빈화면으로 뜨게 할 생각
         // 나중에 메소드 분리해서 검 객체로부터 받아오도록 할게요
+        Sword sword = Player.getInstance(index).getNowSword();
+
         JPanel fp = new JPanel(new BorderLayout());
 
 
@@ -118,7 +119,7 @@ public class LoadScreen extends JPanel implements Screen {
 
         // 검 이미지 패널
         JPanel leftPanel = new JPanel(new BorderLayout());
-        ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("/1.png"));
+        ImageIcon backgroundIcon = sword.imageIcon();
         Image scaledImage = backgroundIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
