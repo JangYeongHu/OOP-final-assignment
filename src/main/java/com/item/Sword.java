@@ -30,6 +30,8 @@ public class Sword {
         int num = 105 - 5*possibility;// 성공확률계산
         Random rand = new Random();
         int n = rand.nextInt(1,101);// 성공
+//        System.out.println("num : "+num);
+//        System.out.println("n : "+n);
         if(n > num){
             FailureCount++;
             return false;
@@ -53,6 +55,7 @@ public class Sword {
         id = i;
         possibility = i;
         SetSellPrice();
+        SetupgradeFee();
     }
 
     public int SetSellPrice(){//특정강화도 이상부터 판매가설정

@@ -1,6 +1,5 @@
 package com.screen;
 
-import com.app.Main;
 import com.app.MainController;
 import com.item.Sword;
 import com.player.Player;
@@ -69,7 +68,6 @@ public class GameScreen extends JPanel implements Screen {
 
     private JButton swordUpgradeButton;
     private JButton swordSellButton;
-    private JButton saveTicketButton;
 
     private void Midbutton(Container c) {//파괴방지권,판매하기,강화하기
         JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -80,7 +78,7 @@ public class GameScreen extends JPanel implements Screen {
         JPanel buttonList = new JPanel();
         buttonList.setLayout(new GridLayout(1, 3, 150, 130)); // 간격 조정
 
-        saveTicketButton = Ticket(new JButton("파괴방지 비활성화"));
+        JButton saveTicketButton = Ticket(new JButton("파괴방지 비활성화"));
         buttonList.add(saveTicketButton);
 
         swordUpgradeButton = new JButton("강화하기");
@@ -125,25 +123,40 @@ public class GameScreen extends JPanel implements Screen {
         swordUpgradeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //number = 19;
-                int number = player.getNowSword().getpossibility();
-                if (number >= 19) {//게임클리어 화면을만들거나 강화를 못하게 하거나 할것임\
-                    //GameClearScreen.Clear();
-                    System.out.println("게임클리어");
-                    player.setNowSword(MainController.swordList[0]);//다음검을 플레이어 객체에넣기
+                //누를때 마다 돈소모하게 하고 돈이 업그레이드 돈보다 적으면 강화가 안되게
+                Sword nowSword = player.getNowSword();
+                if (player.getMoney() > nowSword.getUpgradeFee()){//player의 돈이 강화비용보닫 많을경우에만
+                    //player.doUpgradeSword();//돈소모
+                    player.setMoney(player.getMoney()-player.getNowSword().SetupgradeFee());
+                    money.setText("돈 : "+player.getMoney());
+                    if (nowSword.UpgradeProbability()) {
+                        success(image,nowSword.getpossibility());
+                    } else {
+                        fall(image, button);
+                    }
                 }
-                if (MainController.swordList[number].UpgradeProbability()) {
-                    Sword Upsword = MainController.swordList[number];//다음검뽑아오기
-                    player.doUpgradeSword(Upsword);//다음검을 플레이어 객체에넣기
-                    swordUpgradeButton.setText(Upsword.getName() + " 강화하기");//버튼텍스트변경
-                    swordSellButton.setText(Upsword.getsellPrice() + "원 \n판매하기");//버튼텍스트변경
-                    image.setIcon(Upsword.imageIcon());//이미지변경
-                } else {
-                    fall(image, button);
+                else{
+                    JOptionPane.showMessageDialog(null, "돈이부족합니다");
                 }
             }
         });
         return swordUpgradeButton;
+    }
+
+//엔딩스크린아동
+//    private void ending(int number){
+//        if (number >= 19) {//게임클리어 화면을만들거나 강화를 못하게 하거나 할것임\
+//            //GameClearScreen.Clear();
+//            System.out.println("게임클리어");
+//            player.setNowSword(MainController.swordList[0]);//다음검을 플레이어 객체에넣기
+//        }
+//    }
+    private void success(JLabel image, int number){
+        Sword Upsword = MainController.swordList[number];//다음검뽑아오기
+        player.setNowSword(Upsword);//플레이어검 업그레이드
+        swordUpgradeButton.setText(Upsword.getName() + " 강화하기");//버튼텍스트변경
+        swordSellButton.setText(Upsword.getsellPrice() + "원 \n판매하기");//버튼텍스트변경
+        image.setIcon(Upsword.imageIcon());//이미지변경
     }
 
     private void fall(JLabel Image, JButton button) {
@@ -157,7 +170,7 @@ public class GameScreen extends JPanel implements Screen {
         } else {//나중에 인벤토리안에 있는 티켓에서 -1 하고 색깔을 다시 그레이색으로 바꾼다
             button.setBackground(Color.gray);
             button.setText("파괴방지 비활성화");
-            System.out.println("파괴방어!!");
+            JOptionPane.showMessageDialog(null, "파괴방어");
         }
     }
 
@@ -207,16 +220,11 @@ public class GameScreen extends JPanel implements Screen {
         add(bottom, BorderLayout.PAGE_END);
     }
 
-    private void updateSword() {
-
-    };
-
-
     @Override
     public void initialize() {
         player = Player.getInstance(0);
-        System.out.println(player.getNowSword().getName());
         money = new JLabel("돈 : " + player.getMoney());
+        System.out.println(money);
         setLayout(new BorderLayout());
         topPanel();
         MidPanel();
@@ -227,7 +235,6 @@ public class GameScreen extends JPanel implements Screen {
     @Override
     public void showScreen() {
         setVisible(true);
-        updateSword();
     }
 
     @Override
