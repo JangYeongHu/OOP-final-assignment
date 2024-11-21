@@ -134,7 +134,7 @@ public class GameScreen extends JPanel implements Screen {
                 }
                 if (MainController.swordList[number].UpgradeProbability()) {
                     Sword Upsword = MainController.swordList[number];//다음검뽑아오기
-                    player.doUpgradeSword(Upsword);//다음검을 플레이어 객체에넣기
+                    player.doUpgradeSword();//다음검을 플레이어 객체에넣기
                     swordUpgradeButton.setText(Upsword.getName() + " 강화하기");//버튼텍스트변경
                     swordSellButton.setText(Upsword.getsellPrice() + "원 \n판매하기");//버튼텍스트변경
                     image.setIcon(Upsword.imageIcon());//이미지변경
