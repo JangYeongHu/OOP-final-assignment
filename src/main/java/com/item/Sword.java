@@ -23,10 +23,7 @@ public class Sword {
 
     private String description;
 
-    public String upGradeSword() {
-        return "Success";
-    }
-    public boolean UpgradeProbability() {// 현재 강화율과 비교해서 강화확률조정
+    public boolean upgradeProbability() {// 현재 강화율과 비교해서 강화확률조정
         int num = 105 - 5*possibility;// 성공확률계산
         Random rand = new Random();
         int n = rand.nextInt(1,101);// 성공
@@ -44,7 +41,7 @@ public class Sword {
         ImageIcon imageicon = new ImageIcon(imageSourcePath);//
         Image image = imageicon.getImage();
         int newWidth = 400;
-        int newHeight = 400;
+        int newHeight = 380;
         Image resizedImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
@@ -54,11 +51,11 @@ public class Sword {
         imageSourcePath = img;
         id = i;
         possibility = i;
-        SetSellPrice();
-        SetupgradeFee();
+        setSellPrice();
+        setupgradeFee();
     }
 
-    public int SetSellPrice(){//특정강화도 이상부터 판매가설정
+    public int setSellPrice(){//특정강화도 이상부터 판매가설정
         // = 100*possibility;
         if (possibility == 1)
             return 0;
@@ -75,7 +72,7 @@ public class Sword {
         return sellPrice;
     }
 
-    public int SetupgradeFee(){//특정강화도 이상부터 판매가설정
+    public int setupgradeFee(){//특정강화도 이상부터 판매가설정
         // = 100*possibility;
         if (possibility == 1)
             return 0;
