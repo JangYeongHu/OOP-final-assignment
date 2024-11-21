@@ -42,7 +42,7 @@ public class StartScreen extends JPanel implements Screen {
         });
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 2;
         add(startButton, gbc);
 
         // 설정 버튼
@@ -53,8 +53,9 @@ public class StartScreen extends JPanel implements Screen {
                 mainController.switchTo("Setting");
             }
         });
-        gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 1;
         add(settingButton, gbc);
 
         // 통계 화면으로 이동 버튼
@@ -78,9 +79,9 @@ public class StartScreen extends JPanel implements Screen {
                 System.exit(0); // 게임 종료
             }
         });
-        gbc.gridx = 0;
+        gbc.gridx = 1;
         gbc.gridy = 3;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 1;
         add(exitButton, gbc);
 
     }
