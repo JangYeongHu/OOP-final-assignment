@@ -51,6 +51,13 @@ public class GameScreen extends JPanel implements Screen {
         JLabel swordImage = new JLabel(sword.imageIcon());
         imagePanel.add(swordImage, BorderLayout.CENTER);
 
+        JPanel swordName = new JPanel();
+        swordNameLabel = new JLabel(player.getNowSword().getName());
+        swordNameLabel.setFont(swordNameLabel.getFont().deriveFont(50.0f));
+        swordName.add(swordNameLabel);
+        swordName.setBackground(Color.lightGray);
+        swordName.setPreferredSize(new Dimension(1000,80));
+
         JPanel buttonList = new JPanel();
         buttonList.setLayout(new GridLayout(1, 3, 150, 130)); // 간격 조정
 
@@ -63,20 +70,13 @@ public class GameScreen extends JPanel implements Screen {
         swordSellButton = new JButton("판매하기");
         buttonList.add(sellButton(swordSellButton, swordImage));
 
-
         JPanel mainPanel = new JPanel(new BorderLayout(10,8));
-
-        JPanel swordName = new JPanel();
-        swordNameLabel = new JLabel(player.getNowSword().getName());
-        swordNameLabel.setFont(swordNameLabel.getFont().deriveFont(50.0f));
-        swordName.add(swordNameLabel);
-        swordName.setBackground(Color.lightGray);
-        swordName.setPreferredSize(new Dimension(1000,80));
         mainPanel.add(imagePanel, BorderLayout.PAGE_START);
         mainPanel.add(swordName, BorderLayout.CENTER);
         mainPanel.add(buttonList, BorderLayout.PAGE_END);
         c.add(mainPanel);
     }
+
 
     private JButton saveTicketClickedEvent(JButton button) {
         setButtonSize(button);
@@ -242,22 +242,22 @@ public class GameScreen extends JPanel implements Screen {
         setVisible(false);
     }
 }
-class GameClearScreen extends JPanel implements Screen{//클리어하면 나오는 화면
-    public void setting(){
-        setLayout(new BorderLayout());
-    }
-    @Override
-    public void initialize() {
-    }
-
-
-    @Override
-    public void showScreen() {
-        setVisible(true);
-    }
-
-    @Override
-    public void hideScreen() {
-        setVisible(false);
-    }
-}
+//class GameClearScreen extends JPanel implements Screen{//클리어하면 나오는 화면
+//    public void setting(){
+//        setLayout(new BorderLayout());
+//    }
+//    @Override
+//    public void initialize() {
+//    }
+//
+//
+//    @Override
+//    public void showScreen() {
+//        setVisible(true);
+//    }
+//
+//    @Override
+//    public void hideScreen() {
+//        setVisible(false);
+//    }
+//}
