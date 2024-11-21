@@ -3,6 +3,8 @@ package com.app;
 import com.player.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
@@ -14,10 +16,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 
+
+
 public class JsonController {
 
     private static JsonController singletonJsonController;
     private JSONArray statisticsData;
+    private static final String FILE_PATH = "src/main/resources/savefile.json";
 
     private JSONArray logData;
     private JSONArray rowDatas;
@@ -30,34 +35,38 @@ public class JsonController {
     }
 
     public JsonController() {
-        loadJsonDataWithIndex(0);
-        loadJsonDataWithIndex(1);
-        loadJsonDataWithIndex(2);
+        readJson();
+        for (int i = 0; i < rowDatas.length(); i++) {
+            loadJsonDataWithIndex(i);
+        }
+
     }
 
-    //로드 클릭 시 해당 인덱스의 데이터를 가져오는 메소드
-    public JSONObject loadJsonDataWithIndex(int index) {
-        JSONArray jsonArray = null;
-        try {
-            // JSON 파일 읽기
-            InputStream inputStream = JSONArray.class.getResourceAsStream("/savefile.json");
-            if (inputStream == null) {
-                throw new RuntimeException("Resource not found: savefile.json");
-            }
-            // JSON 데이터를 문자열로 변환
-            String jsonText = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-            jsonArray = new JSONArray(jsonText);
 
+
+
+    public void readJson() {
+        try {
+            String jsonText = new String(Files.readAllBytes(Paths.get(FILE_PATH)), StandardCharsets.UTF_8);
+            JSONArray jsonArray = new JSONArray(jsonText);
+            rowDatas = jsonArray;
+            System.out.println(rowDatas.getJSONObject(0).toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        rowDatas = jsonArray; //저장하기 위해서는 파싱한 전체 데이터가 필요합니다
-        JSONObject jsonData = jsonArray.getJSONObject(index);
+    }
+
+    //로드 클릭 시 해당 인덱스의 데이터를 가져오는 메소드
+    public void loadJsonDataWithIndex(int index) {
+
+        JSONObject jsonData = rowDatas.getJSONObject(index);
         loadPlayerDataInJson(jsonData, index);
         //어쩌면 통계와 로그 데이터도 싸그리 플레이어 클래스에서 관리해야 할 수 있습니다.
         loadStatisticsDataInJson(jsonData);
         loadLogDataInJson(jsonData);
-        return jsonData;
+
+        loadPlayerDataInJson(rowDatas.getJSONObject(index), index);
+        loadStatisticsDataInJson(rowDatas.getJSONObject(index));
     }
 
 
@@ -85,7 +94,8 @@ public class JsonController {
         player.setMoney(playerData.getInt("money"));
         player.setNowSword(MainController.findSwordById(playerData.getInt("sword_id")));
         player.setUpdatedDate(playerData.getString("latest_date"));
-        
+
+        System.out.println("setPlayerData" + player.getUpdateDate());
         //item 관련
         
     }
@@ -112,32 +122,30 @@ public class JsonController {
 
         rowDatas.getJSONObject(index).put("player_data", playerData);
 
-        System.out.println(rowDatas.toString());
+//        System.out.println(rowDatas.toString());
 
 
 
     }
 
-    //파일 처리 
+    //파일 처리 분리
     public void writeJson(int index) {
         savaPlayerData(index);
-
         try {
-
             for (int i = 0; i < rowDatas.length(); i++) {
                 // JSON 데이터를 문자열로 변환
                 String jsonString = rowDatas.toString(4);
-
-                // 파일 경로 생성 savefile1.json으로 일단 해놓음
-                String filePath = getClass().getResource("/savefile1.json").getPath();
-
                 // 파일에 저장
-                Files.write(Paths.get(filePath), jsonString.getBytes());
-                System.out.println("JSON create " + filePath);
+                Files.write(Paths.get(FILE_PATH), jsonString.getBytes());
+                System.out.println("saved successfully");
+
         }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        rowDatas.clear();
+        readJson();
+        loadJsonDataWithIndex(index);
     }
 
 

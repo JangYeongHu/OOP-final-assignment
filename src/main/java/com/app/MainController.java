@@ -84,6 +84,7 @@ public class MainController extends JFrame {
     //index 자리에 현재 데이터를 저장
     public void savePlayerData(int index) {
         jsonController.writeJson(index);
+        LoadScreen.getInstance().initialize();
 
     }
 

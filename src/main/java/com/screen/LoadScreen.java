@@ -41,8 +41,11 @@ public class LoadScreen extends JPanel implements Screen {
     public void initialize() {
         removeAll();
         setLayout(new BorderLayout());
-        System.out.println(isLoadRequest);
+//        System.out.println(isLoadRequest);
         run();
+        revalidate();
+        repaint();
+
     }
 
     @Override
@@ -57,6 +60,7 @@ public class LoadScreen extends JPanel implements Screen {
 
 
     private void run() {
+
         // 패널 생성
         JPanel panel1 = new JPanel(new BorderLayout());
         panel1.add(topPanel(isLoadRequest));
@@ -81,7 +85,6 @@ public class LoadScreen extends JPanel implements Screen {
         for (int i = 0; i < 3; i++) {
             createFilePans(panel2, i);
         }
-
 
     }
 
@@ -164,6 +167,7 @@ public class LoadScreen extends JPanel implements Screen {
         // 정보 패널
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new GridLayout(3, 1, 0, 10)); // 세로로 배치, 행 간격 10px
+
 
         // 정보 라벨
         JLabel nameLabel = new JLabel("검 이름: " + player.getNowSword().getName());
