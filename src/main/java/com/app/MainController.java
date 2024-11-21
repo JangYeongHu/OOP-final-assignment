@@ -18,6 +18,7 @@ public class MainController extends JFrame {
     private Map<String, Screen> screens;
 
     private static Player player;
+    private static JsonController jsonController;
 
     public static Sword[] swordList = new Sword[20];
 
@@ -26,7 +27,7 @@ public class MainController extends JFrame {
         mainPanel = new JPanel(cardLayout);
         screens = new HashMap<>();
         createSword();
-        JsonController.getInstance();
+        jsonController = JsonController.getInstance();
 
         addScreen("Load", new LoadScreen(this));
         addScreen("Start", new StartScreen(this));
@@ -79,4 +80,11 @@ public class MainController extends JFrame {
             swordList[i-1].setSwordName(i+"번째 검");
         }
     }
+
+    //index 자리에 현재 데이터를 저장
+    public void savePlayerData(int index) {
+        jsonController.writeJson(index);
+
+    }
+
 }

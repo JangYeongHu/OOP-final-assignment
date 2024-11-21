@@ -47,6 +47,7 @@ public class GameScreen extends JPanel implements Screen {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {//저장하는법 알아내고 작성
+                LoadScreen.getInstance().setLoadRequest(false);
                 mainController.switchTo("Load");
             }
         });
@@ -214,9 +215,9 @@ public class GameScreen extends JPanel implements Screen {
 
     @Override
     public void initialize() {
-        player = Player.getInstance(0);
+        player = Player.getInstance();
         System.out.println(player.getNowSword().getName());
-        money = new JLabel("돈 : " + player.getMoney());
+        money = new JLabel("money : " + player.getMoney());
         setLayout(new BorderLayout());
         topPanel();
         MidPanel();
