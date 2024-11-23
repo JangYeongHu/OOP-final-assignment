@@ -46,7 +46,7 @@ public class JsonController {
             String jsonText = new String(Files.readAllBytes(Paths.get(FILE_PATH)), StandardCharsets.UTF_8);
             JSONArray jsonArray = new JSONArray(jsonText);
             rowDatas = jsonArray;
-            System.out.println(rowDatas.getJSONObject(0).toString());
+//            System.out.println(rowDatas.getJSONObject(0).toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,7 +87,7 @@ public class JsonController {
 
 
 
-    //플레이어 데이터를 userDatas에 저장 - log랑 statics도 나중에 추가
+    //플레이어 데이터 셋팅 - log 추가하기
     private void savaPlayerData(int index) {
         Player player = Player.getInstance();
 
