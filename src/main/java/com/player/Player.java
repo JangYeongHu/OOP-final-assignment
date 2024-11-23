@@ -20,11 +20,8 @@ public class Player {
 
     private String updatedDate;
 
-    private String updatedTime;
-
     private ArrayList<int[]> statics = new ArrayList<>(); // {SuccessCount,FailureCount}
     private ArrayList<int[]> log = new ArrayList<>();
-
 
 
     //현재 플레이어가 선택중인 프로필을 반환
