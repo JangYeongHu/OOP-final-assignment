@@ -17,6 +17,7 @@ public class MainController extends JFrame {
     private Map<String, Screen> screens;
 
     private static Player player;
+    private static JsonController jsonController;
 
     public static Sword[] swordList = new Sword[20];
 
@@ -25,7 +26,7 @@ public class MainController extends JFrame {
         mainPanel = new JPanel(cardLayout);
         screens = new HashMap<>();
         createSword();
-        JsonController.getInstance();
+        jsonController = JsonController.getInstance();
 
         addScreen("Load", new LoadScreen(this));
         addScreen("Start", new StartScreen(this));
@@ -70,7 +71,6 @@ public class MainController extends JFrame {
     public void loadSettingData() {
 
     }
-
     static void createSword(){
         for (int i = 1; i < 21; i++){
             swordList[i-1] = new Sword("src/main/resources/"+i+".png",i);
@@ -96,6 +96,10 @@ public class MainController extends JFrame {
         if (screen instanceof StoreScreen) {
             ((StoreScreen) screen).refreshInventory(); // InventoryScreen 갱신
         }
+    //index 자리에 현재 데이터를 저장
+    public void savePlayerData(int index) {
+        jsonController.writeJson(index);
+        LoadScreen.getInstance().initialize();
     }
 
 }
