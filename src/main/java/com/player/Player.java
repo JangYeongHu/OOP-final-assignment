@@ -20,7 +20,8 @@ public class Player {
 
     private String updatedDate;
 
-    private String updatedTime;
+    private ArrayList<int[]> statics = new ArrayList<>(); // {SuccessCount,FailureCount}
+    private ArrayList<int[]> log = new ArrayList<>();
 
 
     //현재 플레이어가 선택중인 프로필을 반환
@@ -79,9 +80,15 @@ public class Player {
         return updatedDate;
     }
 
-    public String getUpdatedTime() {
-        return updatedTime;
+
+    public ArrayList<int[]> getStatics() {
+        return statics;
     }
+
+    public ArrayList<int[]> getLog() {
+        return log;
+    }
+
 
     //Setter
     public void setMoney(int money) {
@@ -96,12 +103,13 @@ public class Player {
         this.updatedDate = updatedDate;
     }
 
-    public void setUpdatedTime(String updatedTime) {
-        this.updatedTime = updatedTime;
-    }
-
     public void setInventory(ArrayList<Item> inventory) {}
 
+    public void setStatics(ArrayList<int[]> statics) {
+        this.statics = statics;
+    }
 
-
+    public void setLog(ArrayList<int[]> log) {
+        this.log = log;
+    }
 }
