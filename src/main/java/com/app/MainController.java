@@ -16,7 +16,7 @@ public class MainController extends JFrame {
     private JPanel mainPanel;
     private Map<String, Screen> screens;
 
-    private static Player player;
+    private static Player player = Player.getInstance();
     private static JsonController jsonController;
 
     public static Sword[] swordList = new Sword[20];
@@ -51,6 +51,15 @@ public class MainController extends JFrame {
         return null;
     }
 
+    public static void updateSwordStatistics() {
+        for(int i = 0; i < player.getStatics().size(); i++) {
+            Sword sword = swordList[i];
+            sword.setSuccessCount(player.getStatics().get(i)[0]);
+            sword.setFailureCount(player.getStatics().get(i)[1]);
+            System.out.println(sword.getName() + " " + sword.getSuccessCount() + " " + sword.getFailureCount());
+        }
+    }
+
     private void addScreen(String name, Screen screen) {
         screens.put(name, screen); // Map에 화면 추가
         mainPanel.add((Component) screen, name); // CardLayout에 화면 추가
@@ -78,6 +87,9 @@ public class MainController extends JFrame {
             swordList[i-1].setSwordName(i+"번째 검");
         }
     }
+
+
+
     public void updateGameScreenUI() {
         Screen screen = screens.get("Game");
         if (screen instanceof GameScreen) {
