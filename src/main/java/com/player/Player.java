@@ -1,5 +1,6 @@
 package com.player;
 
+import com.app.MainController;
 import com.item.interfaces.Item;
 import com.item.Sword;
 
@@ -40,6 +41,7 @@ public class Player {
     //플레이어가 선택한 프로필을 갱신
     public static void setNowPlayer(int changePlayer) {
         nowPlayer = changePlayer;
+        MainController.updateSwordStatistics();
     }
 
     public void addItem(Item item) {

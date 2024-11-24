@@ -13,9 +13,9 @@ public class Sword {
     private int possibility = 0;//강화도
 
     //성공횟수,실패횟수,시도횟수
-    private int SuccessCount = 0;
-    private int FailureCount = 0;
-    private int TotalAttempts = 0;
+    private int successCount = 0;
+    private int failureCount = 0;
+    private int totalAttempts = 0;
 
     private String imageSourcePath;
 
@@ -30,10 +30,10 @@ public class Sword {
         Random rand = new Random();
         int n = rand.nextInt(1,101);// 성공
         if(n > num){
-            FailureCount++;
+            failureCount++;
             return false;
         }
-        SuccessCount++;
+        successCount++;
         return true;
     }
 
@@ -97,6 +97,16 @@ public class Sword {
         this.description = description;
         return this.description;
     }
+
+    public void setSuccessCount(int successCount) {
+        this.successCount = successCount;
+    }
+
+    public void setFailureCount(int failureCount) {
+        this.failureCount = failureCount;
+    }
+
+    //getter
     public String getName() {
         return name;
     }
@@ -104,18 +114,19 @@ public class Sword {
         return description;
     }
     public int getSuccessCount(){
-        return SuccessCount;
+        return successCount;
     }
     public int getFailureCount(){
-        return FailureCount;
+        return failureCount;
     }
     public int getTotalAttempts(){
-        TotalAttempts = SuccessCount+FailureCount;
-        return TotalAttempts;
+        totalAttempts = successCount+failureCount;
+        return totalAttempts;
     }
-    public int getSuccessRate(){//실제 성공확률
+    public double getSuccessRate(){//실제 성공확률
         int a = getTotalAttempts();
-        return getSuccessCount()/a;
+        if(a == 0) return 0.0;
+        return (float) getSuccessCount()/a;
     }
 
     public int getId() {

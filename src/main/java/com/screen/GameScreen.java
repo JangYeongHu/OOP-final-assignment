@@ -54,15 +54,6 @@ public class GameScreen extends JPanel implements Screen {
         revalidate();
         repaint();
 }
-    private void saveButton_E(JButton button) {
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {//저장하는법 알아내고 작성
-                LoadScreen.getInstance().setLoadRequest(false);
-                mainController.switchTo("Load");
-            }
-        });
-    }
 
 
     private void midPanel() {
@@ -272,6 +263,7 @@ public class GameScreen extends JPanel implements Screen {
         openSaveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {//저장하는법 알아내고 작성
+                LoadScreen.getInstance().setLoadRequest(false);
                 mainController.switchTo("Load");
             }
         });
