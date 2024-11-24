@@ -96,10 +96,10 @@ public class MainController extends JFrame {
         if (screen instanceof StoreScreen) {
             ((StoreScreen) screen).refreshInventory(); // InventoryScreen 갱신
         }
+    }
     //index 자리에 현재 데이터를 저장
     public void savePlayerData(int index) {
         jsonController.writeJson(index);
         LoadScreen.getInstance().initialize();
     }
-
 }
