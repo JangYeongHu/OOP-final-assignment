@@ -4,7 +4,6 @@ import com.item.Sword;
 import com.player.Player;
 import com.screen.*;
 import com.screen.interfaces.Screen;
-import org.json.JSONArray;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,7 +62,7 @@ public class MainController extends JFrame {
                 screen.showScreen();
             } else {
                 screen.hideScreen();
-            }
+        }
         });
         cardLayout.show(mainPanel, screenName);
     }
@@ -79,4 +78,18 @@ public class MainController extends JFrame {
             swordList[i-1].setSwordName(i+"번째 검");
         }
     }
+    public void updateGameScreenUI() {
+        Screen screen = screens.get("Game");
+        if (screen instanceof GameScreen) {
+            ((GameScreen) screen).gamePanelUpdate(); // GameScreen의 UI 갱신
+            ((GameScreen) screen).updateSaveTicketButton();
+        }
+    }
+    public void updateInventoryScreen() {//게임,상점에서사용예정
+        Screen screen = screens.get("Inventory");
+        if (screen instanceof InventoryScreen) {
+            ((InventoryScreen) screen).refreshInventory(); // InventoryScreen 갱신
+        }
+    }
+
 }

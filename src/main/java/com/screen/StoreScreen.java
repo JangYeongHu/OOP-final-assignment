@@ -6,6 +6,7 @@ import com.app.MainController;
 
 import javax.swing.*;
 
+import com.player.Player;
 import com.screen.interfaces.Screen;
 
 import java.awt.*;
@@ -22,21 +23,31 @@ public class StoreScreen extends JPanel implements Screen {
     }
     public void goGameScreen(){
         JButton GoGame = new JButton("게임창으로 돌아가기");
-        GoGame.setPreferredSize(new Dimension(0,70));
         GoGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainController.switchTo("Game");
             }
         });
-        JPanel goScreen  =new JPanel(new BorderLayout());
-        goScreen.add(GoGame);
-        add(goScreen, BorderLayout.PAGE_START);
+        add(GoGame);
     }
+    public void readItem(Player player){
+    }
+    public void buyItem(){
+
+    }
+    public void itemListPanel(){
+        JPanel itemList = new JPanel(new BorderLayout());
+        JPanel item = new JPanel(new BorderLayout());
+        JLabel name = new JLabel("아이템이름");
+        //|이름   |구매|
+    }
+
     @Override
     public void initialize() {
-        setLayout(new BorderLayout());
+        setLayout(new GridLayout(8,1));
         goGameScreen();
+        itemListPanel();
     }
 
     @Override

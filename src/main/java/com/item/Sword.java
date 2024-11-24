@@ -1,5 +1,7 @@
 package com.item;
 
+import com.player.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
@@ -27,8 +29,6 @@ public class Sword {
         int num = 105 - 5*possibility;// 성공확률계산
         Random rand = new Random();
         int n = rand.nextInt(1,101);// 성공
-//        System.out.println("num : "+num);
-//        System.out.println("n : "+n);
         if(n > num){
             FailureCount++;
             return false;
@@ -40,8 +40,8 @@ public class Sword {
     public ImageIcon imageIcon(){
         ImageIcon imageicon = new ImageIcon(imageSourcePath);//
         Image image = imageicon.getImage();
-        int newWidth = 400;
-        int newHeight = 380;
+        int newWidth = 500;
+        int newHeight = 480;
         Image resizedImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
