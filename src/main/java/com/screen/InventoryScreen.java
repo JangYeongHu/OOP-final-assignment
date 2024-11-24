@@ -29,36 +29,32 @@ public class InventoryScreen extends JPanel implements Screen {
         ArrayList<Item> inventory = player.getInventory();
 
         for (int i = 0; i < MRows*MCols; i++) {
-            if(inventory.size() > i){
+            if(inventory.size() > i&& inventory.get(i).getCount() > 0){
                 JPanel MiniPanel = new JPanel(new GridLayout(2,1));
                 MiniPanel = ItemPanelCreate(MiniPanel,inventory.get(i));
                 panel.add(MiniPanel);
             }
             else{
-                Item nullItem = new Ticket();
-                JPanel MiniPanel = new JPanel(new GridLayout(2,1));
-                MiniPanel = ItemPanelCreate(MiniPanel,nullItem);
-                panel.add(MiniPanel);
+                JPanel miniPanel = new JPanel(new GridLayout(2,1));
+                panel.add(nullItemPanel(miniPanel));
             }
         }
         add(panel);
     }
+    private JPanel nullItemPanel(JPanel j){
+        return ItemPanelCreate(j, new Ticket());
+    }
     public JPanel ItemPanelCreate(JPanel c,Item i){
-
         JPanel NamePanel = new JPanel();
         JLabel itemName = new JLabel(i.getName());//1번패널
-        itemName.setHorizontalAlignment(JLabel.CENTER);
-        itemName.setVerticalAlignment(JLabel.CENTER);
-        itemName.setFont(itemName.getFont().deriveFont(20.0f));
+        labelCenterSort(itemName);
         NamePanel.add(itemName);
         c.add(NamePanel);
 
         JPanel buttonPanel = new JPanel(new GridLayout(1,2));
         JLabel countLabel =new JLabel(i.getCount()+" 개");
         JButton ActivateButton = AButton(new JButton(), i,countLabel);
-        countLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        countLabel.setVerticalAlignment(SwingConstants.CENTER);
-        countLabel.setFont(countLabel.getFont().deriveFont(32.0f));
+        labelCenterSort(countLabel);
         buttonPanel.add(countLabel);
         buttonPanel.add(ActivateButton);
 
@@ -69,6 +65,11 @@ public class InventoryScreen extends JPanel implements Screen {
         return c;
     }
 
+    private void labelCenterSort(JLabel label){
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setVerticalAlignment(SwingConstants.CENTER);
+        label.setFont(label.getFont().deriveFont(25.0f));
+    }
     private JButton AButton(JButton Button, Item i, JLabel countLabel) {
         JLabel Label = new JLabel("사용하기");
         Label.setHorizontalAlignment(JLabel.CENTER);
@@ -77,10 +78,23 @@ public class InventoryScreen extends JPanel implements Screen {
         Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                i.useItem();
-                countLabel.setText(i.getCount()+" 개");
+//                i.useItem();
+//                countLabel.setText(i.getCount()+" 개");
+                if (i.getCount() > 0) {
+                    i.useItem();
+                    countLabel.setText(i.getCount() + " 개");
+
+                    // count가 0이 되었는지 확인
+                    if (i.getCount() == 0) {
+                        JOptionPane.showMessageDialog(null, i.getName() + " 아이템이 모두 사용되었습니다!");
+                        refreshInventory(); // 인벤토리 화면 갱신
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "아이템이 없습니다!");
+                }
                 mainController.updateGameScreenUI();
             }
+
         });
         return Button;
     }

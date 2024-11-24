@@ -91,5 +91,11 @@ public class MainController extends JFrame {
             ((InventoryScreen) screen).refreshInventory(); // InventoryScreen 갱신
         }
     }
+    public void updateStoreScreen() {//게임,상점에서사용예정
+        Screen screen = screens.get("Store");
+        if (screen instanceof StoreScreen) {
+            ((StoreScreen) screen).refreshInventory(); // InventoryScreen 갱신
+        }
+    }
 
 }

@@ -124,6 +124,7 @@ public class GameScreen extends JPanel implements Screen {
                     }
                 }
                 mainController.updateInventoryScreen();
+                mainController.updateStoreScreen();
             }
         });
     }
@@ -277,11 +278,6 @@ public class GameScreen extends JPanel implements Screen {
     public void initialize() {
         player = Player.getInstance(0);
         money = new JLabel("돈 : " + player.getMoney());
-        if(player.getInventory().isEmpty()){
-            player.addItem(Ticket.ticketType("Save"));
-            player.addItem(Ticket.ticketType("Push"));
-            player.addItem(Ticket.ticketType("Upgrade"));
-        }
         setLayout(new BorderLayout());
         topPanel();
         midPanel();
