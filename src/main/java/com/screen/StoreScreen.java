@@ -37,10 +37,12 @@ public class StoreScreen extends JPanel implements Screen {
 
     }
     public void itemListPanel(){
+        Player player = Player.getInstance();
         JPanel itemList = new JPanel(new BorderLayout());
         JPanel item = new JPanel(new BorderLayout());
         JLabel name = new JLabel("아이템이름");
         //|이름   |구매|
+
     }
 
     @Override
