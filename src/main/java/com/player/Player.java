@@ -1,10 +1,7 @@
 package com.player;
 
-import com.app.MainController;
-import com.app.JsonController;
 import com.item.interfaces.Item;
 import com.item.Sword;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -46,6 +43,7 @@ public class Player {
     }
 
     public void addItem(Item item) {
+        inventory.add(item);
     }
 
     public Item useItem(Item item) {
@@ -55,7 +53,6 @@ public class Player {
     public void doUpgradeSword() {
         money -= nowSword.getUpgradeFee();
    }
-
     public void soldSword(Sword initSword) {
         //SList[0] 을 넣어서 호출
         money += nowSword.getsellPrice();
@@ -104,7 +101,7 @@ public class Player {
     }
 
     public void setInventory(ArrayList<Item> inventory) {}
-
+  
     public void setStatics(ArrayList<int[]> statics) {
         this.statics = statics;
     }

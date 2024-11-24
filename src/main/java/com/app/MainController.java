@@ -4,7 +4,6 @@ import com.item.Sword;
 import com.player.Player;
 import com.screen.*;
 import com.screen.interfaces.Screen;
-import org.json.JSONArray;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,7 +63,7 @@ public class MainController extends JFrame {
                 screen.showScreen();
             } else {
                 screen.hideScreen();
-            }
+        }
         });
         cardLayout.show(mainPanel, screenName);
     }
@@ -72,7 +71,6 @@ public class MainController extends JFrame {
     public void loadSettingData() {
 
     }
-
     static void createSword(){
         for (int i = 1; i < 21; i++){
             swordList[i-1] = new Sword("src/main/resources/"+i+".png",i);
@@ -80,12 +78,28 @@ public class MainController extends JFrame {
             swordList[i-1].setSwordName(i+"번째 검");
         }
     }
-
+    public void updateGameScreenUI() {
+        Screen screen = screens.get("Game");
+        if (screen instanceof GameScreen) {
+            ((GameScreen) screen).gamePanelUpdate(); // GameScreen의 UI 갱신
+            ((GameScreen) screen).updateSaveTicketButton();
+        }
+    }
+    public void updateInventoryScreen() {//게임,상점에서사용예정
+        Screen screen = screens.get("Inventory");
+        if (screen instanceof InventoryScreen) {
+            ((InventoryScreen) screen).refreshInventory(); // InventoryScreen 갱신
+        }
+    }
+    public void updateStoreScreen() {//게임,상점에서사용예정
+        Screen screen = screens.get("Store");
+        if (screen instanceof StoreScreen) {
+            ((StoreScreen) screen).refreshInventory(); // InventoryScreen 갱신
+        }
     //index 자리에 현재 데이터를 저장
     public void savePlayerData(int index) {
         jsonController.writeJson(index);
         LoadScreen.getInstance().initialize();
-
     }
 
 }
