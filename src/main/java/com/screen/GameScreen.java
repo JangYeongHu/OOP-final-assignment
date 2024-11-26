@@ -148,7 +148,11 @@ public class GameScreen extends JPanel implements Screen {
     }
     public static void pushTicketActive(){
         int pSword = player.getNowSword().getpossibility();
-        player.setNowSword(MainController.swordList[pSword]);
+        if(MainController.swordList.length > pSword){
+            player.setNowSword(MainController.swordList[pSword]);
+        }else{
+            System.out.println("maxPossibility");
+        }
     }
     public static void upgradeTicketActive(int i){
         player.setNowSword(MainController.swordList[i]);
