@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 
 public class GameScreen extends JPanel implements Screen {
 
-    static Player player = Player.getInstance();
+    static Player player;
     private JLabel money;
     private MainController mainController;
     private static boolean isSaveTicketActive = false;
@@ -277,9 +277,12 @@ public class GameScreen extends JPanel implements Screen {
         c.add(openStartButton);
     }
 
+    public int playerGameSetting(){
+        return 0;
+    }
     @Override
     public void initialize() {
-        player = Player.getInstance(0);
+        player = Player.getInstance();
         money = new JLabel("돈 : " + player.getMoney());
         setLayout(new BorderLayout());
         topPanel();
