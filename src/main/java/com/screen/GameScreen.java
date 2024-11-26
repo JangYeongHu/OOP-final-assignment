@@ -91,7 +91,7 @@ public class GameScreen extends JPanel implements Screen {
         swordUpgradeButton = new JButton("강화하기");
         buttonList.add(upgradeButtonEvent(swordImage));
 
-        swordSellButton = new JButton("판매하기");
+        swordSellButton = new JButton(MainController.swordList[player.getNowSword().getpossibility()-1].getsellPrice() + "원 판매하기");
         buttonList.add(sellButton(swordSellButton, swordImage));
 
         JPanel mainPanel = new JPanel(new BorderLayout());
