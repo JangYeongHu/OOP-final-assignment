@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 public class InventoryScreen extends JPanel implements Screen {
     Player player = Player.getInstance();
+    int MRows = 5;
+    int MCols = 5;
 
     private MainController mainController;
     public InventoryScreen(MainController mainController) {
@@ -23,23 +25,26 @@ public class InventoryScreen extends JPanel implements Screen {
         initialize();
     }
     public void CenterPanelCreate(){
-        int MRows = 5;
-        int MCols = 5;
         JPanel panel = new JPanel(new GridLayout(MRows,MCols,10,5));
         ArrayList<Item> inventory = player.getInventory();
+        add(mainPanelCreate(inventory, panel));
+    }
 
-        for (int i = 0; i < MRows*MCols; i++) {
-            if(inventory.size() > i&& inventory.get(i).getCount() > 0){
-                JPanel MiniPanel = new JPanel(new GridLayout(2,1));
-                MiniPanel = ItemPanelCreate(MiniPanel,inventory.get(i));
+    private JPanel mainPanelCreate(ArrayList<Item> inventory, JPanel panel){
+        int a = 0;
+        for (Item item : inventory) {
+            if (item.getCount() > 0) {
+                JPanel MiniPanel = new JPanel(new GridLayout(2, 1));
+                MiniPanel = ItemPanelCreate(MiniPanel, item);
                 panel.add(MiniPanel);
-            }
-            else{
-                JPanel miniPanel = new JPanel(new GridLayout(2,1));
-                panel.add(nullItemPanel(miniPanel));
-            }
+            } else a++;
         }
-        add(panel);
+        for (int i = 0; i < MRows*MCols-inventory.size()+a; i++) {
+            JPanel miniPanel = new JPanel(new GridLayout(2, 1));
+            panel.add(nullItemPanel(miniPanel));
+        }
+
+        return panel;
     }
     private JPanel nullItemPanel(JPanel j){
         return ItemPanelCreate(j, new Ticket());
@@ -78,16 +83,12 @@ public class InventoryScreen extends JPanel implements Screen {
         Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                i.useItem();
-//                countLabel.setText(i.getCount()+" 개");
                 if (i.getCount() > 0) {
                     i.useItem();
                     countLabel.setText(i.getCount() + " 개");
-
-                    // count가 0이 되었는지 확인
                     if (i.getCount() == 0) {
                         JOptionPane.showMessageDialog(null, i.getName() + " 아이템이 모두 사용되었습니다!");
-                        refreshInventory(); // 인벤토리 화면 갱신
+                        refreshInventory();
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "아이템이 없습니다!");
