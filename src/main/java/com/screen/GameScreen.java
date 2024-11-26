@@ -277,9 +277,6 @@ public class GameScreen extends JPanel implements Screen {
         c.add(openStartButton);
     }
 
-    public int playerGameSetting(){
-        return 0;
-    }
     @Override
     public void initialize() {
         player = Player.getInstance();
