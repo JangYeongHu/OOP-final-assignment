@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 public class GameScreen extends JPanel implements Screen {
 
     static Player player;
-    private static JLabel money;
+    private JLabel money;
     private MainController mainController;
     private static boolean isSaveTicketActive = false;
 
@@ -91,7 +91,7 @@ public class GameScreen extends JPanel implements Screen {
         swordUpgradeButton = new JButton("강화하기");
         buttonList.add(upgradeButtonEvent(swordImage));
 
-        swordSellButton = new JButton("판매하기");
+        swordSellButton = new JButton(MainController.swordList[player.getNowSword().getpossibility()-1].getsellPrice() + "원 판매하기");
         buttonList.add(sellButton(swordSellButton, swordImage));
 
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -107,9 +107,12 @@ public class GameScreen extends JPanel implements Screen {
 
         saveTicketButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {//누르면 색깔변경 초록색
+            public void actionPerformed(ActionEvent e) {
                 int count = findSaveTicket();
-                if(player.getInventory().get(count).getCount() > 0){
+                if(player.getInventory().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "파괴방지권이 부족합니다");
+                }
+                else if(player.getInventory().get(count).getCount() > 0){
                     if (!isSaveTicketActive) {
                         player.getInventory().get(count).minCount();
                         saveTicketButton.setBackground(Color.GREEN);
@@ -145,7 +148,11 @@ public class GameScreen extends JPanel implements Screen {
     }
     public static void pushTicketActive(){
         int pSword = player.getNowSword().getpossibility();
-        player.setNowSword(MainController.swordList[pSword]);
+        if(MainController.swordList.length > pSword){
+            player.setNowSword(MainController.swordList[pSword]);
+        }else{
+            System.out.println("maxPossibility");
+        }
     }
     public static void upgradeTicketActive(int i){
         player.setNowSword(MainController.swordList[i]);
@@ -157,7 +164,7 @@ public class GameScreen extends JPanel implements Screen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Sword nowSword = player.getNowSword();
-                player.setMoney(player.getMoney()-player.getNowSword().setupgradeFee());//player.doUpgradeSword();//돈소모 현재쓰는방식은 임시방편
+                player.doUpgradeSword();//돈소모 현재쓰는방식은 임시방편
                 if (player.getMoney() > nowSword.getUpgradeFee()){//player의 돈이 강화비용보닫 많을경우에만
                     if (nowSword.upgradeProbability()) {
                         success(image,nowSword.getpossibility());
@@ -276,7 +283,7 @@ public class GameScreen extends JPanel implements Screen {
 
     @Override
     public void initialize() {
-        player = Player.getInstance(0);
+        player = Player.getInstance();
         money = new JLabel("돈 : " + player.getMoney());
         setLayout(new BorderLayout());
         topPanel();
