@@ -1,0 +1,130 @@
+{
+  "setting": {
+    "sound": {
+      "bgm-on": true,
+      "volume": 100
+    }
+  },
+  "swords": [
+    {
+      "sword_id": 1,
+      "name": "깨진 돌검",
+      "sell-price": 0,
+      "update-fee": 1000
+    },
+    {
+      "sword_id": 2,
+      "name": "커터칼",
+      "sell-price": 1000,
+      "update-fee": 1500
+    },
+    {
+      "sword_id": 3,
+      "name": "그냥 단검",
+      "sell-price": 3000,
+      "update-fee": 3000
+    },
+    {
+      "sword_id": 4,
+      "name": "녹슨 철검",
+      "sell-price": 10000,
+      "update-fee": 5000
+    },
+    {
+      "sword_id": 5,
+      "name": "치킨 닭다리",
+      "sell-price": 30000,
+      "update-fee": 10000
+    },
+    {
+      "sword_id": 6,
+      "name": "기름칠한 철검",
+      "sell-price": 70000,
+      "update-fee": 20000
+    },
+    {
+      "sword_id": 7,
+      "name": "네더라이트 검",
+      "sell-price": 150000,
+      "update-fee": 40000
+    },
+    {
+      "sword_id": 8,
+      "name": "피 묻힌 검",
+      "sell-price": 300000,
+      "update-fee": 80000
+    },
+    {
+      "sword_id": 9,
+      "name": "마법부여 네더라이트 검",
+      "sell-price": 600000,
+      "update-fee": 160000
+    },
+    {
+      "sword_id": 10,
+      "name": "비싼 금검",
+      "sell-price": 1200000,
+      "update-fee": 320000
+    },
+    {
+      "sword_id": 11,
+      "name": "용사의 비늘검",
+      "sell-price": 2500000,
+      "update-fee": 650000
+    },
+    {
+      "sword_id": 12,
+      "name": "포세이돈의 삼지창",
+      "sell-price": 5000000,
+      "update-fee": 1300000
+    },
+    {
+      "sword_id": 13,
+      "name": "빛의 서약검",
+      "sell-price": 10000000,
+      "update-fee": 2600000
+    },
+    {
+      "sword_id": 14,
+      "name": "일렉트릭 기타",
+      "sell-price": 20000000,
+      "update-fee": 5200000
+    },
+    {
+      "sword_id": 15,
+      "name": "번개가 친 검",
+      "sell-price": 40000000,
+      "update-fee": 10000000
+    },
+    {
+      "sword_id": 16,
+      "name": "불꽃 마검",
+      "sell-price": 80000000,
+      "update-fee": 20000000
+    },
+    {
+      "sword_id": 17,
+      "name": "폭풍의 집행자",
+      "sell-price": 150000000,
+      "update-fee": 40000000
+    },
+    {
+      "sword_id": 18,
+      "name": "어디서 본 거 같은 형광검",
+      "sell-price": 300000000,
+      "update-fee": 80000000
+    },
+    {
+      "sword_id": 19,
+      "name": "데몬 배틀 엑스",
+      "sell-price": 600000000,
+      "update-fee": 160000000
+    },
+    {
+      "sword_id": 20,
+      "name": "궁극의 대검",
+      "sell-price": 1200000000,
+      "update-fee": 320000000
+    }
+  ]
+}
