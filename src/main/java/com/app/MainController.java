@@ -7,6 +7,8 @@ import com.screen.interfaces.Screen;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +29,7 @@ public class MainController extends JFrame {
         screens = new HashMap<>();
         createSword();
         jsonController = JsonController.getInstance();
+        loadFont();
 
         addScreen("Load", new LoadScreen(this));
         addScreen("Start", new StartScreen(this));
@@ -88,7 +91,17 @@ public class MainController extends JFrame {
         }
     }
 
-
+    private void loadFont() {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        try {
+            InputStream fontStream = Main.class.getResourceAsStream("/fonts/DungGeunMo.ttf");
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, fontStream);
+            customFont = customFont.deriveFont(30f);
+            ge.registerFont(customFont);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void updateGameScreenUI() {
         Screen screen = screens.get("Game");
