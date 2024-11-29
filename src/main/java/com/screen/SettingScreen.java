@@ -11,7 +11,7 @@ import java.util.Hashtable;
 public class SettingScreen extends JPanel implements Screen {
 
     private MainController mainController;
-    private BgmController bgmController = new BgmController();
+    private BgmController bgmController = BgmController.getInstance();
     private boolean isBgmOn = true;
     private static final String BGM_FILE_PATH = "src/main/resources/bgm.wav"; // BGM 파일 경로
 

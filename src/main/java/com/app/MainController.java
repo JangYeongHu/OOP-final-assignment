@@ -24,6 +24,8 @@ public class MainController extends JFrame {
     private static Player player = Player.getInstance();
     private static JsonController jsonController;
 
+    private static BgmController bgmController;
+
     public static Sword[] swordList = new Sword[20];
 
     public MainController() {
@@ -31,6 +33,7 @@ public class MainController extends JFrame {
         mainPanel = new JPanel(cardLayout);
         screens = new HashMap<>();
         jsonController = JsonController.getInstance();
+        bgmController = BgmController.getInstance();
         createSword();
         loadFont();
 
@@ -42,11 +45,13 @@ public class MainController extends JFrame {
         addScreen("Reset", new ResetScreen(this));
         addScreen("Statistics", new StatisticsScreen(this));
         addScreen("Inventory", new InventoryScreen(this));
+        addScreen("Collection", new CollectionScreen(this));
 
         add(mainPanel);
         setSize(1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        setResizable(false);
         switchTo("Load");
     }
 

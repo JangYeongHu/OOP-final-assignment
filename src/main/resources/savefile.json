@@ -1,78 +1,74 @@
 [
-	{
-		"index": 0,
-		"player_data": {
-			"latest_date": "2024-11-03 03:00",
-			"sword_id": 1,
-			"money": 1248888,
-			"item": [
-				{
-					"item_code": 3,
-					"quantity": 1
-				},
-				{
-					"item_code": 2,
-					"quantity": 5
-				}
-			]
-		},
-		"statistics" : [
-			{
-				"sword_id": 1,
-				"success": 10,
-				"fail" : 2
-			},
-			{
-				"sword_id": 2,
-				"success": 8,
-				"fail": 3
-			},
-			{
-				"sword_id" : 3,
-				"success": 5,
-				"fail": 3
-			}
-		],
-		"log" : []
-	},
-	{
-		"index" : 1,
-		"player_data": {
-			"latest_date": "2024-11-06 03:11",
-			"sword_id": 2,
-			"money": 2395000,
-			"item": [
-				{
-					"item_code": 4,
-					"quantity": 3
-				},
-				{
-					"item_code": 1,
-					"quantity": 2
-				}
-			]
-		},
-		"statistics" : [],
-		"log" : []
-	},
-	{
-		"index" : 2,
-		"player_data": {
-			"latest_date": "2024-11-10 01:11",
-			"sword_id": 4,
-			"money": 3550000,
-			"item": [
-				{
-					"item_code": 5,
-					"quantity": 2
-				},
-				{
-					"item_code": 6,
-					"quantity": 4
-				}
-			]
-		},
-		"statistics" : [],
-		"log" : []
-	}
+    {
+        "player_data": {
+            "money": 1247538,
+            "sword_id": 8,
+            "latest_date": "2024-11-29 18:38"
+        },
+        "log": [],
+        "index": 0,
+        "statistics": [
+            {
+                "fail": 2,
+                "sword_id": 1,
+                "success": 10
+            },
+            {
+                "fail": 3,
+                "sword_id": 2,
+                "success": 8
+            },
+            {
+                "fail": 3,
+                "sword_id": 3,
+                "success": 5
+            }
+        ]
+    },
+    {
+        "player_data": {
+            "money": 1247538,
+            "sword_id": 8,
+            "latest_date": "2024-11-29 18:38"
+        },
+        "log": [],
+        "index": 1,
+        "statistics": [
+            {
+                "fail": 2,
+                "sword_id": 1,
+                "success": 10
+            },
+            {
+                "fail": 3,
+                "sword_id": 2,
+                "success": 8
+            },
+            {
+                "fail": 3,
+                "sword_id": 3,
+                "success": 5
+            }
+        ]
+    },
+    {
+        "player_data": {
+            "item": [
+                {
+                    "item_code": 5,
+                    "quantity": 2
+                },
+                {
+                    "item_code": 6,
+                    "quantity": 4
+                }
+            ],
+            "money": 3550000,
+            "latest_date": "2024-11-10 01:11",
+            "sword_id": 4
+        },
+        "log": [],
+        "index": 2,
+        "statistics": []
+    }
 ]
