@@ -59,6 +59,7 @@ public class StoreScreen extends JPanel implements Screen {
         productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",18,80000),player));
         add(productPanel, BorderLayout.CENTER);
     }
+    
     public JPanel ItemPanelCreate(Item i,Player player){
         JPanel productPanel = new JPanel(new GridLayout(1,2));
         JLabel productName = new JLabel(i.getName());
@@ -86,13 +87,14 @@ public class StoreScreen extends JPanel implements Screen {
         buyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(player.getMoney()- i.getPrice() > i.getPrice()){
+                if(player.getMoney()- i.getPrice() > 0){
                     player.setMoney(player.getMoney()- i.getPrice());
                     if (player.getInventory().contains(i)){
                         i.addCount();
                     }else{
                         player.getInventory().add(i);
                     }
+                    JOptionPane.showMessageDialog(null, i.getName() + " 아이템을 구매하셨습니다");
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "돈이부족합니다");

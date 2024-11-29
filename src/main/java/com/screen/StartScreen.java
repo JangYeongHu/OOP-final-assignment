@@ -46,7 +46,9 @@ public class StartScreen extends JPanel implements Screen {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainController.switchTo("Game"); // 검 강화 화면으로 전환
+                mainController.switchTo("Game");
+                mainController.updateGameScreenUI();
+            // 검 강화 화면으로 전환
             }
         });
         gbc.gridx = 0;

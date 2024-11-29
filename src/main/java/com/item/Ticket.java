@@ -89,10 +89,10 @@ class PushTicket extends Ticket{//확정업
 }
 
 class UpgradeTicket extends Ticket {//워프권 10,12,14,16,18
-    static String name;
+    String name;
     int possibility = 0;
     public UpgradeTicket(int x,int y){
-        UpgradeTicket.name = x+"강 워프권";
+        name = x+"강 워프권";
         possibility = x-1;
         price = y;
         addCount();
