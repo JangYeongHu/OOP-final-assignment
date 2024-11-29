@@ -1,12 +1,14 @@
 [
     {
         "player_data": {
-            "money": 1247538,
-            "sword_id": 8,
-            "latest_date": "2024-11-29 18:38"
+            "money": 1247138,
+            "sword_id": 1,
+            "latest_date": "2024-11-30 00:45"
         },
         "log": [],
+        "bgm-volume": 100,
         "index": 0,
+        "bgm-on": true,
         "statistics": [
             {
                 "fail": 2,
@@ -27,9 +29,9 @@
     },
     {
         "player_data": {
-            "money": 1247538,
-            "sword_id": 8,
-            "latest_date": "2024-11-29 18:38"
+            "money": 1247138,
+            "sword_id": 1,
+            "latest_date": "2024-11-30 00:42"
         },
         "log": [],
         "index": 1,
@@ -53,22 +55,30 @@
     },
     {
         "player_data": {
-            "item": [
-                {
-                    "item_code": 5,
-                    "quantity": 2
-                },
-                {
-                    "item_code": 6,
-                    "quantity": 4
-                }
-            ],
-            "money": 3550000,
-            "latest_date": "2024-11-10 01:11",
-            "sword_id": 4
+            "money": 1246688,
+            "sword_id": 5,
+            "latest_date": "2024-11-30 00:46"
         },
         "log": [],
+        "bgm-volume": 100,
         "index": 2,
-        "statistics": []
+        "bgm-on": true,
+        "statistics": [
+            {
+                "fail": 2,
+                "sword_id": 1,
+                "success": 10
+            },
+            {
+                "fail": 3,
+                "sword_id": 2,
+                "success": 8
+            },
+            {
+                "fail": 3,
+                "sword_id": 3,
+                "success": 5
+            }
+        ]
     }
 ]

@@ -53,6 +53,7 @@ public class MainController extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setResizable(false);
+        bgmController.play("src/main/resources/bgm.wav");
         switchTo("Load");
     }
 
@@ -84,7 +85,7 @@ public class MainController extends JFrame {
                 screen.showScreen();
             } else {
                 screen.hideScreen();
-        }
+            }
         });
         cardLayout.show(mainPanel, screenName);
     }

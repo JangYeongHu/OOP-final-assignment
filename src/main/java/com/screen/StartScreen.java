@@ -14,7 +14,7 @@ public class StartScreen extends JPanel implements Screen {
     public StartScreen(MainController mainController) {
         this.mainController = mainController;
         // 배경 이미지 초기화
-        backgroundImage = getScaledImageIcon("start.png", 1024, 1024).getImage(); // 배경 이미지 경로 설정
+        backgroundImage = new ImageIcon(getClass().getClassLoader().getResource("start.png")).getImage();
         initialize();
     }
 
@@ -32,10 +32,17 @@ public class StartScreen extends JPanel implements Screen {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // 패딩 설정
 
+        // 색상 및 폰트 설정
+        Color textColor = new Color(0xFF1D4040, true);
+        Color buttonTextColor = new Color(0xFFD6BD98, true);
+        Color buttonColor = new Color(0x677D6A);
+        Font customFont = new Font("DungGeunMo", Font.PLAIN, 20);  // 폰트 설정
+        Font titleFont = new Font("DungGeunMo", Font.PLAIN, 40); // 제목 폰트
         // 제목 레이블
         JLabel titleLabel = new JLabel("검 강화하기");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        titleLabel.setForeground(Color.WHITE); // 글자 흰색
+        titleLabel.setForeground(textColor);  // 텍스트 색상
+        titleLabel.setFont(titleFont);  // 제목 폰트 크기 조정
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
@@ -43,12 +50,17 @@ public class StartScreen extends JPanel implements Screen {
 
         // 게임 시작 버튼
         JButton startButton = new JButton("게임 시작");
+        startButton.setBackground(buttonColor);
+        startButton.setOpaque(true);
+        startButton.setBorderPainted(false);
+        startButton.setForeground(buttonTextColor); // 버튼 텍스트 색상 변경
+        startButton.setFont(customFont); // 버튼 폰트 설정
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainController.switchTo("Game");
                 mainController.updateGameScreenUI();
-            // 검 강화 화면으로 전환
+                // 검 강화 화면으로 전환
             }
         });
         gbc.gridx = 0;
@@ -59,6 +71,11 @@ public class StartScreen extends JPanel implements Screen {
 
         // 설정 버튼
         JButton settingButton = new JButton("설정");
+        settingButton.setBackground(buttonColor);
+        settingButton.setOpaque(true);
+        settingButton.setBorderPainted(false);
+        settingButton.setForeground(buttonTextColor); // 버튼 텍스트 색상 변경
+        settingButton.setFont(customFont); // 버튼 폰트 설정
         settingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,6 +91,11 @@ public class StartScreen extends JPanel implements Screen {
 
         // 통계 화면으로 이동 버튼
         JButton statsButton = new JButton("통계 화면으로 이동");
+        statsButton.setBackground(buttonColor);
+        statsButton.setOpaque(true);
+        statsButton.setBorderPainted(false);
+        statsButton.setForeground(buttonTextColor); // 버튼 텍스트 색상 변경
+        statsButton.setFont(customFont); // 버튼 폰트 설정
         statsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,6 +109,11 @@ public class StartScreen extends JPanel implements Screen {
 
         // 게임 종료 버튼
         JButton exitButton = new JButton("게임 종료");
+        exitButton.setBackground(buttonColor);
+        exitButton.setOpaque(true);
+        exitButton.setBorderPainted(false);
+        exitButton.setForeground(buttonTextColor); // 버튼 텍스트 색상 변경
+        exitButton.setFont(customFont); // 버튼 폰트 설정
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -99,17 +126,6 @@ public class StartScreen extends JPanel implements Screen {
         gbc.gridwidth = 2;
         gbc.gridwidth = 1;
         add(exitButton, gbc);
-
-        // 버튼 스타일 설정
-        for (Component component : getComponents()) {
-            if (component instanceof JButton) {
-                JButton button = (JButton) component;
-                button.setOpaque(false);
-                button.setContentAreaFilled(false);
-                button.setBorderPainted(false);
-                button.setForeground(Color.WHITE); // 버튼 글자 색상
-            }
-        }
     }
 
     @Override
@@ -125,6 +141,7 @@ public class StartScreen extends JPanel implements Screen {
         g.setColor(new Color(0, 0, 0, 150)); // 검은색 반투명 배경 (150의 값으로 어둡게 조정)
         g.fillRect(0, 0, getWidth(), getHeight()); // 전체 패널에 덧칠
     }
+
     @Override
     public void showScreen() {
         setVisible(true);
