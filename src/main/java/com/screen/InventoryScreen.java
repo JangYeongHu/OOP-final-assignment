@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class InventoryScreen extends JPanel implements Screen {
     Player player = Player.getInstance();
-    int MRows = 5;
-    int MCols = 5;
+    int MRows = 3;
+    int MCols = 3;
 
     private MainController mainController;
     public InventoryScreen(MainController mainController) {

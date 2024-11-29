@@ -2,7 +2,6 @@ package com.screen;
 
 import com.app.MainController;
 import com.item.Sword;
-import com.item.Ticket;
 import com.item.interfaces.Item;
 import com.player.Player;
 import com.screen.interfaces.Screen;
@@ -11,11 +10,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
 
 public class GameScreen extends JPanel implements Screen {
 
     static Player player;
     private JLabel money;
+    private JLabel finalDestination;
     private MainController mainController;
     private static boolean isSaveTicketActive = false;
 
@@ -37,11 +38,13 @@ public class GameScreen extends JPanel implements Screen {
         JPanel Panel = new JPanel(null);
         Panel.setBackground(Color.GREEN);
         Panel.setBounds(20,20,300,80);
-        money.setBounds(50,10,280,60);
-        money.setFont(money.getFont().deriveFont(34.0f));
+        money.setBounds(30,10,280,60);
+        replaceFont(money,40);
         Panel.add(money);
         add(Panel);
+        menuPanel();
     }
+
     public void gamePanelUpdate(){
         removeAll();
         initialize();
@@ -49,12 +52,11 @@ public class GameScreen extends JPanel implements Screen {
         repaint();
     }
     public void moneyPanelUpdate(){
-        money.setText("돈 : "+player.getMoney());//돈갱신
         money.setVisible(true);
         revalidate();
         repaint();
-}
-
+        textreplace();
+    }
 
     private void midPanel() {
         JPanel mid = new JPanel(new BorderLayout());
@@ -73,17 +75,17 @@ public class GameScreen extends JPanel implements Screen {
 
         JPanel swordName = new JPanel(new BorderLayout());//검이름
         swordNameLabel = new JLabel(player.getNowSword().getName());
-        swordNameLabel.setFont(swordNameLabel.getFont().deriveFont(50.0f));
+        replaceFont(swordNameLabel,60);
         swordNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         swordNameLabel.setVerticalAlignment(SwingConstants.CENTER);
-        swordName.add(swordNameLabel,BorderLayout.CENTER);
+        swordName.add(swordNameLabel);
         swordNameLabel.setForeground(Color.cyan);
 
-        imagePanel.add(swordImage, BorderLayout.PAGE_START);//검이미지,검이름추가
-        imagePanel.add(swordName);
+        imagePanel.add(swordImage);//검이미지,검이름추가
+        imagePanel.add(swordName, BorderLayout.PAGE_END);
 
         JPanel buttonList = new JPanel();//파괴방지권,판매하기,강화하기을 넣을곳
-        buttonList.setLayout(new GridLayout(1, 3, 150, 130));
+        buttonList.setLayout(new GridLayout(1, 3, 150, 0));
         saveTicketButton = new JButton("파괴방지 비활성화");
         saveTicketClickedEvent();
         buttonList.add(saveTicketButton);
@@ -94,7 +96,7 @@ public class GameScreen extends JPanel implements Screen {
         swordSellButton = new JButton(MainController.swordList[player.getNowSword().getpossibility()-1].getsellPrice() + "원 판매하기");
         buttonList.add(sellButton(swordSellButton, swordImage));
 
-        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel mainPanel = new JPanel(new BorderLayout(50,30));
         mainPanel.add(imagePanel, BorderLayout.CENTER);
         mainPanel.add(buttonList,BorderLayout.PAGE_END);
         c.add(mainPanel);
@@ -192,18 +194,16 @@ public class GameScreen extends JPanel implements Screen {
     private void success(JLabel image, int number){
         Sword nextSword = MainController.swordList[number];//다음검뽑아오기
         player.setNowSword(nextSword);//플레이어검 업그레이드
-        swordNameLabel.setText(nextSword.getName());
-        swordSellButton.setText(nextSword.getsellPrice() + "원 \n판매하기");//버튼텍스트변경
         image.setIcon(nextSword.imageIcon());//이미지변경
     }
 
-
+/*
+*
+* */
     private void fall(JLabel Image) {
         if (saveTicketButton.getBackground() != Color.GREEN) {
             Sword nextSword = MainController.swordList[0];
             player.setNowSword(MainController.swordList[0]);
-            swordNameLabel.setText(nextSword.getName());
-            swordSellButton.setText((MainController.swordList[0].getsellPrice() + "원 \n판매하기"));
             Image.setIcon(nextSword.imageIcon());
         } else {
             saveTicketButton.setBackground(Color.gray);
@@ -220,37 +220,14 @@ public class GameScreen extends JPanel implements Screen {
             @Override
             public void actionPerformed(ActionEvent e) {//player에 돈넣어주는것추가하기
                 player.soldSword(MainController.swordList[0]);//n번째검 판매 > 0번째검으로 초기화
-                swordUpgradeButton.setText("강화하기");
-                swordSellButton.setText(("판매하기"));
-                swordNameLabel.setText(player.getNowSword().getName());
                 Image.setIcon(player.getNowSword().imageIcon());
-                money.setText("돈 : " + player.getMoney());
                 moneyPanelUpdate();
             }
         });
         return button;
     }
 
-
-    private void setButtonSize(Container c) {
-        c.setPreferredSize(new Dimension(300, 100));
-        c.setFont(c.getFont().deriveFont(24.0f));
-    }
-
-    private void bottomPanel() {
-        JPanel bottom = new JPanel(new GridLayout(1, 4));
-        setBottomButton(bottom);
-
-        add(bottom, BorderLayout.PAGE_END);
-    }
-    private void setBottomButton(Container c){
-        JButton openStoreButton = new JButton("상점으로");
-        openStoreButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainController.switchTo("Store");
-            }
-        });
+    private void menuPanel() {
         JButton openInventoryButton = new JButton("인벤토리");
         openInventoryButton.addActionListener(new ActionListener() {
             @Override
@@ -258,27 +235,38 @@ public class GameScreen extends JPanel implements Screen {
                 mainController.switchTo("Inventory");
             }
         });
-
-        JButton openStartButton = new JButton("메인으로 돌아가기");
-        openStartButton.addActionListener(new ActionListener() {
+        JButton openStoreButton = new JButton("상점으로");
+        openStoreButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainController.switchTo("Start");
+                mainController.switchTo("Store");
             }
         });
-        JButton openSaveButton = new JButton("저장하기");
-        openSaveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {//저장하는법 알아내고 작성
-                LoadScreen.getInstance().setLoadRequest(false);
-                mainController.switchTo("Load");
-            }
-        });
+        openStoreButton.setBackground(Color.cyan);
+        openInventoryButton.setBackground(Color.LIGHT_GRAY);
+        openStoreButton.setBounds(20,140,300,100);
+        openInventoryButton.setBounds(20,260,300,100);
+        setButtonSize(openStoreButton);
+        setButtonSize(openInventoryButton);
+        add(openStoreButton);
+        add(openInventoryButton);
 
-        c.add(openStoreButton);
-        c.add(openInventoryButton);
-        c.add(openSaveButton);
-        c.add(openStartButton);
+
+
+        //JButton endSwordCount = new JButton("남은 강화 : "+(20-player.getNowSword().getpossibility()));
+        JPanel endSwordCount = new JPanel();
+        finalDestination = new JLabel("목표까지 "+(20-player.getNowSword().getpossibility())+"강");
+        endSwordCount.setBounds(850,220,300,100);
+        endSwordCount.setBackground(Color.BLUE);
+        replaceFont(finalDestination,30);
+        endSwordCount.add(finalDestination);
+        add(endSwordCount);
+
+        JButton endTEXT = new JButton("검을 강하게하여 20강에 도달하자");
+        endTEXT.setBounds(700,0,500,100);
+        endTEXT.setBackground(Color.BLUE);
+        setButtonSize(endTEXT);
+        add(endTEXT);
     }
 
     @Override
@@ -287,11 +275,106 @@ public class GameScreen extends JPanel implements Screen {
         money = new JLabel("돈 : " + player.getMoney());
         setLayout(new BorderLayout());
         topPanel();
-        midPanel();
-        bottomPanel();
+        midPanel();popup();
     }
 
 
+    private void setButtonSize(Container c) {
+        c.setPreferredSize(new Dimension(300, 100));
+        replaceFont(c,30);
+    }
+
+    private void replaceFont(Container c, int size){
+        try{
+            InputStream fontStream = getClass().getResourceAsStream("/DungGeunMo.ttf");
+            Font baseFont = Font.createFont(Font.TRUETYPE_FONT, fontStream);
+            Font newFont = baseFont.deriveFont((float) size);
+            c.setFont(newFont);
+        } catch (Exception e){
+            e.printStackTrace();
+            System.out.println("not find font2");
+        }
+    }
+    private void textreplace(){
+        money.setText("돈 : " + player.getMoney());
+        swordNameLabel.setText(player.getNowSword().getName());
+        swordSellButton.setText(player.getNowSword().getsellPrice() + "원 \n판매하기");
+        finalDestination.setText("목표까지 "+(20-player.getNowSword().getpossibility())+"강");
+        if(player.getNowSword().getpossibility() >= 20){
+            money.setText("엔딩도착");
+            swordNameLabel.setText("엔딩도착");
+            swordSellButton.setText("리셋하기");
+            finalDestination.setText("목표 도달 축하드립니다.");
+        }
+    }
+    private void popup() {
+        // 메인 프레임
+        JFrame frame = new JFrame("게임 화면");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 400);
+        frame.setLayout(null); // 절대 배치 사용
+
+        // 메인 패널 (게임 화면)
+        JPanel gamePanel = new JPanel();
+        gamePanel.setBackground(Color.LIGHT_GRAY);
+        gamePanel.setBounds(0, 0, 600, 400);
+        gamePanel.setLayout(null);
+
+        // 팝업 패널
+        JPanel popupPanel = new JPanel();
+        popupPanel.setBackground(new Color(0, 0, 0, 200)); // 반투명 배경
+        popupPanel.setBounds(150, 100, 300, 200); // 위치와 크기 설정
+        popupPanel.setLayout(null);
+
+        // 팝업 내용
+        JButton openStartButton = new JButton("메인");
+        openStartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainController.switchTo("Start");
+            }
+        });
+        openStartButton.setBackground(Color.magenta);
+        setButtonSize(openStartButton);
+
+
+        JButton openSaveButton = new JButton("저장");
+        openSaveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoadScreen.getInstance().setLoadRequest(false);
+                mainController.switchTo("Load");
+            }
+        });
+        openSaveButton.setBackground(Color.CYAN);
+        setButtonSize(openSaveButton);
+
+
+        JButton closeButton = new JButton("닫기");
+        closeButton.setBounds(100, 120, 100, 30);
+
+        // 닫기 버튼 클릭 시 팝업 숨기기
+        closeButton.addActionListener(e -> popupPanel.setVisible(false));
+
+        popupPanel.add(closeButton);
+        popupPanel.setVisible(false); // 초기에는 숨김
+
+        // 버튼으로 팝업 열기
+        JButton openPopupButton = new JButton("팝업 열기");
+        openPopupButton.setBounds(250, 320, 100, 30);
+        openPopupButton.addActionListener(e -> popupPanel.setVisible(true));
+
+        // 게임 패널에 추가
+        gamePanel.add(openPopupButton);
+        gamePanel.add(popupPanel);
+
+        // 메인 프레임에 게임 패널 추가
+        frame.add(gamePanel);
+        frame.setVisible(true);
+
+
+
+    }
     @Override
     public void showScreen() {
         setVisible(true);
@@ -302,22 +385,36 @@ public class GameScreen extends JPanel implements Screen {
         setVisible(false);
     }
 }
-//class GameClearScreen extends JPanel implements Screen{//클리어하면 나오는 화면
-//    public void setting(){
-//        setLayout(new BorderLayout());
-//    }
-//    @Override
-//    public void initialize() {
-//    }
-//
-//
-//    @Override
-//    public void showScreen() {
-//        setVisible(true);
-//    }
-//
-//    @Override
-//    public void hideScreen() {
-//        setVisible(false);
-//    }
-//}
+
+class GameClearScreen extends JPanel implements Screen{
+    private final MainController mainController;//클리어하면 나오는 화면
+    public void setting(){
+        ImageIcon img = new ImageIcon("start.png");
+        JPanel background = new JPanel() {
+            public void paintComponent(Graphics g) {
+                g.drawImage(img.getImage(), 0, 0, null);
+                setOpaque(false);
+                super.paintComponent(g);
+            }
+        };
+    }
+    @Override
+    public void initialize() {
+        setting();
+    }
+    public GameClearScreen(MainController mainController) {
+        this.mainController = mainController;
+        initialize();
+    }
+
+    @Override
+    public void showScreen() {
+        setVisible(true);
+    }
+
+    @Override
+    public void hideScreen() {
+        setVisible(false);
+    }
+
+}
