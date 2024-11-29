@@ -66,7 +66,7 @@ public class StatisticsScreen extends JPanel implements Screen {
     private void generateBottomButton() {
         JPanel buttonPanel = new JPanel(new GridLayout(1,2));
         JButton statisticsButton = new JButton("통계 보기");
-        JButton logButton = new JButton("검 모아 보기");
+        JButton collectionButton = new JButton("검 모아 보기");
 
         statisticsButton.addActionListener(new ActionListener() {
             @Override
@@ -74,15 +74,15 @@ public class StatisticsScreen extends JPanel implements Screen {
                 tableCardLayout.show(tablePanel,"statistics");
             }
         });
-        logButton.addActionListener(new ActionListener() {
+        collectionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableCardLayout.show(tablePanel,"log");
+                mainController.switchTo("Collection");
             }
         });
 
         buttonPanel.add(statisticsButton);
-        buttonPanel.add(logButton);
+        buttonPanel.add(collectionButton);
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
