@@ -50,13 +50,13 @@ public class StoreScreen extends JPanel implements Screen {
         moneyPanel.add(playerMoneyLabel);
         moneyPanel.setBackground(Color.yellow);
         productPanel.add(moneyPanel);
-        productPanel.add(ItemPanelCreate(Ticket.ticketType("Save",null,null),player));
-        productPanel.add(ItemPanelCreate(Ticket.ticketType("Push",null,null),player));
-        productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",10,40000),player));
-        productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",12,50000),player));
-        productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",14,60000),player));
-        productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",16,70000),player));
-        productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",18,80000),player));
+        productPanel.add(ItemPanelCreate(Ticket.ticketType("Save",0,1),player));
+        productPanel.add(ItemPanelCreate(Ticket.ticketType("Push",0,1),player));
+        productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",10,1),player));
+        productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",12,1),player));
+        productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",14,1),player));
+        productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",16,1),player));
+        productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",18,1),player));
         add(productPanel, BorderLayout.CENTER);
     }
     

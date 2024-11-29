@@ -38,10 +38,11 @@ public class Sword {
     }
 
     public ImageIcon imageIcon(){
-        ImageIcon imageicon = new ImageIcon(imageSourcePath);//
+        ImageIcon imageicon = new ImageIcon(imageSourcePath);
         Image image = imageicon.getImage();
         int newWidth = 500;
-        int newHeight = 480;
+        int newHeight = 500;
+
         Image resizedImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
