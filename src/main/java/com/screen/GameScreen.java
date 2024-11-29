@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.InputStream;
 
 public class GameScreen extends JPanel implements Screen {
@@ -285,11 +287,21 @@ public class GameScreen extends JPanel implements Screen {
 
     private void setButtonSize(JButton c) {
         c.setPreferredSize(new Dimension(300, 100));
-        c.setBackground(new Color(103, 125, 106));
+        c.setBackground(new Color(64, 83, 76));
         Color color = new Color(214, 189, 152);
         c.setForeground(color);
         replaceFont(c,30);
         c.setFocusPainted(false);
+        c.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                c.setBackground(new Color(103, 125, 106));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                c.setBackground(new Color(64, 83, 76));
+            }
+        });
         c.setBorder(BorderFactory.createLineBorder(color, 8));
     }
 
