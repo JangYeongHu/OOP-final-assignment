@@ -12,6 +12,9 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 public class MainController extends JFrame {
     private CardLayout cardLayout;
@@ -27,8 +30,8 @@ public class MainController extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         screens = new HashMap<>();
-        createSword();
         jsonController = JsonController.getInstance();
+        createSword();
         loadFont();
 
         addScreen("Load", new LoadScreen(this));
@@ -84,11 +87,21 @@ public class MainController extends JFrame {
 
     }
     static void createSword(){
-        for (int i = 1; i < 21; i++){
-            swordList[i-1] = new Sword("src/main/resources/"+i+".png",i);
-            swordList[i-1].setSwordDescription(i+"번째 검의 설명");
-            swordList[i-1].setSwordName(i+"번째 검");
+        JSONArray swords = jsonController.getSwords();
+
+        for (int i = 0; i < swords.length(); i++){
+            JSONObject sword = swords.getJSONObject(i);
+            swordList[i] = new Sword("src/main/resources/"+(i+1)+".png", i+1);
+            swordList[i].setSwordName(sword.getString("name"));
+//            swordList[i].setSellPrice(sword.getInt("sell-price"));
+//            swordList[i].setupgradeFee(sword.getInt("update-fee"));
+            swordList[i].setSwordDescription(sword.getString("description"));
+            //      "sell-price": 3000,
+            //      "update-fee": 3000,
+            //      "description": "특별할 것 없는 평범한 단검."
         }
+
+        jsonController.init();
     }
 
     private void loadFont() {

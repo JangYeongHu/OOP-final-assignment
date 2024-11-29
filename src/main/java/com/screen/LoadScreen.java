@@ -1,6 +1,5 @@
 package com.screen;
 
-import com.app.JsonController;
 import com.app.MainController;
 import com.item.Sword;
 import com.player.Player;

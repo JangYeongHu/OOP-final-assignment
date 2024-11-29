@@ -21,7 +21,9 @@ public class JsonController {
 
     private static JsonController singletonJsonController;
     private static final String FILE_PATH = "src/main/resources/savefile.json";
+    private static final String CONFIG_FILE_PATH = "src/main/resources/config.json"; // config.json 경로
     private JSONArray rowDatas;
+    private JSONObject configData;
 
     //싱글톤으로 관리해주는 메소드
     public static JsonController getInstance() {
@@ -32,13 +34,14 @@ public class JsonController {
 
     public JsonController() {
         readJson();
+        readConfigJson(); // config.json 읽기
+    }
+
+    public void init() {
         for (int i = 0; i < rowDatas.length(); i++) {
             loadJsonDataWithIndex(i);
         }
-
     }
-
-
 
     //Json 읽기
     public void readJson() {
@@ -46,11 +49,36 @@ public class JsonController {
             String jsonText = new String(Files.readAllBytes(Paths.get(FILE_PATH)), StandardCharsets.UTF_8);
             JSONArray jsonArray = new JSONArray(jsonText);
             rowDatas = jsonArray;
-//            System.out.println(rowDatas.getJSONObject(0).toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    // config.json 읽기
+    public void readConfigJson() {
+        try {
+            String jsonText = new String(Files.readAllBytes(Paths.get(CONFIG_FILE_PATH)), StandardCharsets.UTF_8);
+            configData = new JSONObject(jsonText);
+            System.out.println("Config Loaded: " + configData.toString(4));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // config.json에서 설정 읽기
+    public boolean isBgmOn() {
+        return configData.getJSONObject("setting").getJSONObject("sound").getBoolean("bgm-on");
+    }
+
+    public int getBgmVolume() {
+        return configData.getJSONObject("setting").getJSONObject("sound").getInt("volume");
+    }
+
+    public JSONArray getSwords() {
+        return configData.getJSONArray("swords");
+    }
+
+
 
     //로드 클릭 시 해당 인덱스의 데이터를 가져오는 메소드
     public void loadJsonDataWithIndex(int index) {
