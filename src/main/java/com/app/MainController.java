@@ -40,6 +40,7 @@ public class MainController extends JFrame {
         addScreen("Statistics", new StatisticsScreen(this));
         addScreen("Inventory", new InventoryScreen(this));
 
+
         add(mainPanel);
         setSize(1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
