@@ -41,6 +41,7 @@ public class JsonController {
         for (int i = 0; i < rowDatas.length(); i++) {
             loadJsonDataWithIndex(i);
         }
+        Player.setSelectedIdx(0);
     }
 
     //Json 읽기
@@ -59,7 +60,6 @@ public class JsonController {
         try {
             String jsonText = new String(Files.readAllBytes(Paths.get(CONFIG_FILE_PATH)), StandardCharsets.UTF_8);
             configData = new JSONObject(jsonText);
-            System.out.println("Config Loaded: " + configData.toString(4));
         } catch (Exception e) {
             e.printStackTrace();
         }

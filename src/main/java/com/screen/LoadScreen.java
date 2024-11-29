@@ -1,7 +1,6 @@
 package com.screen;
 
 import com.app.MainController;
-import com.item.Sword;
 import com.player.Player;
 import com.screen.interfaces.Screen;
 
@@ -40,7 +39,6 @@ public class LoadScreen extends JPanel implements Screen {
     public void initialize() {
         removeAll();
         setLayout(new BorderLayout());
-//        System.out.println(isLoadRequest);
         run();
         revalidate();
         repaint();
@@ -115,7 +113,7 @@ public class LoadScreen extends JPanel implements Screen {
             public void mouseClicked(MouseEvent e) {
                 //로드 화면일 때
                 if(isLoadRequest) {
-                    Player.setNowPlayer(index);
+                    Player.setSelectedIdx(index);
                     mainController.switchTo("Start");
                     super.mouseClicked(e);
                 }

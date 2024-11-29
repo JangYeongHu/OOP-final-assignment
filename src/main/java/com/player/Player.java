@@ -4,13 +4,17 @@ import com.app.MainController;
 import com.item.interfaces.Item;
 import com.item.Sword;
 
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class Player {
 
     private static Player[] instances = new Player[3];
+    private static Player currentPlayer = new Player();
+    private static int cnt = 0;
 
-    private static int nowPlayer = 0;
+    private static int selectedIdx = 0;
 
     private int money = 0;
     private Sword nowSword;
@@ -24,25 +28,34 @@ public class Player {
 
     //현재 플레이어가 선택중인 프로필을 반환
     public static Player getInstance() {
-        if(instances[0] == null) {
-            for(int i = 0; i < 3; i++) instances[i] = new Player();
-        }
-        return instances[nowPlayer];
+        return currentPlayer;
     }
 
     //플레이어가 어떤 프로필을 골랐는지와 별개로 index번째 프로필을 반환
     public static Player getInstance(int index) {
         if(instances[0] == null) {
             for(int i = 0; i < 3; i++) instances[i] = new Player();
+            currentPlayer = new Player();
         }
         return instances[index];
     }
 
     //플레이어가 선택한 프로필을 갱신
-    public static void setNowPlayer(int changePlayer) {
-        nowPlayer = changePlayer;
+    public static void setSelectedIdx(int changePlayer) {
+        selectedIdx = changePlayer;
+        copyPlayer(instances[selectedIdx], currentPlayer);
         MainController.updateSwordStatistics();
     }
+
+    private static void copyPlayer(Player instance, Player currentPlayer) {
+        currentPlayer.money = instance.money;
+        currentPlayer.inventory = instance.inventory;
+        currentPlayer.updatedDate = instance.updatedDate;
+        currentPlayer.statics = instance.statics;
+        currentPlayer.log = instance.log;
+        currentPlayer.nowSword = instance.nowSword;
+    }
+
 
     public void addItem(Item item) {
         inventory.add(item);
