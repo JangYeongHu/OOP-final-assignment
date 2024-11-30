@@ -124,6 +124,7 @@ public class JsonController {
         JSONObject playerData = new JSONObject();
         playerData.put("money", player.getMoney());
         playerData.put("sword_id", player.getNowSword().getId());
+        playerData.put("best_sword",player.getBestSword());
         //아이템 추가해야함
 
         // 시간 포함

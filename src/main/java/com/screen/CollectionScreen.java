@@ -1,7 +1,6 @@
 package com.screen;
 
 import com.app.MainController;
-import com.item.Sword;
 import com.player.Player;
 import com.screen.interfaces.Screen;
 
@@ -9,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 
 public class CollectionScreen extends JPanel implements Screen {
 

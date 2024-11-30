@@ -112,7 +112,7 @@ public class GameScreen extends JPanel implements Screen {
         swordUpgradeButton = new JButton("강화하기");
         buttonList.add(upgradeButtonEvent(swordImage));
 
-        swordSellButton = new JButton(MainController.swordList[player.getNowSword().getpossibility()-1].getsellPrice() + "원 판매하기");
+        swordSellButton = new JButton(MainController.swordList[player.getNowSword().getId()-1].getsellPrice() + "원 판매하기");
         buttonList.add(sellButton(swordSellButton, swordImage));
 
         JPanel mainPanel = new JPanel(new BorderLayout(50,30));
@@ -176,7 +176,7 @@ public class GameScreen extends JPanel implements Screen {
         isSaveTicketActive = Active;
     }
     public static void pushTicketActive(){
-        int pSword = player.getNowSword().getpossibility();
+        int pSword = player.getNowSword().getId();
         if(MainController.swordList.length > pSword){
             player.setNowSword(MainController.swordList[pSword]);
         }else{
@@ -195,7 +195,7 @@ public class GameScreen extends JPanel implements Screen {
                 if (player.getMoney() > nowSword.getUpgradeFee()){//player의 돈이 강화비용보닫 많을경우에만
                     player.doUpgradeSword();//돈소모 현재쓰는방식은 임시방편
                     if (nowSword.upgradeProbability()) {
-                        success(image,nowSword.getpossibility());
+                        success(image,nowSword.getId());
                         moneyPanelUpdate();
                     } else {
                         fall(image);
@@ -323,7 +323,7 @@ public class GameScreen extends JPanel implements Screen {
         JPanel endSwordCount = new JPanel(new BorderLayout());
         endSwordCount.setBounds(860,20,300,70);
         endSwordCount.setOpaque(false);
-        finalDestination = new JLabel("목표까지 "+(20-player.getNowSword().getpossibility())+"강");
+        finalDestination = new JLabel("목표까지 "+(20-player.getNowSword().getId())+"강");
         //폰트조정, 중앙정렬
         finalDestination.setFont(new Font("DungGeunMo",Font.PLAIN,35));
         finalDestination.setHorizontalAlignment(JLabel.CENTER);
@@ -339,7 +339,7 @@ public class GameScreen extends JPanel implements Screen {
         popup();
         player = Player.getInstance();
         money = new JLabel("돈:" + player.getMoney());
-        finalDestination = new JLabel("목표까지 "+(20-player.getNowSword().getpossibility())+"강");
+        finalDestination = new JLabel("목표까지 "+(20-player.getNowSword().getId())+"강");
         setLayout(new BorderLayout());
         topPanel();
         midPanel();
@@ -369,7 +369,7 @@ public class GameScreen extends JPanel implements Screen {
         money.setText("돈:" + player.getMoney());
         swordNameLabel.setText(player.getNowSword().getName());
         swordSellButton.setText(player.getNowSword().getsellPrice() + "원 판매하기");
-        finalDestination.setText("목표까지 "+(20-player.getNowSword().getpossibility())+"강");
+        finalDestination.setText("목표까지 "+(20-player.getNowSword().getId())+"강");
     }
     private void popup() {
         // 팝업 패널

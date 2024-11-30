@@ -100,6 +100,7 @@ public class MainController extends JFrame {
             swordList[i].setSwordName(sword.getString("name"));
             swordList[i].setSellPrice(sword.getInt("sell-price"));
             swordList[i].setUpgradeFee(sword.getInt("update-fee"));
+            swordList[i].setPossibility(sword.getInt("possibility"));
             swordList[i].setSwordDescription(sword.getString("description"));
             //      "sell-price": 3000,
             //      "update-fee": 3000,
