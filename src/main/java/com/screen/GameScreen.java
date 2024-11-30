@@ -38,11 +38,13 @@ public class GameScreen extends JPanel implements Screen {
 
     private void topPanel() {
         JPanel Panel = new JPanel(null);
-        Panel.setBackground(Color.yellow);
         Panel.setBounds(20,20,300,80);
         money.setBounds(30,10,280,60);
         replaceFont(money,40);
         Panel.add(money);
+        Panel.setOpaque(false);
+        money.setForeground(new Color(214, 189, 152));
+        Panel.setBorder(BorderFactory.createLineBorder(new Color(26, 54, 54), 5));
         add(Panel);
         menuPanel();
     }
@@ -118,7 +120,7 @@ public class GameScreen extends JPanel implements Screen {
     private void saveTicketClickedEvent() {
         saveTicketButton.setBackground(isSaveTicketActive ? Color.GREEN : Color.GRAY);
         saveTicketButton.setText(isSaveTicketActive ? "파괴방지 활성화" : "파괴방지 비활성화");
-
+        //색깔크기,폰트조정,배경투명,
         saveTicketButton.setPreferredSize(new Dimension(300, 100));
         saveTicketButton.setBackground(new Color(64, 83, 76));
         Color color = new Color(214, 189, 152);
@@ -197,23 +199,12 @@ public class GameScreen extends JPanel implements Screen {
         return swordUpgradeButton;
     }
 
-//엔딩스크린아동
-//    private void ending(int number){
-//        if (number >= 19) {//게임클리어 화면을만들거나 강화를 못하게 하거나 할것임\
-//            //GameClearScreen.Clear();
-//            System.out.println("게임클리어");
-//            player.setNowSword(MainController.swordList[0]);//다음검을 플레이어 객체에넣기
-//        }
-//    }
     private void success(JLabel image, int number){
         Sword nextSword = MainController.swordList[number];//다음검뽑아오기
         player.setNowSword(nextSword);//플레이어검 업그레이드
         image.setIcon(nextSword.imageIcon());//이미지변경
     }
 
-/*
-*
-* */
     private void fall(JLabel Image) {
         if (saveTicketButton.getBackground() != Color.GREEN) {
             Sword nextSword = MainController.swordList[0];
@@ -265,12 +256,17 @@ public class GameScreen extends JPanel implements Screen {
         add(openInventoryButton);
 
 
-        JPanel endSwordCount = new JPanel();
+        JPanel endSwordCount = new JPanel(new BorderLayout());
+        endSwordCount.setBounds(860,20,300,70);
+        endSwordCount.setOpaque(false);
         finalDestination = new JLabel("목표까지 "+(20-player.getNowSword().getpossibility())+"강");
-        endSwordCount.setBounds(880,20,300,50);
-        endSwordCount.setBackground(Color.yellow);
-        replaceFont(finalDestination,30);
+        //폰트조정, 중앙정렬
+        replaceFont(finalDestination,35);
+        finalDestination.setHorizontalAlignment(JLabel.CENTER);
+        finalDestination.setVerticalAlignment(JLabel.CENTER);
+        finalDestination.setForeground(new Color(214, 189, 152));
         endSwordCount.add(finalDestination);
+        endSwordCount.setBorder(BorderFactory.createLineBorder(new Color(26, 54, 54), 5));
         add(endSwordCount);
     }
 
@@ -322,12 +318,6 @@ public class GameScreen extends JPanel implements Screen {
         swordNameLabel.setText(player.getNowSword().getName());
         swordSellButton.setText(player.getNowSword().getsellPrice() + "원 \n판매하기");
         finalDestination.setText("목표까지 "+(20-player.getNowSword().getpossibility())+"강");
-        if(player.getNowSword().getpossibility() >= 20){
-            money.setText("엔딩도착");
-            swordNameLabel.setText("엔딩도착");
-            swordSellButton.setText("리셋하기");
-            finalDestination.setText("목표도달 축하드립니다.");
-        }
     }
     private void popup() {
         // 팝업 패널
@@ -337,37 +327,6 @@ public class GameScreen extends JPanel implements Screen {
         popupPanel.setBackground(new Color(64, 83, 76)); //배경
         popupPanel.setBounds(20, 380, 300, 230); // 위치와 크기 설정
 
-        JPanel menuPanel = getjPanel();
-        popupPanel.add(menuPanel, BorderLayout.PAGE_START);
-
-        JButton openPopupButton = new JButton("팝업 열기");
-        openPopupButton.setBounds(20, 380, 300, 100);
-        JButton closeButton = new JButton("닫기");
-        closeButton.setBounds(100, 190, 100, 30);
-
-        // 버튼으로 팝업 닫혀있음
-        closeButton.addActionListener(e -> popupPanel.setVisible(false));
-        closeButton.addActionListener(e -> openPopupButton.setVisible(true));
-        // 버튼으로 팝업 열기 팝업열림
-        openPopupButton.addActionListener(e -> popupPanel.setVisible(true));
-        openPopupButton.addActionListener(e -> openPopupButton.setVisible(false));
-
-        popupPanel.setVisible(false); // 초기에는 숨김
-        popupPanel.add(closeButton, BorderLayout.PAGE_END);
-
-        menuPanel.setOpaque(false);
-        closeButton.setOpaque(false);
-
-        setButtonSize(openPopupButton);
-        // 게임 패널에 추가
-        add(openPopupButton);
-        add(popupPanel);
-
-    }
-
-    private JPanel getjPanel() {
-        JPanel menuPanel = new JPanel(new GridLayout(1,3));
-        // 팝업 내용
         JButton openStartButton = new JButton("메인");
         openStartButton.addActionListener(new ActionListener() {
             @Override
@@ -392,12 +351,62 @@ public class GameScreen extends JPanel implements Screen {
                 mainController.switchTo("Load");
             }
         });
-        menuPanel.add(openStartButton);
-        menuPanel.add(openSaveButton);
-        menuPanel.add(openLoadButton);
-        return menuPanel;
-    }
+        // 버튼 위치와 크기 설정
+        openStartButton.setBounds(50, 10, 200, 50);
+        openSaveButton.setBounds(50, 70, 200, 50);
+        openLoadButton.setBounds(50, 130, 200, 50);
+        popupPanel.add(openLoadButton);
+        popupPanel.add(openSaveButton);
+        popupPanel.add(openStartButton);
 
+
+        // 버튼 위치와 크기 설정
+        JButton openPopupButton = new JButton("팝업 열기");
+        openPopupButton.setBounds(20, 380, 300, 100);
+        JButton closeButton = new JButton("닫기");
+        closeButton.setBounds(100, 190, 100, 30);
+        replaceFont(closeButton, 20);
+
+        // 버튼으로 팝업 닫혀있음
+        closeButton.addActionListener(e -> popupPanel.setVisible(false));
+        closeButton.addActionListener(e -> openPopupButton.setVisible(true));
+        // 버튼으로 팝업 열기 팝업열림
+        openPopupButton.addActionListener(e -> popupPanel.setVisible(true));
+        openPopupButton.addActionListener(e -> openPopupButton.setVisible(false));
+
+        setButtonSize(openPopupButton);
+        popupPanel.setVisible(false); // 초기에는 숨김
+        popupPanel.add(closeButton, BorderLayout.PAGE_END);
+
+        closeButton.setOpaque(false);
+
+        setMenuButtonSetting(openStartButton,30);
+        setMenuButtonSetting(openSaveButton,30);
+        setMenuButtonSetting(openLoadButton,30);
+        setMenuButtonSetting(closeButton,20);
+
+        // 게임 패널에 추가
+        add(openPopupButton);
+        add(popupPanel);
+    }
+    private void setMenuButtonSetting(JButton button, int size){
+        button.setBackground(new Color(64, 83, 76));
+        Color color = new Color(214, 189, 152);
+        button.setForeground(color);
+        replaceFont(button, size);
+        button.setFocusPainted(false);
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(new Color(103, 125, 106));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(new Color(64, 83, 76));
+            }
+        });
+        button.setBorder(BorderFactory.createLineBorder(color, 3));
+    }
     @Override
     public void showScreen() {
         setVisible(true);
