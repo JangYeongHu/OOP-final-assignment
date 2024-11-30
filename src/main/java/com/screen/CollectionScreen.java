@@ -15,7 +15,10 @@ public class CollectionScreen extends JPanel implements Screen {
 
     private MainController mainController;
 
+    private Player player = Player.getInstance();
+
     private ImageIcon swordImages[] = new ImageIcon[20];
+    private ImageIcon blackSwordImages[] = new ImageIcon[20];
 
     private int nowIndex = 0;
 
@@ -100,10 +103,10 @@ public class CollectionScreen extends JPanel implements Screen {
     }
 
     private void loadSwordImages() {
-        for (int i = 0; i < 20; i++) {
-            Sword sword = MainController.swordList[i];
-                swordImages[i] = new ImageIcon("src/main/resources/"+(i+1)+".png");
-        }
+        for (int i = 0; i < 20; i++)
+            swordImages[i] = new ImageIcon("src/main/resources/"+(i+1)+".png");
+        for (int i = 0; i < 20; i++)
+            blackSwordImages[i] = new ImageIcon("src/main/resources/collectionScreen/"+(i+1)+".png");
     }
 
     private class ImageDisplayPanel extends JPanel {
@@ -126,23 +129,26 @@ public class CollectionScreen extends JPanel implements Screen {
             int leftIndex = nowIndex-1;
             int rightIndex = nowIndex+1;
 
-            int leftX = centerX - sideSize - 30;
+            int leftX = centerX - sideSize - 40;
             int leftY = centerY + 20;
-            int rightX = centerX + centerSize + 30;
+            int rightX = centerX + centerSize + 40;
             int rightY = centerY + 20;
-
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setColor(new Color(0, 0, 0, 255)); // 검은색 + 투명도
-            g2d.fillRect(0, 0, getWidth(), getHeight());
-
-
 
             // 이미지 그리기
             if(nowIndex != 0)
-                g.drawImage(swordImages[leftIndex].getImage(), leftX, leftY, sideSize, sideSize, this);
-            g.drawImage(swordImages[nowIndex].getImage(), centerX, centerY, centerSize, centerSize, this);
+                if(player.getBestSword() < leftIndex)
+                    g.drawImage(blackSwordImages[leftIndex].getImage(), leftX, leftY, sideSize, sideSize, this);
+                else
+                    g.drawImage(swordImages[leftIndex].getImage(), leftX, leftY, sideSize, sideSize, this);
+            if(player.getBestSword() < nowIndex)
+                g.drawImage(blackSwordImages[nowIndex].getImage(), centerX, centerY, centerSize, centerSize, this);
+            else
+                g.drawImage(swordImages[nowIndex].getImage(), centerX, centerY, centerSize, centerSize, this);
             if(nowIndex != 19)
-                g.drawImage(swordImages[rightIndex].getImage(), rightX, rightY, sideSize, sideSize, this);
+                if(player.getBestSword() < rightIndex)
+                    g.drawImage(blackSwordImages[rightIndex].getImage(), rightX, rightY, sideSize, sideSize, this);
+                else
+                    g.drawImage(swordImages[rightIndex].getImage(), rightX, rightY, sideSize, sideSize, this);
         }
     }
 }

@@ -95,6 +95,7 @@ public class JsonController {
         player.setMoney(playerData.getInt("money"));
         player.setNowSword(MainController.findSwordById(playerData.getInt("sword_id")));
         player.setUpdatedDate(playerData.getString("latest_date"));
+        player.setBestSword(playerData.getInt("best_sword"));
 
         //statistics 관련
         ArrayList<int[]> statics = new ArrayList<>(); // [SuccessCount,FailureCount]
