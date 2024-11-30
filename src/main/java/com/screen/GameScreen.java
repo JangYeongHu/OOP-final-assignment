@@ -278,8 +278,8 @@ public class GameScreen extends JPanel implements Screen {
             }
         });
         // 버튼 위치와 크기 설정
-        openInventoryButton.setBounds(50, 10, 200, 50);
-        openStoreButton.setBounds(50, 70, 200, 50);
+        openInventoryButton.setBounds(50, 20, 200, 50);
+        openStoreButton.setBounds(50, 80, 200, 50);
         popupPanel.add(openInventoryButton);
         popupPanel.add(openStoreButton);
 

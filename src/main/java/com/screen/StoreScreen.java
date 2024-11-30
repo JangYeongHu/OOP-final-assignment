@@ -22,7 +22,7 @@ public class StoreScreen extends JPanel implements Screen {
 
     private MainController mainController;
 
-    private int productList = 8;
+    private int productList = 7;
     public StoreScreen(MainController mainController) {
         this.mainController = mainController;
         initialize();
@@ -41,18 +41,20 @@ public class StoreScreen extends JPanel implements Screen {
     JLabel playerMoneyLabel = new JLabel();
     public void itemListPanel(){
         Player player = Player.getInstance();
+        JPanel productPanel2 = new JPanel(new BorderLayout());
         JPanel productPanel = new JPanel(new GridLayout(productList,1,0,20));
-        JPanel moneyPanel = new JPanel();
-        moneyPanel.setPreferredSize(new Dimension(200,200));
+        JPanel moneyPanel = new JPanel(new BorderLayout());
+        moneyPanel.setPreferredSize(new Dimension(200,70));
         playerMoneyLabel.setText("돈 : "+player.getMoney());
         playerMoneyLabel.setForeground(new Color(214, 189, 152));
         replaceFont(playerMoneyLabel,40);
+        playerMoneyLabel.setHorizontalAlignment(JLabel.CENTER);
+        playerMoneyLabel.setVerticalAlignment(JLabel.CENTER);
         moneyPanel.add(playerMoneyLabel);
 
         moneyPanel.setOpaque(false);
-        productPanel.setOpaque(false);
-
-        productPanel.add(moneyPanel);
+        productPanel2.setOpaque(false);
+        productPanel2.add(moneyPanel,BorderLayout.PAGE_START);
         productPanel.add(ItemPanelCreate(Ticket.ticketType("Save",0,1),player));
         productPanel.add(ItemPanelCreate(Ticket.ticketType("Push",0,1),player));
         productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",10,1),player));
@@ -60,7 +62,11 @@ public class StoreScreen extends JPanel implements Screen {
         productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",14,1),player));
         productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",16,1),player));
         productPanel.add(ItemPanelCreate(Ticket.ticketType("Upgrade",18,1),player));
-        add(productPanel, BorderLayout.CENTER);
+
+        productPanel.setBackground(new Color(64, 83, 76));
+        productPanel2.add(productPanel);
+
+        add(productPanel2, BorderLayout.CENTER);
     }
 
     public JPanel ItemPanelCreate(Item i,Player player){
