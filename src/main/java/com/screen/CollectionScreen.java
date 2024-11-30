@@ -27,12 +27,17 @@ public class CollectionScreen extends JPanel implements Screen {
         generateLowArrow();
     }
 
-    void generateLowArrow() {
-        JPanel middlePanel = new JPanel(new BorderLayout());
-        middlePanel.setBackground(this.getBackground());
-        generateLeftArrow(middlePanel);
-        generateRightArrow(middlePanel);
-        add(middlePanel,BorderLayout.PAGE_END);
+    private void generateLowArrow() {
+        JPanel LowPanel = new JPanel(new BorderLayout());
+        LowPanel.setBackground(this.getBackground());
+        generateLeftArrow(LowPanel);
+        generateRightArrow(LowPanel);
+        add(LowPanel,BorderLayout.PAGE_END);
+    }
+
+    private void genereateMiddleImage() {
+        JPanel MiddlePanel = new JPanel(null);
+
     }
 
     private void generateLeftArrow(JPanel middlePanel) {
