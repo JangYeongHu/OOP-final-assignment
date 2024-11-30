@@ -128,7 +128,7 @@ public class StatisticsScreen extends JPanel implements Screen {
                     sword.getSuccessCount(),
                     sword.getFailureCount(),
                     sword.getTotalAttempts(),
-                    String.format("%.3f", sword.getSuccessRate())+"%"
+                    String.format("%.3f", sword.getSuccessRate()*100)+"%"
             });
         }
 
