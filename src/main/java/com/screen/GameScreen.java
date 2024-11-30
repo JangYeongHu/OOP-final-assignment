@@ -323,15 +323,7 @@ public class GameScreen extends JPanel implements Screen {
     }
 
     private void replaceFont(Container c, int size){
-        try{
-            InputStream fontStream = getClass().getResourceAsStream("/fonts/DungGeunMo.ttf");
-            Font baseFont = Font.createFont(Font.TRUETYPE_FONT, fontStream);
-            Font newFont = baseFont.deriveFont((float) size);
-            c.setFont(newFont);
-        } catch (Exception e){
-            e.printStackTrace();
-            System.out.println("not find font2");
-        }
+        c.setFont(new Font("DungGeunMo",Font.PLAIN,size));
     }
     private void textReplace(){
         money.setText("돈:" + player.getMoney());

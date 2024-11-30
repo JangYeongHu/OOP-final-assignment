@@ -23,10 +23,11 @@ public class CollectionScreen extends JPanel implements Screen {
     public void initialize() {
         setLayout(new BorderLayout());
         setBackground(new Color(0x40534C));
-        generateMiddlePanel();
+        loadSwordImages();
+        generateLowArrow();
     }
 
-    void generateMiddlePanel() {
+    void generateLowArrow() {
         JPanel middlePanel = new JPanel(new BorderLayout());
         middlePanel.setBackground(this.getBackground());
         generateLeftArrow(middlePanel);
@@ -60,14 +61,12 @@ public class CollectionScreen extends JPanel implements Screen {
     }
 
     public void update() {
-        loadSwordImages();
     }
 
     private void loadSwordImages() {
-        for(int i = 0; i < 20; i++) {
+        for (int i = 0; i < 20; i++) {
             Sword sword = MainController.swordList[i];
-            //if(Player.getInstance().getBestSword().getId() < sword.getId());
-            //swordImages[i] = sword.getimage()
+                swordImages[i] = new ImageIcon("src/main/resources/"+(i+1)+".png");
         }
     }
 }
