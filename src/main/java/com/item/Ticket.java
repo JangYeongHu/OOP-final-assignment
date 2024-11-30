@@ -1,6 +1,7 @@
 package com.item;
 
 
+import com.app.MainController;
 import com.item.interfaces.Item;
 import com.screen.GameScreen;
 
@@ -68,7 +69,7 @@ class PushTicket extends Ticket{//확정업
     static String name = "확정업 티켓";
 
     public PushTicket(int count){
-        price = 150000;
+        price = 1000000000;
         if(count == 0) addCount();
         else {
             this.count = count;
@@ -97,7 +98,9 @@ class UpgradeTicket extends Ticket {//워프권 10,12,14,16,18
     public UpgradeTicket(int x,int count){
         name = x+"강 워프권";
         possibility = x-1;
-        price = x*4000;
+        this.price = MainController.swordList[possibility].getsellPrice()*2
+        -MainController.swordList[possibility].getsellPrice()/3;
+
         if(count == 0) addCount();
         else {
             this.count = count;
