@@ -10,14 +10,14 @@
       "sword_id": 1,
       "name": "깨진 돌검",
       "sell-price": 0,
-      "update-fee": 1000,
+      "update-fee": 0,
       "description": "오래된 돌이 깨져버린 검, 사실상 쓸모없다."
     },
     {
       "sword_id": 2,
       "name": "커터칼",
-      "sell-price": 1000,
-      "update-fee": 1500,
+      "sell-price": 1500,
+      "update-fee": 1000,
       "description": "휴대용이지만 전투에 쓸 수는 없는 칼."
     },
     {
