@@ -199,9 +199,6 @@ public class GameScreen extends JPanel implements Screen {
                         moneyPanelUpdate();
                     } else {
                         fall(image);
-                        moneyPanelUpdate();
-                        mainController.updateInventoryScreen();
-                        fallImg();
                     }
                 }
                 else{
@@ -228,15 +225,20 @@ public class GameScreen extends JPanel implements Screen {
             Sword nextSword = MainController.swordList[0];
             player.setNowSword(MainController.swordList[0]);
             Image.setIcon(nextSword.imageIcon());
+            moneyPanelUpdate();
+            fallImg();
         } else {
             saveTicketButton.setBackground(Color.gray);
             saveTicketButton.setText("파괴방지 비활성화");
             isSaveTicketActive = false;
+            player.getInventory().get(findSaveTicket()).minCount();
+            moneyPanelUpdate();
+            mainController.updateInventoryScreen();
             JOptionPane.showMessageDialog(null,"파괴방어", "파괴방지권", JOptionPane.WARNING_MESSAGE);
         }
     }
     private void fallImg(){
-        JOptionPane.showMessageDialog(null,"검이 파괴되었습니다", "파괴", JOptionPane.OK_OPTION);
+        JOptionPane.showMessageDialog(null,"검이 파괴되었습니다", "파괴", JOptionPane.ERROR_MESSAGE);
     }
 
     private JButton sellButton(JButton button, JLabel Image) {
@@ -254,6 +256,13 @@ public class GameScreen extends JPanel implements Screen {
     }
 
     private void menuPanel() {
+        // 팝업 패널
+        JPanel popupPanel = new JPanel(null);
+
+        popupPanel.setBorder(BorderFactory.createLineBorder(new Color(214, 189, 152), 4));
+        popupPanel.setBackground(new Color(64, 83, 76)); //배경
+        popupPanel.setBounds(20, 110, 300, 180); // 위치와 크기 설정
+
         JButton openInventoryButton = new JButton("인벤토리");
         openInventoryButton.addActionListener(new ActionListener() {
             @Override
@@ -261,21 +270,56 @@ public class GameScreen extends JPanel implements Screen {
                 mainController.switchTo("Inventory");
             }
         });
-        JButton openStoreButton = new JButton("상점으로");
+        JButton openStoreButton = new JButton("상점");
         openStoreButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainController.switchTo("Store");
             }
         });
-        openStoreButton.setBounds(20,140,300,100);
-        openInventoryButton.setBounds(20,260,300,100);
-        setButtonSize(openStoreButton,30);
-        setButtonSize(openInventoryButton,30);
-        add(openStoreButton);
-        add(openInventoryButton);
+        // 버튼 위치와 크기 설정
+        openInventoryButton.setBounds(50, 20, 200, 50);
+        openStoreButton.setBounds(50, 80, 200, 50);
+        popupPanel.add(openInventoryButton);
+        popupPanel.add(openStoreButton);
 
 
+        // 버튼 위치와 크기 설정
+        JButton openPopupButton = new JButton("상점 // 인벤토리");
+        openPopupButton.setBounds(20,140,300,100);
+        JButton closeButton = new JButton("닫기");
+        closeButton.setBounds(100, 140, 100, 30);
+        popupPanel.add(closeButton);
+
+        // 버튼으로 팝업 닫혀있음
+        closeButton.addActionListener(e -> {
+            popupPanel.setVisible(false);
+            openPopupButton.setVisible(true);
+        });
+        // 버튼으로 팝업 열기 팝업열림
+        openPopupButton.addActionListener(e -> {
+            popupPanel.setVisible(true);
+            openPopupButton.setVisible(false);
+            setComponentZOrder(popupPanel, 0); // popupPanel을 맨 앞으로 이동
+            revalidate();          // 레이아웃 갱신
+            repaint();
+        });
+
+        setButtonSize(openPopupButton,30);
+        popupPanel.setVisible(false); // 초기에는 숨김
+
+        closeButton.setOpaque(false);
+
+        setMenuButtonSetting(openInventoryButton,30);
+        setMenuButtonSetting(openStoreButton,30);
+        setMenuButtonSetting(closeButton,20);
+
+        // 게임 패널에 추가
+        add(openPopupButton);
+        add(popupPanel);
+
+
+        //검강화하기 목표
         JPanel endSwordCount = new JPanel(new BorderLayout());
         endSwordCount.setBounds(860,20,300,70);
         endSwordCount.setOpaque(false);
@@ -333,7 +377,7 @@ public class GameScreen extends JPanel implements Screen {
 
         popupPanel.setBorder(BorderFactory.createLineBorder(new Color(214, 189, 152), 4));
         popupPanel.setBackground(new Color(64, 83, 76)); //배경
-        popupPanel.setBounds(20, 380, 300, 230); // 위치와 크기 설정
+        popupPanel.setBounds(20, 260, 300, 230); // 위치와 크기 설정
 
         JButton openStartButton = new JButton("메인");
         openStartButton.addActionListener(new ActionListener() {
@@ -370,17 +414,23 @@ public class GameScreen extends JPanel implements Screen {
 
         // 버튼 위치와 크기 설정
         JButton openPopupButton = new JButton("메뉴");
-        openPopupButton.setBounds(20, 380, 300, 100);
+        openPopupButton.setBounds(20,300,300,100);
         JButton closeButton = new JButton("닫기");
         closeButton.setBounds(100, 190, 100, 30);
         closeButton.setFont(new Font("DungGeunMo",Font.PLAIN,20));
         // 버튼으로 팝업 닫혀있음
-        closeButton.addActionListener(e -> popupPanel.setVisible(false));
-        closeButton.addActionListener(e -> openPopupButton.setVisible(true));
+        closeButton.addActionListener(e -> {
+            popupPanel.setVisible(false);
+            openPopupButton.setVisible(true);
+        });
         // 버튼으로 팝업 열기 팝업열림
-        openPopupButton.addActionListener(e -> popupPanel.setVisible(true));
-        openPopupButton.addActionListener(e -> openPopupButton.setVisible(false));
-
+        openPopupButton.addActionListener(e -> {
+            popupPanel.setVisible(true);
+            openPopupButton.setVisible(false);
+            setComponentZOrder(popupPanel, 0); // popupPanel을 맨 앞으로 이동
+            revalidate();          // 레이아웃 갱신
+            repaint();
+        });
         setButtonSize(openPopupButton,30);
         popupPanel.setVisible(false); // 초기에는 숨김
         popupPanel.add(closeButton, BorderLayout.PAGE_END);

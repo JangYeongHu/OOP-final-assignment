@@ -7,7 +7,6 @@ import com.screen.interfaces.Screen;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -138,7 +137,7 @@ public class MainController extends JFrame {
     public void updateStoreScreen() {//게임,상점에서사용예정
         Screen screen = screens.get("Store");
         if (screen instanceof StoreScreen) {
-            ((StoreScreen) screen).refreshInventory(); // InventoryScreen 갱신
+            ((StoreScreen) screen).refreshStore(); // InventoryScreen 갱신
         }
     }
     //index 자리에 현재 데이터를 저장
