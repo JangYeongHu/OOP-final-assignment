@@ -361,7 +361,7 @@ public class GameScreen extends JPanel implements Screen {
 
 
         // 버튼 위치와 크기 설정
-        JButton openPopupButton = new JButton("팝업 열기");
+        JButton openPopupButton = new JButton("메뉴");
         openPopupButton.setBounds(20, 380, 300, 100);
         JButton closeButton = new JButton("닫기");
         closeButton.setBounds(100, 190, 100, 30);
