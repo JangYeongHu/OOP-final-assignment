@@ -97,7 +97,7 @@ class UpgradeTicket extends Ticket {//워프권 10,12,14,16,18
     public UpgradeTicket(int x,int count){
         name = x+"강 워프권";
         possibility = x-1;
-        price = x*3000;
+        price = x*4000;
         if(count == 0) addCount();
         else {
             this.count = count;
@@ -123,7 +123,7 @@ class UpgradeTicket extends Ticket {//워프권 10,12,14,16,18
 class SaveTicket extends Ticket{//파괴방지권
     static String name = "파괴방지권";
     public SaveTicket(int count){
-        price = 20000;
+        price = 10000;
         if(count == 0) addCount();
         else {
             this.count = count;

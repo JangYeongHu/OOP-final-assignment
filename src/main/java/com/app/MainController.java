@@ -99,8 +99,8 @@ public class MainController extends JFrame {
             JSONObject sword = swords.getJSONObject(i);
             swordList[i] = new Sword("src/main/resources/"+(i+1)+".png", i+1);
             swordList[i].setSwordName(sword.getString("name"));
-//            swordList[i].setSellPrice(sword.getInt("sell-price"));
-//            swordList[i].setupgradeFee(sword.getInt("update-fee"));
+            swordList[i].setSellPrice(sword.getInt("sell-price"));
+            swordList[i].setUpgradeFee(sword.getInt("update-fee"));
             swordList[i].setSwordDescription(sword.getString("description"));
             //      "sell-price": 3000,
             //      "update-fee": 3000,

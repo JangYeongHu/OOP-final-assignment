@@ -52,42 +52,14 @@ public class Sword {
         imageSourcePath = img;
         id = i;
         possibility = i;
-        setSellPrice();
-        setupgradeFee();
     }
 
-    public int setSellPrice(){//특정강화도 이상부터 판매가설정
-        // = 100*possibility;
-        if (possibility == 1)
-            return 0;
-        if (possibility > 4)
-            sellPrice = 200*possibility;
-        if (possibility > 8)
-            sellPrice = 400*possibility;
-        if (possibility > 12)
-            sellPrice = 800*possibility;
-        if (possibility > 16)
-            sellPrice = 1600*possibility;
-        else
-            sellPrice = 110*possibility;
-        return sellPrice;
+    public void setSellPrice(int price){//특정강화도 이상부터 판매가설정
+        sellPrice = price;
     }
 
-    public int setupgradeFee(){//특정강화도 이상부터 판매가설정
-        // = 100*possibility;
-        if (possibility == 1)
-            return 0;
-        if (possibility > 4)
-            upgradeFee = 100*possibility;
-        if (possibility > 8)
-            upgradeFee = 200*possibility;
-        if (possibility > 12)
-            upgradeFee = 300*possibility;
-        if (possibility > 16)
-            upgradeFee = 400*possibility;
-        else
-            upgradeFee = 50*possibility;
-        return upgradeFee;
+    public void setUpgradeFee(int price){//특정강화도 이상부터 판매가설정
+        upgradeFee = price;
     }
 
     public String setSwordName(String name){
