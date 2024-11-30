@@ -141,7 +141,6 @@ class SaveTicket extends Ticket{//파괴방지권
     public void useItem() {//아이템사용메서드
         if(count > 0 && !GameScreen.getIsSaveTicketActive()){
             GameScreen.setIsSaveTicketActive(true);
-            minCount();
             JOptionPane.showMessageDialog(null, "파괴방지권 활성화");
         }
         else{

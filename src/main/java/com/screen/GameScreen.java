@@ -63,6 +63,7 @@ public class GameScreen extends JPanel implements Screen {
     private void midPanel() {
         JPanel mid = new JPanel(new BorderLayout());
         setMidbutton(mid);
+        mid.setOpaque(false);
         add(mid, BorderLayout.CENTER);
     }
 
@@ -102,45 +103,46 @@ public class GameScreen extends JPanel implements Screen {
         mainPanel.add(imagePanel, BorderLayout.CENTER);
         mainPanel.add(buttonList,BorderLayout.PAGE_END);
 
-        PanelBackGroundColor(mainPanel);
-        PanelBackGroundColor(imagePanel);
-        PanelBackGroundColor(swordImage);
-        PanelBackGroundColor(buttonList);
-        PanelBackGroundColor(swordName);
+        mainPanel.setOpaque(false);
+        imagePanel.setOpaque(false);
+        buttonList.setOpaque(false);
+        swordImage.setOpaque(false);
+        swordName.setOpaque(false);
 
+        setBackground(new Color(64, 83, 76));
         c.add(mainPanel);
     }
 
-    private void PanelBackGroundColor(Container c){
-        c.setBackground(new Color(64, 83, 76));
+    private void PanelBackGroundColor(){
     }
     private void saveTicketClickedEvent() {
-        setButtonSize(saveTicketButton);
         saveTicketButton.setBackground(isSaveTicketActive ? Color.GREEN : Color.GRAY);
         saveTicketButton.setText(isSaveTicketActive ? "파괴방지 활성화" : "파괴방지 비활성화");
 
+        saveTicketButton.setPreferredSize(new Dimension(300, 100));
+        saveTicketButton.setBackground(new Color(64, 83, 76));
+        Color color = new Color(214, 189, 152);
+        saveTicketButton.setForeground(color);
+        replaceFont(saveTicketButton,30);
+        saveTicketButton.setFocusPainted(false);
+        saveTicketButton.setBorder(BorderFactory.createLineBorder(color, 3));
         saveTicketButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int count = findSaveTicket();
                 if(player.getInventory().isEmpty()){
                     JOptionPane.showMessageDialog(null, "파괴방지권이 부족합니다");
                 }
-                else if(player.getInventory().get(count).getCount() > 0){
+                else if(player.getInventory().get(findSaveTicket()).getCount() > 0){
                     if (!isSaveTicketActive) {
-                        player.getInventory().get(count).minCount();
                         saveTicketButton.setBackground(Color.GREEN);
                         saveTicketButton.setText("파괴방지 활성화");
                         isSaveTicketActive = true;
                     } else {
-                        player.getInventory().get(count).addCount();
                         saveTicketButton.setBackground(Color.gray);
                         saveTicketButton.setText("파괴방지 비활성화");
                         isSaveTicketActive = false;
                     }
                 }
-                mainController.updateInventoryScreen();
-                mainController.updateStoreScreen();
             }
         });
     }
@@ -183,6 +185,7 @@ public class GameScreen extends JPanel implements Screen {
                         success(image,nowSword.getpossibility());
                     } else {
                         fall(image);
+                        mainController.updateInventoryScreen();
                     }
                 }
                 else{
@@ -220,6 +223,7 @@ public class GameScreen extends JPanel implements Screen {
             saveTicketButton.setBackground(Color.gray);
             saveTicketButton.setText("파괴방지 비활성화");
             isSaveTicketActive = false;
+            player.getInventory().get(findSaveTicket()).minCount();
             JOptionPane.showMessageDialog(null, "파괴방어");
 
         }
@@ -261,12 +265,10 @@ public class GameScreen extends JPanel implements Screen {
         add(openInventoryButton);
 
 
-
-        //JButton endSwordCount = new JButton("남은 강화 : "+(20-player.getNowSword().getpossibility()));
         JPanel endSwordCount = new JPanel();
         finalDestination = new JLabel("목표까지 "+(20-player.getNowSword().getpossibility())+"강");
-        endSwordCount.setBounds(900,20,300,50);
-        endSwordCount.setBackground(Color.white);
+        endSwordCount.setBounds(880,20,300,50);
+        endSwordCount.setBackground(Color.yellow);
         replaceFont(finalDestination,30);
         endSwordCount.add(finalDestination);
         add(endSwordCount);
@@ -281,7 +283,6 @@ public class GameScreen extends JPanel implements Screen {
         setLayout(new BorderLayout());
         topPanel();
         midPanel();
-
     }
 
 
@@ -302,12 +303,12 @@ public class GameScreen extends JPanel implements Screen {
                 c.setBackground(new Color(64, 83, 76));
             }
         });
-        c.setBorder(BorderFactory.createLineBorder(color, 8));
+        c.setBorder(BorderFactory.createLineBorder(color, 5));
     }
 
     private void replaceFont(Container c, int size){
         try{
-            InputStream fontStream = getClass().getResourceAsStream("/DungGeunMo.ttf");
+            InputStream fontStream = getClass().getResourceAsStream("/fonts/DungGeunMo.ttf");
             Font baseFont = Font.createFont(Font.TRUETYPE_FONT, fontStream);
             Font newFont = baseFont.deriveFont((float) size);
             c.setFont(newFont);
@@ -330,12 +331,42 @@ public class GameScreen extends JPanel implements Screen {
     }
     private void popup() {
         // 팝업 패널
-        JPanel popupPanel = new JPanel();
-        popupPanel.setBackground(new Color(112, 145, 133)); // 반투명 배경
-        popupPanel.setBounds(20, 380, 300, 200); // 위치와 크기 설정
-        popupPanel.setLayout(new GridLayout(4,1));
+        JPanel popupPanel = new JPanel(null);
 
+        popupPanel.setBorder(BorderFactory.createLineBorder(new Color(214, 189, 152), 4));
+        popupPanel.setBackground(new Color(64, 83, 76)); //배경
+        popupPanel.setBounds(20, 380, 300, 230); // 위치와 크기 설정
 
+        JPanel menuPanel = getjPanel();
+        popupPanel.add(menuPanel, BorderLayout.PAGE_START);
+
+        JButton openPopupButton = new JButton("팝업 열기");
+        openPopupButton.setBounds(20, 380, 300, 100);
+        JButton closeButton = new JButton("닫기");
+        closeButton.setBounds(100, 190, 100, 30);
+
+        // 버튼으로 팝업 닫혀있음
+        closeButton.addActionListener(e -> popupPanel.setVisible(false));
+        closeButton.addActionListener(e -> openPopupButton.setVisible(true));
+        // 버튼으로 팝업 열기 팝업열림
+        openPopupButton.addActionListener(e -> popupPanel.setVisible(true));
+        openPopupButton.addActionListener(e -> openPopupButton.setVisible(false));
+
+        popupPanel.setVisible(false); // 초기에는 숨김
+        popupPanel.add(closeButton, BorderLayout.PAGE_END);
+
+        menuPanel.setOpaque(false);
+        closeButton.setOpaque(false);
+
+        setButtonSize(openPopupButton);
+        // 게임 패널에 추가
+        add(openPopupButton);
+        add(popupPanel);
+
+    }
+
+    private JPanel getjPanel() {
+        JPanel menuPanel = new JPanel(new GridLayout(1,3));
         // 팝업 내용
         JButton openStartButton = new JButton("메인");
         openStartButton.addActionListener(new ActionListener() {
@@ -361,31 +392,12 @@ public class GameScreen extends JPanel implements Screen {
                 mainController.switchTo("Load");
             }
         });
-        popupPanel.add(openStartButton);
-        popupPanel.add(openSaveButton);
-        popupPanel.add(openLoadButton);
-        JButton closeButton = new JButton("닫기");
-        closeButton.setBounds(100, 140, 100, 30);
-
-        // 닫기 버튼 클릭 시 팝업 숨기기
-        JButton openPopupButton = new JButton("팝업 열기");
-        setButtonSize(openPopupButton);
-        openPopupButton.setBounds(20, 380, 300, 100);
-
-        closeButton.addActionListener(e -> popupPanel.setVisible(false));
-        closeButton.addActionListener(e -> openPopupButton.setVisible(true));
-        popupPanel.add(closeButton);
-        popupPanel.setVisible(false); // 초기에는 숨김
-
-        // 버튼으로 팝업 열기
-        openPopupButton.addActionListener(e -> popupPanel.setVisible(true));
-        openPopupButton.addActionListener(e -> openPopupButton.setVisible(false));
-
-        // 게임 패널에 추가
-        add(openPopupButton);
-        add(popupPanel);
-
+        menuPanel.add(openStartButton);
+        menuPanel.add(openSaveButton);
+        menuPanel.add(openLoadButton);
+        return menuPanel;
     }
+
     @Override
     public void showScreen() {
         setVisible(true);
