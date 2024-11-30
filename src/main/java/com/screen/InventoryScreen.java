@@ -133,16 +133,8 @@ public class InventoryScreen extends JPanel implements Screen {
         c.setBorder(new CompoundBorder(topBorder, null));
     }
     private void replaceFont(Container c, int size){
-        try{
-            InputStream fontStream = getClass().getResourceAsStream("/fonts/DungGeunMo.ttf");
-            Font baseFont = Font.createFont(Font.TRUETYPE_FONT, fontStream);
-            Font newFont = baseFont.deriveFont((float) size);
             c.setForeground(Color.white);
-            c.setFont(newFont);
-        } catch (Exception e){
-            e.printStackTrace();
-            System.out.println("not find font2");
-        }
+            c.setFont(new Font("DungGeunMo",Font.PLAIN,size));
     }
     public void goGameScreen(){
         JButton GoGame = new JButton("게임창으로 돌아가기");

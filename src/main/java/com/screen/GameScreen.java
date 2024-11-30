@@ -42,7 +42,7 @@ public class GameScreen extends JPanel implements Screen {
         JPanel Panel = new JPanel(null);
         Panel.setBounds(20,20,300,80);
         money.setBounds(30,10,280,60);
-        replaceFont(money,40);
+        money.setFont(new Font("DungGeunMo",Font.PLAIN,40));
         Panel.add(money);
         Panel.setOpaque(false);
         money.setForeground(new Color(214, 189, 152));
@@ -54,7 +54,7 @@ public class GameScreen extends JPanel implements Screen {
         successPanel.setBackground(Color.orange);
         JLabel successMessage = new JLabel("강화 성공");
         successMessage.setBounds(80, 15, 200, 30);
-        replaceFont(successMessage, 30);
+        successMessage.setFont(new Font("DungGeunMo",Font.PLAIN,30));
         successPanel.add(successMessage);
         successPanel.setVisible(false);
         successPanel.setBorder(BorderFactory.createLineBorder(new Color(26, 54, 54), 5));
@@ -94,7 +94,7 @@ public class GameScreen extends JPanel implements Screen {
 
         JPanel swordName = new JPanel(new BorderLayout());//검이름
         swordNameLabel = new JLabel(player.getNowSword().getName());
-        replaceFont(swordNameLabel,60);
+        swordNameLabel.setFont(new Font("DungGeunMo",Font.PLAIN,60));
         swordNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         swordNameLabel.setVerticalAlignment(SwingConstants.CENTER);
         swordName.add(swordNameLabel);
@@ -136,7 +136,7 @@ public class GameScreen extends JPanel implements Screen {
         saveTicketButton.setBackground(new Color(64, 83, 76));
         Color color = new Color(214, 189, 152);
         saveTicketButton.setForeground(color);
-        replaceFont(saveTicketButton,30);
+        saveTicketButton.setFont(new Font("DungGeunMo",Font.PLAIN,30));
         saveTicketButton.setFocusPainted(false);
         saveTicketButton.setBorder(BorderFactory.createLineBorder(color, 3));
         saveTicketButton.addActionListener(new ActionListener() {
@@ -281,7 +281,7 @@ public class GameScreen extends JPanel implements Screen {
         endSwordCount.setOpaque(false);
         finalDestination = new JLabel("목표까지 "+(20-player.getNowSword().getpossibility())+"강");
         //폰트조정, 중앙정렬
-        replaceFont(finalDestination,35);
+        finalDestination.setFont(new Font("DungGeunMo",Font.PLAIN,35));
         finalDestination.setHorizontalAlignment(JLabel.CENTER);
         finalDestination.setVerticalAlignment(JLabel.CENTER);
         finalDestination.setForeground(new Color(214, 189, 152));
@@ -307,7 +307,7 @@ public class GameScreen extends JPanel implements Screen {
         c.setBackground(new Color(64, 83, 76));
         Color color = new Color(214, 189, 152);
         c.setForeground(color);
-        replaceFont(c,size);
+        c.setFont(new Font("DungGeunMo",Font.PLAIN,size));
         c.setFocusPainted(false);
         c.addMouseListener(new MouseAdapter() {
             @Override
@@ -320,18 +320,6 @@ public class GameScreen extends JPanel implements Screen {
             }
         });
         c.setBorder(BorderFactory.createLineBorder(color, 5));
-    }
-
-    private void replaceFont(Container c, int size){
-        try{
-            InputStream fontStream = getClass().getResourceAsStream("/fonts/DungGeunMo.ttf");
-            Font baseFont = Font.createFont(Font.TRUETYPE_FONT, fontStream);
-            Font newFont = baseFont.deriveFont((float) size);
-            c.setFont(newFont);
-        } catch (Exception e){
-            e.printStackTrace();
-            System.out.println("not find font2");
-        }
     }
     private void textReplace(){
         money.setText("돈:" + player.getMoney());
@@ -385,8 +373,7 @@ public class GameScreen extends JPanel implements Screen {
         openPopupButton.setBounds(20, 380, 300, 100);
         JButton closeButton = new JButton("닫기");
         closeButton.setBounds(100, 190, 100, 30);
-        replaceFont(closeButton, 20);
-
+        closeButton.setFont(new Font("DungGeunMo",Font.PLAIN,20));
         // 버튼으로 팝업 닫혀있음
         closeButton.addActionListener(e -> popupPanel.setVisible(false));
         closeButton.addActionListener(e -> openPopupButton.setVisible(true));
@@ -413,7 +400,7 @@ public class GameScreen extends JPanel implements Screen {
         button.setBackground(new Color(64, 83, 76));
         Color color = new Color(214, 189, 152);
         button.setForeground(color);
-        replaceFont(button, size);
+        button.setFont(new Font("DungGeunMo",Font.PLAIN,size));
         button.setFocusPainted(false);
         button.addMouseListener(new MouseAdapter() {
             @Override
