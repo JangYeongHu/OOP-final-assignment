@@ -48,17 +48,14 @@ public class InventoryScreen extends JPanel implements Screen {
         }
         for (int i = 0; i < MRows*MCols-inventory.size()+a; i++) {
             JPanel miniPanel = new JPanel(new GridLayout(2, 1));
-            panel.add(nullItemPanel(miniPanel));
+            panel.add(ItemPanelCreate(miniPanel, new Ticket()));
         }
-
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         setBackground(new Color(64, 83, 76));
         panel.setOpaque(false);
         return panel;
     }
-    private JPanel nullItemPanel(JPanel j){
-        return ItemPanelCreate(j, new Ticket());
-    }
+
     public JPanel ItemPanelCreate(JPanel c,Item i){
         JPanel NamePanel = new JPanel(new BorderLayout());
         JLabel itemName = new JLabel(i.getName());//1번패널
@@ -163,7 +160,7 @@ public class InventoryScreen extends JPanel implements Screen {
     }
     public void refreshInventory() {
         removeAll();
-        initialize();
+        initialize();//다시그리기
         revalidate();
         repaint();
     }

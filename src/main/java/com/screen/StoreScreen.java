@@ -166,10 +166,7 @@ public class StoreScreen extends JPanel implements Screen {
         setVisible(false);
     }
 
-    public void refreshInventory() {
-        removeAll();
-        initialize();
-        revalidate();
-        repaint();
+    public void refreshStore() {
+        playerMoneyLabel.setText("돈 : "+Player.getInstance().getMoney());
     }
 }

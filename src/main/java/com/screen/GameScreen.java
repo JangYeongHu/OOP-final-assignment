@@ -199,9 +199,6 @@ public class GameScreen extends JPanel implements Screen {
                         moneyPanelUpdate();
                     } else {
                         fall(image);
-                        moneyPanelUpdate();
-                        mainController.updateInventoryScreen();
-                        fallImg();
                     }
                 }
                 else{
@@ -228,10 +225,15 @@ public class GameScreen extends JPanel implements Screen {
             Sword nextSword = MainController.swordList[0];
             player.setNowSword(MainController.swordList[0]);
             Image.setIcon(nextSword.imageIcon());
+            moneyPanelUpdate();
+            fallImg();
         } else {
             saveTicketButton.setBackground(Color.gray);
             saveTicketButton.setText("파괴방지 비활성화");
             isSaveTicketActive = false;
+            player.getInventory().get(findSaveTicket()).minCount();
+            moneyPanelUpdate();
+            mainController.updateInventoryScreen();
             JOptionPane.showMessageDialog(null,"파괴방어", "파괴방지권", JOptionPane.WARNING_MESSAGE);
         }
     }
