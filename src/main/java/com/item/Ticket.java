@@ -1,6 +1,7 @@
 package com.item;
 
 
+import com.app.MainController;
 import com.item.interfaces.Item;
 import com.screen.GameScreen;
 
@@ -68,7 +69,7 @@ class PushTicket extends Ticket{//확정업
     static String name = "확정업 티켓";
 
     public PushTicket(int count){
-        price = 150000;
+        price = 1000000000;
         if(count == 0) addCount();
         else {
             this.count = count;
@@ -97,7 +98,8 @@ class UpgradeTicket extends Ticket {//워프권 10,12,14,16,18
     public UpgradeTicket(int x,int count){
         name = x+"강 워프권";
         possibility = x-1;
-        price = x*3000;
+        price = MainController.swordList[x].getsellPrice()*2;
+
         if(count == 0) addCount();
         else {
             this.count = count;
@@ -123,7 +125,7 @@ class UpgradeTicket extends Ticket {//워프권 10,12,14,16,18
 class SaveTicket extends Ticket{//파괴방지권
     static String name = "파괴방지권";
     public SaveTicket(int count){
-        price = 20000;
+        price = 10000;
         if(count == 0) addCount();
         else {
             this.count = count;
@@ -141,7 +143,6 @@ class SaveTicket extends Ticket{//파괴방지권
     public void useItem() {//아이템사용메서드
         if(count > 0 && !GameScreen.getIsSaveTicketActive()){
             GameScreen.setIsSaveTicketActive(true);
-            minCount();
             JOptionPane.showMessageDialog(null, "파괴방지권 활성화");
         }
         else{

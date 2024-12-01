@@ -1,148 +1,150 @@
 {
-    "swords": [
-        {
-            "sword_id": 1,
-            "name": "깨진 돌검",
-            "update-fee": 1000,
-            "sell-price": 0,
-            "description": "오래된 돌이 깨져버린 검, 사실상 쓸모없다."
-        },
-        {
-            "sword_id": 2,
-            "name": "커터칼",
-            "update-fee": 1500,
-            "sell-price": 1000,
-            "description": "휴대용이지만 전투에 쓸 수는 없는 칼."
-        },
-        {
-            "sword_id": 3,
-            "name": "그냥 단검",
-            "update-fee": 3000,
-            "sell-price": 3000,
-            "description": "특별할 것 없는 평범한 단검."
-        },
-        {
-            "sword_id": 4,
-            "name": "녹슨 철검",
-            "update-fee": 5000,
-            "sell-price": 10000,
-            "description": "시간의 흔적이 고스란히 묻어 있는 철검."
-        },
-        {
-            "sword_id": 5,
-            "name": "치킨 닭다리",
-            "update-fee": 10000,
-            "sell-price": 30000,
-            "description": "전투보단 배고플 때 유용한 검."
-        },
-        {
-            "sword_id": 6,
-            "name": "기름칠한 철검",
-            "update-fee": 20000,
-            "sell-price": 70000,
-            "description": "녹을 방지하기 위해 손질된 철검."
-        },
-        {
-            "sword_id": 7,
-            "name": "네더라이트 검",
-            "update-fee": 40000,
-            "sell-price": 150000,
-            "description": "희귀한 네더라이트로 제작된 강력한 검."
-        },
-        {
-            "sword_id": 8,
-            "name": "피 묻힌 검",
-            "update-fee": 80000,
-            "sell-price": 300000,
-            "description": "수많은 전투의 흔적이 남은 검."
-        },
-        {
-            "sword_id": 9,
-            "name": "마법부여 네더라이트 검",
-            "update-fee": 160000,
-            "sell-price": 600000,
-            "description": "마법의 힘이 깃든 전설적인 검."
-        },
-        {
-            "sword_id": 10,
-            "name": "비싼 금검",
-            "update-fee": 320000,
-            "sell-price": 1200000,
-            "description": "장식용으로 더 적합한 고급 금검."
-        },
-        {
-            "sword_id": 11,
-            "name": "용사의 비늘검",
-            "update-fee": 650000,
-            "sell-price": 2500000,
-            "description": "전설의 용사가 사용한 강철 같은 검."
-        },
-        {
-            "sword_id": 12,
-            "name": "포세이돈의 삼지창",
-            "update-fee": 1300000,
-            "sell-price": 5000000,
-            "description": "바다의 신이 사용할 법한 삼지창."
-        },
-        {
-            "sword_id": 13,
-            "name": "빛의 서약검",
-            "update-fee": 2600000,
-            "sell-price": 10000000,
-            "description": "신성한 힘이 담긴 빛나는 검."
-        },
-        {
-            "sword_id": 14,
-            "name": "일렉트릭 기타",
-            "update-fee": 5200000,
-            "sell-price": 20000000,
-            "description": "연주와 전투를 동시에 할 수 있는 독특한 무기."
-        },
-        {
-            "sword_id": 15,
-            "name": "번개가 친 검",
-            "update-fee": 10000000,
-            "sell-price": 40000000,
-            "description": "번개의 위력이 깃든 강렬한 검."
-        },
-        {
-            "sword_id": 16,
-            "name": "불꽃 마검",
-            "update-fee": 20000000,
-            "sell-price": 80000000,
-            "description": "불길처럼 타오르는 마법 검."
-        },
-        {
-            "sword_id": 17,
-            "name": "폭풍의 집행자",
-            "update-fee": 40000000,
-            "sell-price": 150000000,
-            "description": "폭풍의 힘을 다스리는 강력한 검."
-        },
-        {
-            "sword_id": 18,
-            "name": "어디서 본 거 같은 형광검",
-            "update-fee": 80000000,
-            "sell-price": 300000000,
-            "description": "친숙하지만 정체는 알 수 없는 형광빛 검."
-        },
-        {
-            "sword_id": 19,
-            "name": "데몬 배틀 엑스",
-            "update-fee": 160000000,
-            "sell-price": 600000000,
-            "description": "악마를 처치하는 데 최적화된 거대한 전투 도끼."
-        },
-        {
-            "sword_id": 20,
-            "name": "궁극의 대검",
-            "update-fee": 320000000,
-            "sell-price": 1200000000,
-            "description": "모든 검의 끝판왕, 궁극의 파괴력을 자랑한다."
-        }
-    ],
-    "setting": {"sound": {
-        "volume": 100,
-        "bgm-on": true
-    }}
+  "setting": {
+    "sound": {
+      "bgm-on": true,
+      "volume": 100
+    }
+  },
+  "swords": [
+    {
+      "sword_id": 1,
+      "name": "깨진 돌검",
+      "sell-price": 0,
+      "update-fee": 1000,
+      "description": "오래된 돌이 깨져버린 검, 사실상 쓸모없다."
+    },
+    {
+      "sword_id": 2,
+      "name": "커터칼",
+      "sell-price": 1000,
+      "update-fee": 1500,
+      "description": "휴대용이지만 전투에 쓸 수는 없는 칼."
+    },
+    {
+      "sword_id": 3,
+      "name": "그냥 단검",
+      "sell-price": 3000,
+      "update-fee": 3000,
+      "description": "특별할 것 없는 평범한 단검."
+    },
+    {
+      "sword_id": 4,
+      "name": "녹슨 철검",
+      "sell-price": 10000,
+      "update-fee": 5000,
+      "description": "시간의 흔적이 고스란히 묻어 있는 철검."
+    },
+    {
+      "sword_id": 5,
+      "name": "치킨 닭다리",
+      "sell-price": 30000,
+      "update-fee": 10000,
+      "description": "전투보단 배고플 때 유용한 검."
+    },
+    {
+      "sword_id": 6,
+      "name": "기름칠한 철검",
+      "sell-price": 70000,
+      "update-fee": 20000,
+      "description": "녹을 방지하기 위해 손질된 철검."
+    },
+    {
+      "sword_id": 7,
+      "name": "네더라이트 검",
+      "sell-price": 150000,
+      "update-fee": 40000,
+      "description": "희귀한 네더라이트로 제작된 강력한 검."
+    },
+    {
+      "sword_id": 8,
+      "name": "피 묻힌 검",
+      "sell-price": 300000,
+      "update-fee": 80000,
+      "description": "수많은 전투의 흔적이 남은 검."
+    },
+    {
+      "sword_id": 9,
+      "name": "마법부여 네더라이트 검",
+      "sell-price": 600000,
+      "update-fee": 160000,
+      "description": "마법의 힘이 깃든 전설적인 검."
+    },
+    {
+      "sword_id": 10,
+      "name": "비싼 금검",
+      "sell-price": 1200000,
+      "update-fee": 320000,
+      "description": "장식용으로 더 적합한 고급 금검."
+    },
+    {
+      "sword_id": 11,
+      "name": "용사의 비늘검",
+      "sell-price": 2500000,
+      "update-fee": 650000,
+      "description": "전설의 용사가 사용한 강철 같은 검."
+    },
+    {
+      "sword_id": 12,
+      "name": "포세이돈의 삼지창",
+      "sell-price": 5000000,
+      "update-fee": 1300000,
+      "description": "바다의 신이 사용할 법한 삼지창."
+    },
+    {
+      "sword_id": 13,
+      "name": "빛의 서약검",
+      "sell-price": 10000000,
+      "update-fee": 2600000,
+      "description": "신성한 힘이 담긴 빛나는 검."
+    },
+    {
+      "sword_id": 14,
+      "name": "일렉트릭 기타",
+      "sell-price": 20000000,
+      "update-fee": 5200000,
+      "description": "연주와 전투를 동시에 할 수 있는 독특한 무기."
+    },
+    {
+      "sword_id": 15,
+      "name": "번개가 친 검",
+      "sell-price": 40000000,
+      "update-fee": 10000000,
+      "description": "번개의 위력이 깃든 강렬한 검."
+    },
+    {
+      "sword_id": 16,
+      "name": "불꽃 마검",
+      "sell-price": 80000000,
+      "update-fee": 20000000,
+      "description": "불길처럼 타오르는 마법 검."
+    },
+    {
+      "sword_id": 17,
+      "name": "폭풍의 집행자",
+      "sell-price": 150000000,
+      "update-fee": 40000000,
+      "description": "폭풍의 힘을 다스리는 강력한 검."
+    },
+    {
+      "sword_id": 18,
+      "name": "어디서 본 거 같은 형광검",
+      "sell-price": 300000000,
+      "update-fee": 80000000,
+      "description": "친숙하지만 정체는 알 수 없는 형광빛 검."
+    },
+    {
+      "sword_id": 19,
+      "name": "데몬 배틀 엑스",
+      "sell-price": 600000000,
+      "update-fee": 160000000,
+      "description": "악마를 처치하는 데 최적화된 거대한 전투 도끼."
+    },
+    {
+      "sword_id": 20,
+      "name": "궁극의 대검",
+      "sell-price": 1200000000,
+      "update-fee": 320000000,
+      "description": "모든 검의 끝판왕, 궁극의 파괴력을 자랑한다."
+    }
+  ]
 }

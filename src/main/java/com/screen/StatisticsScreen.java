@@ -2,11 +2,15 @@ package com.screen;
 
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import com.app.MainController;
 import com.item.Sword;
 import com.screen.interfaces.Screen;
@@ -30,7 +34,6 @@ public class StatisticsScreen extends JPanel implements Screen {
         setLayout(new BorderLayout());
         generateUpperButton();
         generateTable();
-        generateBottomButton();
     }
 
     @Override
@@ -45,35 +48,39 @@ public class StatisticsScreen extends JPanel implements Screen {
     }
 
 
-    private void updateScreen() {
-
-    }
-
 
     private void generateUpperButton() {
-        JPanel buttonPanel = new JPanel(new BorderLayout());
         JButton exitButton = new JButton("돌아가기");
+        exitButton.setForeground(new Color(214, 189, 152));
+        exitButton.setFont(new Font("DungGeunMo", Font.PLAIN, 16));
+        exitButton.setBackground(new Color(64, 83, 76));
+        exitButton.setBounds(50,0,200,50);
+        exitButton.setBorder(BorderFactory.createLineBorder(new Color(0x677d6a), 3));;
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainController.switchTo("Start");
             }
         });
-        buttonPanel.add(exitButton);
-        add(buttonPanel,BorderLayout.NORTH);
-    }
 
-    private void generateBottomButton() {
-        JPanel buttonPanel = new JPanel(new GridLayout(1,2));
-        JButton statisticsButton = new JButton("통계 보기");
-        JButton collectionButton = new JButton("검 모아 보기");
-
-        statisticsButton.addActionListener(new ActionListener() {
+        exitButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                tableCardLayout.show(tablePanel,"statistics");
+            public void mouseEntered(MouseEvent e) {
+                exitButton.setBackground(new Color(103, 125, 106));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                exitButton.setBackground(new Color(64, 83, 76));
             }
         });
+        add(exitButton);
+
+        JButton collectionButton = new JButton("도감 보기");
+        collectionButton.setForeground(new Color(214, 189, 152));
+        collectionButton.setFont(new Font("DungGeunMo", Font.PLAIN, 16));
+        collectionButton.setBackground(new Color(64, 83, 76));
+        collectionButton.setBounds(950,0,200,50);
+        collectionButton.setBorder(BorderFactory.createLineBorder(new Color(0x677d6a), 3));;
         collectionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -81,17 +88,26 @@ public class StatisticsScreen extends JPanel implements Screen {
             }
         });
 
-        buttonPanel.add(statisticsButton);
-        buttonPanel.add(collectionButton);
-        add(buttonPanel, BorderLayout.SOUTH);
+        collectionButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                collectionButton.setBackground(new Color(103, 125, 106));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                collectionButton.setBackground(new Color(64, 83, 76));
+            }
+        });
+        add(collectionButton);
+
     }
 
     private void generateTable() {
-        tableCardLayout = new CardLayout();
-        tablePanel = new JPanel(tableCardLayout);
+        tablePanel = new JPanel(null);
         generateOrUpdateStatisticsTable();
+        tablePanel.setBounds(0,0,1200,650);
+        tablePanel.setBackground(new Color(64, 83, 76));
         add(tablePanel);
-        tableCardLayout.show(tablePanel,"statistics");
     }
     private void generateOrUpdateStatisticsTable() {
         String[] columnNames = {"칼 이름", "성공 횟수", "실패 횟수", "총 횟수", "성공 확률"};
@@ -102,10 +118,12 @@ public class StatisticsScreen extends JPanel implements Screen {
             JTable statisticsTable = new JTable(statisticsTableModel);
 
             // 테이블 기본 설정
-            statisticsTable.setFont(new Font("DungGeunMo", Font.PLAIN, 18));
+            statisticsTable.setFont(new Font("DungGeunMo", Font.PLAIN, 16));
             statisticsTable.getTableHeader().setFont(new Font("DungGeunMo", Font.BOLD, 20));
+            statisticsTable.setDefaultEditor(Object.class, null);
             // 2. 행 높이 설정
-            statisticsTable.setRowHeight(30);
+            statisticsTable.setRowHeight(50);
+            statisticsTable.setBackground(new Color(214, 189, 152));
 
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
             centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -115,7 +133,46 @@ public class StatisticsScreen extends JPanel implements Screen {
 
             // 스크롤 팬 생성 및 패널에 추가
             statisticsScrollPane = new JScrollPane(statisticsTable);
-            tablePanel.add(statisticsScrollPane, "statistics");
+            statisticsScrollPane.setBounds(50,50,1100,650);
+
+            class CustomScrollBarUI extends BasicScrollBarUI {
+                @Override
+                protected void configureScrollBarColors() {
+                    this.thumbColor = new Color(103, 125, 106);
+                    this.trackColor = new Color(214, 189, 152);
+                }
+
+
+
+                @Override
+                protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+                    g.setColor(trackColor);
+                    g.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
+                }
+
+                @Override
+                protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+                    Graphics2D g2d = (Graphics2D) g;
+                    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+                    // 그림자 추가 (슬라이더 자체에 그림자 적용)
+                    g2d.setColor(new Color(0, 0, 0, 120));  // 반투명한 검정 (그림자)
+                    g2d.fillRoundRect(thumbBounds.x + 3, thumbBounds.y + 3, thumbBounds.width, thumbBounds.height, 10, 10);  // 그림자 위치 조정
+
+                    // 슬라이더(thumb)에 그라디언트 효과 추가 (위에서 아래로)
+                    GradientPaint gradient = new GradientPaint(
+                            thumbBounds.x, thumbBounds.y, thumbColor,  // 슬라이더 위쪽 밝은 색
+                            thumbBounds.x, thumbBounds.y + thumbBounds.height, new Color(64, 83, 76)  // 슬라이더 아래쪽 어두운 색
+                    );
+                    g2d.setPaint(gradient);
+                    g2d.fillRoundRect(thumbBounds.x, thumbBounds.y, thumbBounds.width, thumbBounds.height, 10, 10);  // 둥근 슬라이더
+                }
+            }
+
+
+
+            statisticsScrollPane.getVerticalScrollBar().setUI(new CustomScrollBarUI());
+            tablePanel.add(statisticsScrollPane);
         } else {
             // 기존 데이터를 초기화
             statisticsTableModel.setRowCount(0);
@@ -128,7 +185,7 @@ public class StatisticsScreen extends JPanel implements Screen {
                     sword.getSuccessCount(),
                     sword.getFailureCount(),
                     sword.getTotalAttempts(),
-                    String.format("%.3f", sword.getSuccessRate())+"%"
+                    String.format("%.3f", sword.getSuccessRate()*100)+"%"
             });
         }
 
