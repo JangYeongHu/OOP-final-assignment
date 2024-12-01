@@ -1,5 +1,6 @@
 package com.app;
 
+import com.item.Ticket;
 import com.player.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,6 +42,7 @@ public class JsonController {
         for (int i = 0; i < rowDatas.length(); i++) {
             loadJsonDataWithIndex(i);
         }
+        Player.setSelectedIdx(0);
     }
 
     //Json 읽기
@@ -59,7 +61,6 @@ public class JsonController {
         try {
             String jsonText = new String(Files.readAllBytes(Paths.get(CONFIG_FILE_PATH)), StandardCharsets.UTF_8);
             configData = new JSONObject(jsonText);
-            System.out.println("Config Loaded: " + configData.toString(4));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -108,8 +109,17 @@ public class JsonController {
         }
         player.setStatics(statics);
 
-//        System.out.println("setPlayerData" + player.getUpdateDate());
         //item 관련
+        JSONArray items = jsonData.getJSONArray("item");
+        for (int i = 0; i < items.length(); i++) {
+            JSONObject jo = items.getJSONObject(i);
+            String type = jo.getString("type");
+            int possibility = jo.getInt("possibility");
+            int count = jo.getInt("count");
+
+            player.addItem(Ticket.ticketType(type,possibility,count));
+        }
+
 
         //log 관련
     }
