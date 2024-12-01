@@ -22,7 +22,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class InventoryScreen extends JPanel implements Screen {
-    Player player = Player.getInstance();
     int MRows = 3;
     int MCols = 3;
 
@@ -31,7 +30,7 @@ public class InventoryScreen extends JPanel implements Screen {
         this.mainController = mainController;
         initialize();
     }
-    public void CenterPanelCreate(){
+    public void CenterPanelCreate(Player player){
         JPanel panel = new JPanel(new GridLayout(MRows,MCols,10,5));
         ArrayList<Item> inventory = player.getInventory();
         add(mainPanelCreate(inventory, panel));
@@ -159,9 +158,10 @@ public class InventoryScreen extends JPanel implements Screen {
 
     @Override
     public void initialize() {
+        Player player = Player.getInstance();
         setLayout(new BorderLayout());
         goGameScreen();
-        CenterPanelCreate();
+        CenterPanelCreate(player);
     }
     @Override
     public void showScreen() {

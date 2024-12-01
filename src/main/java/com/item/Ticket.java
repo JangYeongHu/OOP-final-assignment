@@ -98,8 +98,7 @@ class UpgradeTicket extends Ticket {//워프권 10,12,14,16,18
     public UpgradeTicket(int x,int count){
         name = x+"강 워프권";
         possibility = x-1;
-        this.price = MainController.swordList[possibility].getsellPrice()*2
-        -MainController.swordList[possibility].getsellPrice()/3;
+        price = MainController.swordList[x].getsellPrice()*2;
 
         if(count == 0) addCount();
         else {
