@@ -39,8 +39,8 @@ public class StoreScreen extends JPanel implements Screen {
         add(GoGame, BorderLayout.PAGE_START);
     }
     JLabel playerMoneyLabel = new JLabel();
-    public void itemListPanel(){
-        Player player = Player.getInstance();
+    public void itemListPanel(Player player){
+
         JPanel productPanel2 = new JPanel(new BorderLayout());
         JPanel productPanel = new JPanel(new GridLayout(productList,1,0,20));
         JPanel moneyPanel = new JPanel(new BorderLayout());
@@ -156,10 +156,11 @@ public class StoreScreen extends JPanel implements Screen {
 
     @Override
     public void initialize() {
+        Player player = Player.getInstance();
         setLayout(new BorderLayout());
         setBackground(new Color(64, 83, 76));
         goGameScreen();
-        itemListPanel();
+        itemListPanel(player);
     }
 
     @Override

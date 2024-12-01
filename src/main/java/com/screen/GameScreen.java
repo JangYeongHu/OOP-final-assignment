@@ -343,6 +343,8 @@ public class GameScreen extends JPanel implements Screen {
         setLayout(new BorderLayout());
         topPanel();
         midPanel();
+        mainController.updateStoreScreen();
+        mainController.updateInventoryScreen();
     }
 
 
@@ -474,3 +476,5 @@ public class GameScreen extends JPanel implements Screen {
         setVisible(false);
     }
 }
+//게임클리어화면구현
+//강화비용 판매비용 위에 구현
