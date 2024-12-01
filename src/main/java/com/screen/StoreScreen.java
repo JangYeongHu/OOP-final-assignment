@@ -115,6 +115,7 @@ public class StoreScreen extends JPanel implements Screen {
                 }
                 mainController.updateInventoryScreen();
                 mainController.updateGameScreenUI();
+
                 playerMoneyLabel.setText("돈 : "+player.getMoney());
             }
         });
@@ -174,6 +175,8 @@ public class StoreScreen extends JPanel implements Screen {
     }
 
     public void refreshStore() {
-        playerMoneyLabel.setText("돈 : "+Player.getInstance().getMoney());
+        initialize();
+        revalidate();
+        repaint();
     }
 }
