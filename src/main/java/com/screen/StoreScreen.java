@@ -175,7 +175,6 @@ public class StoreScreen extends JPanel implements Screen {
     }
 
     public void refreshStore() {
-        initialize();
         revalidate();
         repaint();
     }
