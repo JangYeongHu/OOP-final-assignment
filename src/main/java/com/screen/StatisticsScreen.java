@@ -74,12 +74,38 @@ public class StatisticsScreen extends JPanel implements Screen {
             }
         });
         add(exitButton);
+
+        JButton collectionButton = new JButton("도감 보기");
+        collectionButton.setForeground(new Color(214, 189, 152));
+        collectionButton.setFont(new Font("DungGeunMo", Font.PLAIN, 16));
+        collectionButton.setBackground(new Color(64, 83, 76));
+        collectionButton.setBounds(950,0,200,50);
+        collectionButton.setBorder(BorderFactory.createLineBorder(new Color(0x677d6a), 3));;
+        collectionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainController.switchTo("Collection");
+            }
+        });
+
+        collectionButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                collectionButton.setBackground(new Color(103, 125, 106));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                collectionButton.setBackground(new Color(64, 83, 76));
+            }
+        });
+        add(collectionButton);
+
     }
 
     private void generateTable() {
         tablePanel = new JPanel(null);
         generateOrUpdateStatisticsTable();
-        tablePanel.setBounds(0,0,1200,800);
+        tablePanel.setBounds(0,0,1200,650);
         tablePanel.setBackground(new Color(64, 83, 76));
         add(tablePanel);
     }
@@ -107,7 +133,7 @@ public class StatisticsScreen extends JPanel implements Screen {
 
             // 스크롤 팬 생성 및 패널에 추가
             statisticsScrollPane = new JScrollPane(statisticsTable);
-            statisticsScrollPane.setBounds(50,50,1100,750);
+            statisticsScrollPane.setBounds(50,50,1100,650);
 
             class CustomScrollBarUI extends BasicScrollBarUI {
                 @Override

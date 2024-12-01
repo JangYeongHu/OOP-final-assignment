@@ -89,7 +89,7 @@
     {
       "sword_id": 11,
       "name": "용사의 비늘검",
-      "sell-price": 12150000,
+      "sell-price": 8100000,
       "update-fee": 650000,
       "possibility": 70,
       "description": "전설의 용사가 사용한 강철 같은 검."
@@ -97,7 +97,7 @@
     {
       "sword_id": 12,
       "name": "포세이돈의 삼지창",
-      "sell-price": 25300000,
+      "sell-price": 15300000,
       "update-fee": 1300000,
       "possibility": 70,
       "description": "바다의 신이 사용할 법한 삼지창."
@@ -105,7 +105,7 @@
     {
       "sword_id": 13,
       "name": "빛의 서약검",
-      "sell-price": 50300000,
+      "sell-price": 30300000,
       "update-fee": 2600000,
       "possibility": 65,
       "description": "신성한 힘이 담긴 빛나는 검."
@@ -113,7 +113,7 @@
     {
       "sword_id": 14,
       "name": "일렉트릭 기타",
-      "sell-price": 100000000,
+      "sell-price": 600000000,
       "update-fee": 5200000,
       "possibility": 60,
       "description": "연주와 전투를 동시에 할 수 있는 독특한 무기."
@@ -121,7 +121,7 @@
     {
       "sword_id": 15,
       "name": "번개가 친 검",
-      "sell-price": 200000000,
+      "sell-price": 120000000,
       "update-fee": 10000000,
       "possibility": 50,
       "description": "번개의 위력이 깃든 강렬한 검."
@@ -129,7 +129,7 @@
     {
       "sword_id": 16,
       "name": "불꽃 마검",
-      "sell-price": 400000000,
+      "sell-price": 150000000,
       "update-fee": 20000000,
       "possibility": 40,
       "description": "불길처럼 타오르는 마법 검."
@@ -137,7 +137,7 @@
     {
       "sword_id": 17,
       "name": "폭풍의 집행자",
-      "sell-price": 800000000,
+      "sell-price": 300000000,
       "update-fee": 40000000,
       "possibility": 30,
       "description": "폭풍의 힘을 다스리는 강력한 검."
@@ -145,7 +145,7 @@
     {
       "sword_id": 18,
       "name": "어디서 본 거 같은 형광검",
-      "sell-price": 1600000000,
+      "sell-price": 600000000,
       "update-fee": 80000000,
       "possibility": 20,
       "description": "친숙하지만 정체는 알 수 없는 형광빛 검."
@@ -153,7 +153,7 @@
     {
       "sword_id": 19,
       "name": "데몬 배틀 엑스",
-      "sell-price": 3500000000,
+      "sell-price": 900000000,
       "update-fee": 160000000,
       "possibility": 15,
       "description": "악마를 처치하는 데 최적화된 거대한 전투 도끼."
@@ -161,7 +161,7 @@
     {
       "sword_id": 20,
       "name": "궁극의 대검",
-      "sell-price": 10000000000,
+      "sell-price": 1000000000,
       "update-fee": 320000000,
       "possibility": 5,
       "description": "모든 검의 끝판왕, 궁극의 파괴력을 자랑한다."
