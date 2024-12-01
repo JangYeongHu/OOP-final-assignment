@@ -48,6 +48,12 @@ public class StartScreen extends JPanel implements Screen {
         gbc.gridwidth = 2;
         add(titleLabel, gbc);
 
+        // 배경 추가 (검 강화하기 텍스트에 배경 색상 추가)
+        titleLabel.setOpaque(true);
+        titleLabel.setBackground(new Color(255, 255, 255, 255));
+
+        add(titleLabel, gbc);
+
         // 게임 시작 버튼
         JButton startButton = new JButton("게임 시작");
         startButton.setBackground(buttonColor);
@@ -152,4 +158,3 @@ public class StartScreen extends JPanel implements Screen {
         setVisible(false);
     }
 }
-/////
