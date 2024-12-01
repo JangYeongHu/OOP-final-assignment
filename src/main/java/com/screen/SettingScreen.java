@@ -130,4 +130,3 @@ public class SettingScreen extends JPanel implements Screen {
         setVisible(false);
     }
 }
-//커밋이 안돼서 주석으로합니다.
