@@ -1,14 +1,12 @@
 [
     {
         "player_data": {
-            "money": 1247138,
+            "money": 1214928538,
             "sword_id": 1,
-            "latest_date": "2024-11-30 00:45"
+            "latest_date": "2024-12-01 18:08",
+            "best_sword": 7
         },
-        "log": [],
-        "bgm-volume": 100,
         "index": 0,
-        "bgm-on": true,
         "statistics": [
             {
                 "fail": 2,
@@ -29,11 +27,11 @@
     },
     {
         "player_data": {
-            "money": 1247138,
-            "sword_id": 1,
-            "latest_date": "2024-11-30 00:42"
+            "money": 1214807538,
+            "sword_id": 3,
+            "latest_date": "2024-12-01 18:06",
+            "best_sword": 7
         },
-        "log": [],
         "index": 1,
         "statistics": [
             {
@@ -55,14 +53,12 @@
     },
     {
         "player_data": {
-            "money": 1246688,
-            "sword_id": 5,
-            "latest_date": "2024-11-30 00:46"
+            "money": 1214928538,
+            "sword_id": 1,
+            "latest_date": "2024-12-01 18:09",
+            "best_sword": 7
         },
-        "log": [],
-        "bgm-volume": 100,
         "index": 2,
-        "bgm-on": true,
         "statistics": [
             {
                 "fail": 2,

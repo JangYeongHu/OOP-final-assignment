@@ -130,3 +130,4 @@ public class SettingScreen extends JPanel implements Screen {
         setVisible(false);
     }
 }
+//
