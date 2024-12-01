@@ -7,7 +7,6 @@ import com.screen.interfaces.Screen;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +23,8 @@ public class MainController extends JFrame {
     private static Player player = Player.getInstance();
     private static JsonController jsonController;
 
+    private static BgmController bgmController;
+
     public static Sword[] swordList = new Sword[20];
 
     public MainController() {
@@ -31,6 +32,7 @@ public class MainController extends JFrame {
         mainPanel = new JPanel(cardLayout);
         screens = new HashMap<>();
         jsonController = JsonController.getInstance();
+        bgmController = BgmController.getInstance();
         createSword();
         loadFont();
 
@@ -42,11 +44,14 @@ public class MainController extends JFrame {
         addScreen("Reset", new ResetScreen(this));
         addScreen("Statistics", new StatisticsScreen(this));
         addScreen("Inventory", new InventoryScreen(this));
+        addScreen("Collection", new CollectionScreen(this));
+
 
         add(mainPanel);
         setSize(1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        setResizable(false);
         switchTo("Load");
     }
 
@@ -93,8 +98,9 @@ public class MainController extends JFrame {
             JSONObject sword = swords.getJSONObject(i);
             swordList[i] = new Sword("src/main/resources/"+(i+1)+".png", i+1);
             swordList[i].setSwordName(sword.getString("name"));
-//            swordList[i].setSellPrice(sword.getInt("sell-price"));
-//            swordList[i].setupgradeFee(sword.getInt("update-fee"));
+            swordList[i].setSellPrice(sword.getInt("sell-price"));
+            swordList[i].setUpgradeFee(sword.getInt("update-fee"));
+            swordList[i].setPossibility(sword.getInt("possibility"));
             swordList[i].setSwordDescription(sword.getString("description"));
             //      "sell-price": 3000,
             //      "update-fee": 3000,
@@ -132,7 +138,7 @@ public class MainController extends JFrame {
     public void updateStoreScreen() {//게임,상점에서사용예정
         Screen screen = screens.get("Store");
         if (screen instanceof StoreScreen) {
-            ((StoreScreen) screen).refreshInventory(); // InventoryScreen 갱신
+            ((StoreScreen) screen).refreshStore(); // InventoryScreen 갱신
         }
     }
     //index 자리에 현재 데이터를 저장

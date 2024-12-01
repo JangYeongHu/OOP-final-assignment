@@ -1,6 +1,7 @@
 package com.item;
 
 
+import com.app.MainController;
 import com.item.interfaces.Item;
 import com.screen.GameScreen;
 
@@ -50,11 +51,11 @@ public class Ticket implements Item {
     public boolean match(String itemName){
         return name.contains(itemName);
     }
-    public static Item ticketType(String type,Object possibility,Object price){
+    public static Item ticketType(String type,int possibility,int count){
         return switch (type) {
-            case "Save" -> new SaveTicket();
-            case "Push" -> new PushTicket();
-            case "Upgrade" -> new UpgradeTicket((Integer) possibility,(Integer)price);
+            case "Save" -> new SaveTicket(count);
+            case "Push" -> new PushTicket(count);
+            case "Upgrade" -> new UpgradeTicket(possibility,count);
             default -> new Ticket();
         };
     }
@@ -67,9 +68,12 @@ public class Ticket implements Item {
 class PushTicket extends Ticket{//확정업
     static String name = "확정업 티켓";
 
-    public PushTicket(){
-        price = 150000;
-        addCount();
+    public PushTicket(int count){
+        price = 1000000000;
+        if(count == 0) addCount();
+        else {
+            this.count = count;
+        }
     }
     @Override
     public String getName() {
@@ -91,11 +95,15 @@ class PushTicket extends Ticket{//확정업
 class UpgradeTicket extends Ticket {//워프권 10,12,14,16,18
     String name;
     int possibility = 0;
-    public UpgradeTicket(int x,int y){
+    public UpgradeTicket(int x,int count){
         name = x+"강 워프권";
         possibility = x-1;
-        price = y;
-        addCount();
+        price = MainController.swordList[x].getsellPrice()*2;
+
+        if(count == 0) addCount();
+        else {
+            this.count = count;
+        }
     }
 
     @Override
@@ -116,9 +124,12 @@ class UpgradeTicket extends Ticket {//워프권 10,12,14,16,18
 }
 class SaveTicket extends Ticket{//파괴방지권
     static String name = "파괴방지권";
-    public SaveTicket(){
-        price = 20000;
-        addCount();
+    public SaveTicket(int count){
+        price = 10000;
+        if(count == 0) addCount();
+        else {
+            this.count = count;
+        }
     }
     @Override
     public String getName() {
@@ -132,7 +143,6 @@ class SaveTicket extends Ticket{//파괴방지권
     public void useItem() {//아이템사용메서드
         if(count > 0 && !GameScreen.getIsSaveTicketActive()){
             GameScreen.setIsSaveTicketActive(true);
-            minCount();
             JOptionPane.showMessageDialog(null, "파괴방지권 활성화");
         }
         else{

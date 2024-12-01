@@ -22,6 +22,8 @@ public class Player {
 
     private String updatedDate;
 
+    private int bestSword;
+
     private ArrayList<int[]> statics = new ArrayList<>(); // {SuccessCount,FailureCount}
     private ArrayList<int[]> log = new ArrayList<>();
 
@@ -96,6 +98,9 @@ public class Player {
     public ArrayList<int[]> getStatics() {
         return statics;
     }
+    public int getBestSword() {
+        return bestSword;
+    }
 
     public ArrayList<int[]> getLog() {
         return log;
@@ -123,5 +128,9 @@ public class Player {
 
     public void setLog(ArrayList<int[]> log) {
         this.log = log;
+    }
+
+    public void setBestSword(int bestSword) {
+        this.bestSword = bestSword;
     }
 }

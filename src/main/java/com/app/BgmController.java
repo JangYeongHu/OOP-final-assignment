@@ -5,8 +5,16 @@ import java.io.File;
 import java.io.IOException;
 
 public class BgmController {
+
+    private static BgmController bgmController;
     private Clip clip;
     private FloatControl volumeControl;
+
+    public static BgmController getInstance() {
+        if(bgmController == null)
+            bgmController = new BgmController();
+        return bgmController;
+    }
 
     public void play(String filePath) {
         try {

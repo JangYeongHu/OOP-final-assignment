@@ -95,6 +95,7 @@ public class JsonController {
         player.setMoney(playerData.getInt("money"));
         player.setNowSword(MainController.findSwordById(playerData.getInt("sword_id")));
         player.setUpdatedDate(playerData.getString("latest_date"));
+        player.setBestSword(playerData.getInt("best_sword"));
 
         //statistics 관련
         ArrayList<int[]> statics = new ArrayList<>(); // [SuccessCount,FailureCount]
@@ -123,6 +124,7 @@ public class JsonController {
         JSONObject playerData = new JSONObject();
         playerData.put("money", player.getMoney());
         playerData.put("sword_id", player.getNowSword().getId());
+        playerData.put("best_sword",player.getBestSword());
         //아이템 추가해야함
 
         // 시간 포함

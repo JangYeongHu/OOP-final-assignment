@@ -3,6 +3,10 @@ package com.screen;
 import com.app.MainController;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 
 import com.item.Ticket;
 import com.item.interfaces.Item;
@@ -12,19 +16,21 @@ import com.screen.interfaces.Screen;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class InventoryScreen extends JPanel implements Screen {
-    Player player = Player.getInstance();
-    int MRows = 5;
-    int MCols = 5;
+    int MRows = 3;
+    int MCols = 3;
 
     private MainController mainController;
     public InventoryScreen(MainController mainController) {
         this.mainController = mainController;
         initialize();
     }
-    public void CenterPanelCreate(){
+    public void CenterPanelCreate(Player player){
         JPanel panel = new JPanel(new GridLayout(MRows,MCols,10,5));
         ArrayList<Item> inventory = player.getInventory();
         add(mainPanelCreate(inventory, panel));
@@ -41,32 +47,39 @@ public class InventoryScreen extends JPanel implements Screen {
         }
         for (int i = 0; i < MRows*MCols-inventory.size()+a; i++) {
             JPanel miniPanel = new JPanel(new GridLayout(2, 1));
-            panel.add(nullItemPanel(miniPanel));
+            panel.add(ItemPanelCreate(miniPanel, new Ticket()));
         }
-
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        setBackground(new Color(64, 83, 76));
+        panel.setOpaque(false);
         return panel;
     }
-    private JPanel nullItemPanel(JPanel j){
-        return ItemPanelCreate(j, new Ticket());
-    }
+
     public JPanel ItemPanelCreate(JPanel c,Item i){
-        JPanel NamePanel = new JPanel();
+        JPanel NamePanel = new JPanel(new BorderLayout());
         JLabel itemName = new JLabel(i.getName());//1번패널
         labelCenterSort(itemName);
         NamePanel.add(itemName);
+        replaceFont(itemName, 50);
         c.add(NamePanel);
 
         JPanel buttonPanel = new JPanel(new GridLayout(1,2));
         JLabel countLabel =new JLabel(i.getCount()+" 개");
-        JButton ActivateButton = AButton(new JButton(), i,countLabel);
+        JButton ActivateButton = AButton(new JButton("사용"), i,countLabel);
         labelCenterSort(countLabel);
         buttonPanel.add(countLabel);
         buttonPanel.add(ActivateButton);
+        replaceFont(countLabel, 40);
 
-        buttonPanel.setBackground(Color.LIGHT_GRAY);
-        NamePanel.setBackground(Color.gray);
+        NamePanel.setOpaque(false);
+        buttonPanel.setOpaque(false);
+        c.setOpaque(false);
         c.add(buttonPanel);
 
+        Color color = new Color(214, 189, 152);
+        c.setBorder(BorderFactory.createLineBorder(color, 4));
+        Border topBorder = new MatteBorder(4, 0, 0, 2, color);
+        countLabel.setBorder(new CompoundBorder(topBorder, null));
         return c;
     }
 
@@ -76,10 +89,6 @@ public class InventoryScreen extends JPanel implements Screen {
         label.setFont(label.getFont().deriveFont(25.0f));
     }
     private JButton AButton(JButton Button, Item i, JLabel countLabel) {
-        JLabel Label = new JLabel("사용하기");
-        Label.setHorizontalAlignment(JLabel.CENTER);
-        Label.setFont(Label.getFont().deriveFont(20.0f));
-        Button.add(Label);
         Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -97,12 +106,36 @@ public class InventoryScreen extends JPanel implements Screen {
             }
 
         });
+        setButtonSize(Button);
         return Button;
     }
-
+    private void setButtonSize(JButton c) {
+        c.setBackground(new Color(26, 54, 54));
+        Color color = new Color(214, 189, 152);
+        c.setForeground(color);
+        replaceFont(c,30);
+        c.setFocusPainted(false);
+        c.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                c.setBackground(new Color(103, 125, 106));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                c.setBackground(new Color(26, 54, 54));
+            }
+        });
+        Border topBorder = new MatteBorder(4, 2, 0, 0, color);
+        c.setBorder(new CompoundBorder(topBorder, null));
+    }
+    private void replaceFont(Container c, int size){
+            c.setForeground(Color.white);
+            c.setFont(new Font("DungGeunMo",Font.PLAIN,size));
+    }
     public void goGameScreen(){
         JButton GoGame = new JButton("게임창으로 돌아가기");
-        GoGame.setPreferredSize(new Dimension(0,70));
+        GoGame.setPreferredSize(new Dimension(0,100));
+        setButtonSize(GoGame);
         GoGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -111,20 +144,24 @@ public class InventoryScreen extends JPanel implements Screen {
         });
         JPanel goScreen = new JPanel(new BorderLayout());
         goScreen.add(GoGame);
+        Color color = new Color(214, 189, 152);
+        Border topBorder = new MatteBorder(4, 4, 4, 4, color);
+        GoGame.setBorder(new CompoundBorder(topBorder, null));
         add(goScreen, BorderLayout.PAGE_START);
     }
     public void refreshInventory() {
         removeAll();
-        initialize();
+        initialize();//다시그리기
         revalidate();
         repaint();
     }
 
     @Override
     public void initialize() {
+        Player player = Player.getInstance();
         setLayout(new BorderLayout());
         goGameScreen();
-        CenterPanelCreate();
+        CenterPanelCreate(player);
     }
     @Override
     public void showScreen() {

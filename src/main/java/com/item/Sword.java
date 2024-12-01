@@ -26,10 +26,10 @@ public class Sword {
     private String description;
 
     public boolean upgradeProbability() {// 현재 강화율과 비교해서 강화확률조정
-        int num = 105 - 5*possibility;// 성공확률계산
         Random rand = new Random();
         int n = rand.nextInt(1,101);// 성공
-        if(n > num){
+        System.out.println(n + " " + possibility);
+        if(n > possibility){
             failureCount++;
             return false;
         }
@@ -38,55 +38,27 @@ public class Sword {
     }
 
     public ImageIcon imageIcon(){
-        ImageIcon imageicon = new ImageIcon(imageSourcePath);//
+        ImageIcon imageicon = new ImageIcon(imageSourcePath);
         Image image = imageicon.getImage();
         int newWidth = 500;
-        int newHeight = 480;
+        int newHeight = 500;
+
         Image resizedImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
 
 
-    public Sword (String img, int i){//검만들기 검이름과 이미지파일 이름을넣는다
+    public Sword (String img, int i){//검만들기 검아이디와 이미지파일 이름을넣는다
         imageSourcePath = img;
         id = i;
-        possibility = i;
-        setSellPrice();
-        setupgradeFee();
     }
 
-    public int setSellPrice(){//특정강화도 이상부터 판매가설정
-        // = 100*possibility;
-        if (possibility == 1)
-            return 0;
-        if (possibility > 4)
-            sellPrice = 200*possibility;
-        if (possibility > 8)
-            sellPrice = 400*possibility;
-        if (possibility > 12)
-            sellPrice = 800*possibility;
-        if (possibility > 16)
-            sellPrice = 1600*possibility;
-        else
-            sellPrice = 110*possibility;
-        return sellPrice;
+    public void setSellPrice(int price){//특정강화도 이상부터 판매가설정
+        sellPrice = price;
     }
 
-    public int setupgradeFee(){//특정강화도 이상부터 판매가설정
-        // = 100*possibility;
-        if (possibility == 1)
-            return 0;
-        if (possibility > 4)
-            upgradeFee = 100*possibility;
-        if (possibility > 8)
-            upgradeFee = 200*possibility;
-        if (possibility > 12)
-            upgradeFee = 300*possibility;
-        if (possibility > 16)
-            upgradeFee = 400*possibility;
-        else
-            upgradeFee = 50*possibility;
-        return upgradeFee;
+    public void setUpgradeFee(int price){//특정강화도 이상부터 판매가설정
+        upgradeFee = price;
     }
 
     public String setSwordName(String name){
@@ -96,6 +68,10 @@ public class Sword {
     public String setSwordDescription(String description){
         this.description = description;
         return this.description;
+    }
+
+    public void setPossibility(int possibility) {
+        this.possibility = possibility;
     }
 
     public void setSuccessCount(int successCount) {
