@@ -1,5 +1,6 @@
 package com.app;
 
+import com.item.Ticket;
 import com.player.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -108,8 +109,17 @@ public class JsonController {
         }
         player.setStatics(statics);
 
-//        System.out.println("setPlayerData" + player.getUpdateDate());
         //item 관련
+        JSONArray items = jsonData.getJSONArray("item");
+        for (int i = 0; i < items.length(); i++) {
+            JSONObject jo = items.getJSONObject(i);
+            String type = jo.getString("type");
+            int possibility = jo.getInt("possibility");
+            int count = jo.getInt("count");
+
+            player.addItem(Ticket.ticketType(type,possibility,count));
+        }
+
 
         //log 관련
     }
