@@ -6,10 +6,17 @@ import com.screen.interfaces.Screen;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class CollectionScreen extends JPanel implements Screen {
+
+    private final Color COLOR_DARK_GREEN = new Color(0x1A3636); // #1a3636
+    private final Color COLOR_GREEN = new Color(0x40534C); // #40534c
+    private final Color COLOR_LIGHT_GREEN = new Color(0x677D6A); // #677d6a
+    private final Color COLOR_YELLOW = new Color(0xD6BD98); // #d6bd98
 
     private MainController mainController;
 
@@ -20,11 +27,12 @@ public class CollectionScreen extends JPanel implements Screen {
 
     private int nowIndex = 0;
 
-    private Image centerImage;
-    private Image leftImage;
-    private Image rightImage;
-
-    private ImageDisplayPanel imageDisplayPanel;
+    private JLabel centerImage;
+    private JPanel centerLabelBox;
+    private JLabel centerLabel;
+    private JLabel centerDescription;
+    private JLabel leftImage;
+    private JLabel rightImage;
 
     public CollectionScreen(MainController mainController) {
         this.mainController = mainController;
@@ -33,71 +41,159 @@ public class CollectionScreen extends JPanel implements Screen {
     @Override
     public void initialize() {
         setLayout(new BorderLayout());
-        setBackground(new Color(0x40534C));
+        setBackground(COLOR_GREEN);
+        generateUpperButton();
         loadSwordImages();
+        generateMiddleImages();
         generateLowArrow();
-        genereateMiddleImage();
+        showSwordImages();
+    }
+
+    private void generateUpperButton() {
+        JButton exitButton = new JButton("돌아가기");
+        exitButton.setForeground(COLOR_YELLOW);
+        exitButton.setFont(new Font("DungGeunMo", Font.PLAIN, 16));
+        exitButton.setBackground(COLOR_GREEN);
+        exitButton.setBounds(50,25,200,50);
+        exitButton.setBorder(BorderFactory.createLineBorder(COLOR_LIGHT_GREEN, 3));;
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainController.switchTo("Statistics");
+            }
+        });
+        exitButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                exitButton.setBackground(COLOR_LIGHT_GREEN);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                exitButton.setBackground(COLOR_GREEN);
+            }
+        });
+
+        add(exitButton);
+    }
+
+    private void generateMiddleImages() {
+        JPanel middleImages = new JPanel(null);
+        middleImages.setBackground(this.getBackground());
+        int centerX = (1200-400)/2;
+        int centerY = (800-400)/2;
+
+        centerImage = new JLabel();
+        centerImage.setBounds(centerX,centerY,400,400);
+
+        leftImage = new JLabel();
+        leftImage.setBounds(centerX-300-40,centerY+20,300,300);
+
+        rightImage = new JLabel();
+        rightImage.setBounds(centerX+400+40,centerY+20,300,300);
+
+        middleImages.add(centerImage);
+        middleImages.add(leftImage);
+        middleImages.add(rightImage);
+        add(middleImages);
     }
 
     private void generateLowArrow() {
         JPanel LowPanel = new JPanel(new BorderLayout());
-        LowPanel.setBackground(this.getBackground());
+        LowPanel.setOpaque(false);
         generateLeftArrow(LowPanel);
         generateRightArrow(LowPanel);
-        add(LowPanel,BorderLayout.PAGE_END);
-    }
 
-    private void genereateMiddleImage() {
-        imageDisplayPanel = new ImageDisplayPanel();
-        imageDisplayPanel.setBackground(this.getBackground());
-        add(imageDisplayPanel);
+        centerLabelBox = new JPanel(new BorderLayout());
+        centerLabelBox.setBounds(450,650,200,50);
+        centerLabelBox.setOpaque(false);
+        centerLabel = new JLabel();
+        centerLabel.setFont(new Font("DungGeunMo",Font.PLAIN,35));
+        centerLabel.setForeground(COLOR_YELLOW);
+        centerLabel.setHorizontalAlignment(JLabel.CENTER);
+        centerLabel.setVerticalAlignment(JLabel.CENTER);
+        centerLabelBox.add(centerLabel,BorderLayout.NORTH);
+
+        centerDescription = new JLabel();
+        centerDescription.setFont(new Font("DungGeunMo",Font.PLAIN,15));
+        centerDescription.setForeground(COLOR_YELLOW);
+        centerDescription.setHorizontalAlignment(JLabel.CENTER);
+        centerDescription.setVerticalAlignment(JLabel.CENTER);
+        centerLabelBox.add(centerDescription,BorderLayout.CENTER);
+
+        LowPanel.add(centerLabelBox,BorderLayout.CENTER);
+        add(LowPanel,BorderLayout.PAGE_END);
     }
 
     private void generateLeftArrow(JPanel middlePanel) {
         ImageIcon leftImageIcon = new ImageIcon("src/main/resources/left-arrow-button.png");
-        Image leftImage = leftImageIcon.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH);
-        JLabel leftArrowLabel = new JLabel(new ImageIcon(leftImage));
+        ImageIcon leftImageIconClicked = new ImageIcon("src/main/resources/left-arrow-button-clicked.png");
+        ImageIcon leftImage = new ImageIcon(leftImageIcon.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
+        ImageIcon leftImageClicked = new ImageIcon(leftImageIconClicked.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
+        JLabel leftArrowLabel = new JLabel(leftImage);
         leftArrowLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(nowIndex > 0) {
                     nowIndex--;
-                    imageDisplayPanel.repaint();
+                    showSwordImages();
                 }
             }
         });
+
+        leftArrowLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                leftArrowLabel.setIcon(leftImageClicked);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                leftArrowLabel.setIcon(leftImage);
+            }
+        });
+
         middlePanel.add(leftArrowLabel,BorderLayout.WEST);
     }
 
     private void generateRightArrow(JPanel middlePanel) {
         ImageIcon rightImageIcon = new ImageIcon("src/main/resources/right-arrow-button.png");
-        Image rightImage = rightImageIcon.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH);
-        JLabel rightImageLabel = new JLabel(new ImageIcon(rightImage));
+        ImageIcon rightImageIconClicked = new ImageIcon("src/main/resources/right-arrow-button-clicked.png");
+        ImageIcon rightImage = new ImageIcon(rightImageIcon.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
+        ImageIcon rightImageClicked = new ImageIcon(rightImageIconClicked.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
+        JLabel rightImageLabel = new JLabel(rightImage);
         rightImageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(nowIndex < 19) {
                     nowIndex++;
-                    imageDisplayPanel.repaint();
+                    showSwordImages();
                 }
             }
         });
+
+        rightImageLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                rightImageLabel.setIcon(rightImageClicked);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                rightImageLabel.setIcon(rightImage);
+            }
+        });
+
+
         middlePanel.add(rightImageLabel,BorderLayout.EAST);
     }
 
     @Override
     public void showScreen() {
-        update();
+        showSwordImages();
         setVisible(true);
     }
 
     @Override
     public void hideScreen() {
         setVisible(false);
-    }
-
-    public void update() {
-
     }
 
     private void loadSwordImages() {
@@ -107,46 +203,29 @@ public class CollectionScreen extends JPanel implements Screen {
             blackSwordImages[i] = new ImageIcon("src/main/resources/collectionScreen/"+(i+1)+".png");
     }
 
-    private class ImageDisplayPanel extends JPanel {
-        @Override
-        protected void paintComponent(Graphics g) {
-            System.out.println(nowIndex);
-            super.paintComponent(g);
+    private void showSwordImages() {
+        centerImage.setIcon(new ImageIcon(isSwordShow(nowIndex).getImage().getScaledInstance(400,400,Image.SCALE_SMOOTH)));
+        isTextShow(nowIndex);
+        if(nowIndex > 0)
+            leftImage.setIcon(new ImageIcon(isSwordShow(nowIndex-1).getImage().getScaledInstance(300,300,Image.SCALE_SMOOTH)));
+        else leftImage.setIcon(new ImageIcon());
+        if(nowIndex < 19)
+            rightImage.setIcon(new ImageIcon(isSwordShow(nowIndex+1).getImage().getScaledInstance(300,300,Image.SCALE_SMOOTH)));
+        else rightImage.setIcon(new ImageIcon());
+    }
 
-            // 패널 크기 가져오기
-            int width = getWidth();
-            int height = getHeight();
+    private ImageIcon isSwordShow(int index) {
+        if(player.getBestSword() >= index) return swordImages[index];
+        return blackSwordImages[index];
+    }
 
-            // 가운데 이미지 크기와 위치
-            int centerSize = 400;
-            int centerX = (width - centerSize) / 2;
-            int centerY = (height - centerSize) / 2;
-
-            // 양쪽 이미지 크기와 위치
-            int sideSize = 300;
-            int leftIndex = nowIndex-1;
-            int rightIndex = nowIndex+1;
-
-            int leftX = centerX - sideSize - 40;
-            int leftY = centerY + 20;
-            int rightX = centerX + centerSize + 40;
-            int rightY = centerY + 20;
-
-            // 이미지 그리기
-            if(nowIndex != 0)
-                if(player.getBestSword() < leftIndex)
-                    g.drawImage(blackSwordImages[leftIndex].getImage(), leftX, leftY, sideSize, sideSize, this);
-                else
-                    g.drawImage(swordImages[leftIndex].getImage(), leftX, leftY, sideSize, sideSize, this);
-            if(player.getBestSword() < nowIndex)
-                g.drawImage(blackSwordImages[nowIndex].getImage(), centerX, centerY, centerSize, centerSize, this);
-            else
-                g.drawImage(swordImages[nowIndex].getImage(), centerX, centerY, centerSize, centerSize, this);
-            if(nowIndex != 19)
-                if(player.getBestSword() < rightIndex)
-                    g.drawImage(blackSwordImages[rightIndex].getImage(), rightX, rightY, sideSize, sideSize, this);
-                else
-                    g.drawImage(swordImages[rightIndex].getImage(), rightX, rightY, sideSize, sideSize, this);
+    private void isTextShow(int index) {
+        if(player.getBestSword() >= index) {
+            centerLabel.setText(MainController.swordList[nowIndex].getName());
+            centerDescription.setText(MainController.swordList[nowIndex].getDescription());
+        } else {
+            centerLabel.setText("?????");
+            centerDescription.setText("??????????????????????????");
         }
     }
 }

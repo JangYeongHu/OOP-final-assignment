@@ -54,7 +54,7 @@ public class StatisticsScreen extends JPanel implements Screen {
         exitButton.setForeground(new Color(214, 189, 152));
         exitButton.setFont(new Font("DungGeunMo", Font.PLAIN, 16));
         exitButton.setBackground(new Color(64, 83, 76));
-        exitButton.setBounds(50,0,200,50);
+        exitButton.setBounds(50,25,200,50);
         exitButton.setBorder(BorderFactory.createLineBorder(new Color(0x677d6a), 3));;
         exitButton.addActionListener(new ActionListener() {
             @Override
@@ -79,7 +79,7 @@ public class StatisticsScreen extends JPanel implements Screen {
         collectionButton.setForeground(new Color(214, 189, 152));
         collectionButton.setFont(new Font("DungGeunMo", Font.PLAIN, 16));
         collectionButton.setBackground(new Color(64, 83, 76));
-        collectionButton.setBounds(950,0,200,50);
+        collectionButton.setBounds(950,25,200,50);
         collectionButton.setBorder(BorderFactory.createLineBorder(new Color(0x677d6a), 3));;
         collectionButton.addActionListener(new ActionListener() {
             @Override
@@ -133,7 +133,7 @@ public class StatisticsScreen extends JPanel implements Screen {
 
             // 스크롤 팬 생성 및 패널에 추가
             statisticsScrollPane = new JScrollPane(statisticsTable);
-            statisticsScrollPane.setBounds(50,50,1100,650);
+            statisticsScrollPane.setBounds(50,75,1100,650);
 
             class CustomScrollBarUI extends BasicScrollBarUI {
                 @Override
