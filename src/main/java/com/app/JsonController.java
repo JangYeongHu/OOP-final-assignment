@@ -1,6 +1,7 @@
 package com.app;
 
 import com.item.Ticket;
+import com.item.interfaces.Item;
 import com.player.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -156,6 +157,22 @@ public class JsonController {
            statistics.put(jo);
         }
         rowDatas.getJSONObject(index).put("statistics", statistics);
+
+
+        // 아이템 정보 저장
+        JSONArray items = new JSONArray();
+        ArrayList<Item> playerItems = player.getInventory(); // Player의 아이템 목록 가져오기
+        for (Item playerItem : playerItems) {
+            System.out.println(playerItem.getName());
+        }
+        for (Item ticket : playerItems) {
+            JSONObject itemObject = new JSONObject();
+            itemObject.put("type", ticket.getType());
+            itemObject.put("possibility", ticket.getPossibility()+1);
+            itemObject.put("count", ticket.getCount());
+            items.put(itemObject);
+        }
+        rowDatas.getJSONObject(index).put("item", items);
     }
 
     //파일 처리 분리 - 쓰기

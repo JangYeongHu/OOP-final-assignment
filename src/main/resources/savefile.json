@@ -1,9 +1,26 @@
 [
     {
+        "item": [
+            {
+                "count": 1,
+                "type": "Save",
+                "possibility": 1
+            },
+            {
+                "count": 5,
+                "type": "Push",
+                "possibility": 1
+            },
+            {
+                "count": 5,
+                "type": "Upgrade",
+                "possibility": 10
+            }
+        ],
         "player_data": {
-            "money": 1215092038,
+            "money": 320356227,
             "sword_id": 1,
-            "latest_date": "2024-12-01 21:28",
+            "latest_date": "2024-12-02 12:22",
             "best_sword": 0
         },
         "index": 0,
@@ -23,31 +40,10 @@
                 "sword_id": 3,
                 "success": 5
             }
-        ],
-        "item": [
-            {
-                "type": "Save",
-                "possibility" : 0,
-                "count": 1
-            },
-            {
-                "type": "Push",
-                "possibility" : 0,
-                "count": 5
-            },
-            {
-                "type": "Upgrade",
-                "possibility" : 10,
-                "count": 5
-            },
-            {
-                "type": "Upgrade",
-                "possibility" : 12,
-                "count": 1
-            }
         ]
     },
     {
+        "item": [],
         "player_data": {
             "money": 1214807538,
             "sword_id": 3,
@@ -71,10 +67,10 @@
                 "sword_id": 3,
                 "success": 5
             }
-        ],
-        "item" : []
+        ]
     },
     {
+        "item": [],
         "player_data": {
             "money": 1214928538,
             "sword_id": 1,
@@ -98,7 +94,6 @@
                 "sword_id": 3,
                 "success": 5
             }
-        ],
-        "item" : []
+        ]
     }
 ]
