@@ -6,6 +6,8 @@ import com.screen.interfaces.Screen;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -34,9 +36,37 @@ public class CollectionScreen extends JPanel implements Screen {
     public void initialize() {
         setLayout(new BorderLayout());
         setBackground(new Color(0x40534C));
+        generateUpperButton();
         loadSwordImages();
         generateLowArrow();
         genereateMiddleImage();
+    }
+
+    private void generateUpperButton() {
+        JButton exitButton = new JButton("돌아가기");
+        exitButton.setForeground(new Color(214, 189, 152));
+        exitButton.setFont(new Font("DungGeunMo", Font.PLAIN, 16));
+        exitButton.setBackground(new Color(64, 83, 76));
+        exitButton.setBounds(50,25,200,50);
+        exitButton.setBorder(BorderFactory.createLineBorder(new Color(0x677d6a), 3));;
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainController.switchTo("Statistics");
+            }
+        });
+        exitButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                exitButton.setBackground(new Color(103, 125, 106));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                exitButton.setBackground(new Color(64, 83, 76));
+            }
+        });
+
+        add(exitButton);
     }
 
     private void generateLowArrow() {
