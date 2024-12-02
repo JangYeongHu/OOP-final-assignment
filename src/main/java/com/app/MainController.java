@@ -102,9 +102,7 @@ public class MainController extends JFrame {
             swordList[i].setUpgradeFee(sword.getInt("update-fee"));
             swordList[i].setPossibility(sword.getInt("possibility"));
             swordList[i].setSwordDescription(sword.getString("description"));
-            //      "sell-price": 3000,
-            //      "update-fee": 3000,
-            //      "description": "특별할 것 없는 평범한 단검."
+
         }
 
         jsonController.init();

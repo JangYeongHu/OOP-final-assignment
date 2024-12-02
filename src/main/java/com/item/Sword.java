@@ -25,6 +25,9 @@ public class Sword {
 
     private String description;
 
+    private ImageIcon gifIcon;
+    private ImageIcon failedIcon;
+
     public boolean upgradeProbability() {// 현재 강화율과 비교해서 강화확률조정
         Random rand = new Random();
         int n = rand.nextInt(1,101);// 성공
@@ -39,18 +42,27 @@ public class Sword {
 
     public ImageIcon imageIcon(){
         ImageIcon imageicon = new ImageIcon(imageSourcePath);
-        Image image = imageicon.getImage();
-        int newWidth = 500;
-        int newHeight = 500;
 
-        Image resizedImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-        return new ImageIcon(resizedImage);
+        return imageicon;
     }
+
+    public ImageIcon gifIcon(){
+        return gifIcon;
+    }
+
+    public ImageIcon failedIcon(){
+        return failedIcon;
+    }
+
+
 
 
     public Sword (String img, int i){//검만들기 검아이디와 이미지파일 이름을넣는다
         imageSourcePath = img;
         id = i;
+        gifIcon = new ImageIcon("src/main/resources/game/" + id + ".gif");
+        failedIcon = new ImageIcon("src/main/resources/failed/" + id + ".gif");
+
     }
 
     public void setSellPrice(int price){//특정강화도 이상부터 판매가설정
