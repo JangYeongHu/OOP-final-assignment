@@ -52,7 +52,8 @@ public class MainController extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setResizable(false);
-        bgmController.play("src/main/resources/bgm.wav");
+//        bgmController.play();
+        loadSettingData();
         switchTo("Load");
     }
 
@@ -90,8 +91,14 @@ public class MainController extends JFrame {
     }
 
     public void loadSettingData() {
-
+        if(jsonController.isBgmOn()) bgmController.play();
+        int volume = jsonController.getBgmVolume();
+        float volumeValue = volume == 0 ? -80.0f : (float) (volume - 100) / 10.0f;
+        bgmController.setVolume(volumeValue);
+        bgmController.setRoughVolume(volume);
     }
+
+
     static void createSword(){
         JSONArray swords = jsonController.getSwords();
 
@@ -103,9 +110,7 @@ public class MainController extends JFrame {
             swordList[i].setUpgradeFee(sword.getInt("update-fee"));
             swordList[i].setPossibility(sword.getInt("possibility"));
             swordList[i].setSwordDescription(sword.getString("description"));
-            //      "sell-price": 3000,
-            //      "update-fee": 3000,
-            //      "description": "특별할 것 없는 평범한 단검."
+
         }
 
         jsonController.init();

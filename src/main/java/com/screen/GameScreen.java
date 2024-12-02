@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.InputStream;
 
 public class GameScreen extends JPanel implements Screen {
 
@@ -21,7 +22,7 @@ public class GameScreen extends JPanel implements Screen {
     private JPanel successPanel = new JPanel(null);
     private MainController mainController;
     private static boolean isSaveTicketActive = false;
-
+    private Sword[] swords;
 
     public static boolean getIsSaveTicketActive() {
         return isSaveTicketActive;
@@ -89,7 +90,8 @@ public class GameScreen extends JPanel implements Screen {
     private void setMidbutton(Container c) {
         JPanel imagePanel = new JPanel(new BorderLayout());//검이미지
         Sword sword = player.getNowSword();
-        JLabel swordImage = new JLabel(sword.imageIcon());
+//        JLabel swordImage = new JLabel(sword.imageIcon());
+        JLabel swordImage = new JLabel(sword.gifIcon());
 
         JPanel swordName = new JPanel(new BorderLayout());//검이름
         swordNameLabel = new JLabel(player.getNowSword().getName());
@@ -138,19 +140,22 @@ public class GameScreen extends JPanel implements Screen {
         saveTicketButton.setFont(new Font("DungGeunMo",Font.PLAIN,30));
         saveTicketButton.setFocusPainted(false);
         saveTicketButton.setBorder(BorderFactory.createLineBorder(color, 3));
-        saveTicketButton.addActionListener(e -> {
-            if(player.getInventory().isEmpty()){
-                JOptionPane.showMessageDialog(null, "파괴방지권이 부족합니다");
-            }
-            else if(player.getInventory().get(findSaveTicket()).getCount() > 0){
-                if (!isSaveTicketActive) {
-                    saveTicketButton.setBackground(Color.GREEN);
-                    saveTicketButton.setText("파괴방지 활성화");
-                    isSaveTicketActive = true;
-                } else {
-                    saveTicketButton.setBackground(Color.gray);
-                    saveTicketButton.setText("파괴방지 비활성화");
-                    isSaveTicketActive = false;
+        saveTicketButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(player.getInventory().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "파괴방지권이 부족합니다");
+                }
+                else if(player.getInventory().get(findSaveTicket()).getCount() > 0){
+                    if (!isSaveTicketActive) {
+                        saveTicketButton.setBackground(Color.GREEN);
+                        saveTicketButton.setText("파괴방지 활성화");
+                        isSaveTicketActive = true;
+                    } else {
+                        saveTicketButton.setBackground(Color.gray);
+                        saveTicketButton.setText("파괴방지 비활성화");
+                        isSaveTicketActive = false;
+                    }
                 }
             }
         });
@@ -184,19 +189,22 @@ public class GameScreen extends JPanel implements Screen {
     }
     private JButton upgradeButtonEvent(JLabel image) {
         setButtonSize(swordUpgradeButton,30);
-        swordUpgradeButton.addActionListener(e -> {
-            Sword nowSword = player.getNowSword();
-            if (player.getMoney() > nowSword.getUpgradeFee()){//player의 돈이 강화비용보닫 많을경우에만
-                player.doUpgradeSword();//돈소모 현재쓰는방식은 임시방편
-                if (nowSword.upgradeProbability()) {
-                    success(image,nowSword.getId());
-                    moneyPanelUpdate();
-                } else {
-                    fall(image);
+        swordUpgradeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Sword nowSword = player.getNowSword();
+                if (player.getMoney() > nowSword.getUpgradeFee()){//player의 돈이 강화비용보닫 많을경우에만
+                    player.doUpgradeSword();//돈소모 현재쓰는방식은 임시방편
+                    if (nowSword.upgradeProbability()) {
+                        success(image,nowSword.getId());
+                        moneyPanelUpdate();
+                    } else {
+                        fall(image, nowSword.getId());
+                    }
                 }
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "돈이부족합니다");//세팅스크린에서빌려왔음
+                else{
+                    JOptionPane.showMessageDialog(null, "돈이부족합니다");//세팅스크린에서빌려왔음
+                }
             }
         });
         return swordUpgradeButton;
@@ -205,7 +213,8 @@ public class GameScreen extends JPanel implements Screen {
     private void success(JLabel image, int number){
         Sword nextSword = MainController.swordList[number];//다음검뽑아오기
         player.setNowSword(nextSword);//플레이어검 업그레이드
-        image.setIcon(nextSword.imageIcon());//이미지변경
+//        image.setIcon(nextSword.imageIcon());//이미지변경
+        image.setIcon(nextSword.gifIcon());//이미지변경
         successPanel.setVisible(true);
         if(successPanel.isVisible()){
             new javax.swing.Timer(3000, e -> {
@@ -213,13 +222,14 @@ public class GameScreen extends JPanel implements Screen {
             }).start();
         }
     }
-    private void fall(JLabel Image) {
+    private void fall(JLabel Image, int num) {
         if (saveTicketButton.getBackground() != Color.GREEN) {
-            Sword nextSword = MainController.swordList[0];
-            player.setNowSword(MainController.swordList[0]);
-            Image.setIcon(nextSword.imageIcon());
-            moneyPanelUpdate();
+//            Image.setIcon(nextSword.imageIcon());
+            Image.setIcon(swords[num-1].failedIcon());
             fallImg();
+            player.setNowSword(swords[0]);
+            Image.setIcon(swords[0].gifIcon());
+            moneyPanelUpdate();
         } else {
             saveTicketButton.setBackground(Color.gray);
             saveTicketButton.setText("파괴방지 비활성화");
@@ -236,11 +246,15 @@ public class GameScreen extends JPanel implements Screen {
 
     private JButton sellButton(JButton button, JLabel Image) {
         setButtonSize(button,25);
-        button.addActionListener(e -> {//player에 돈넣어주는것추가하기
-            player.soldSword(MainController.swordList[0]);//n번째검 판매 > 0번째검으로 초기화
-            Image.setIcon(player.getNowSword().imageIcon());
-            moneyPanelUpdate();
-            mainController.updateStoreScreen();
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {//player에 돈넣어주는것추가하기
+                player.soldSword(MainController.swordList[0]);//n번째검 판매 > 0번째검으로 초기화
+//                Image.setIcon(player.getNowSword().imageIcon());
+                Image.setIcon(player.getNowSword().gifIcon());
+                moneyPanelUpdate();
+                mainController.updateStoreScreen();
+            }
         });
         return button;
     }
@@ -254,9 +268,19 @@ public class GameScreen extends JPanel implements Screen {
         popupPanel.setBounds(20, 110, 300, 180); // 위치와 크기 설정
 
         JButton openInventoryButton = new JButton("인벤토리");
-        openInventoryButton.addActionListener(e -> mainController.switchTo("Inventory"));
+        openInventoryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainController.switchTo("Inventory");
+            }
+        });
         JButton openStoreButton = new JButton("상점");
-        openStoreButton.addActionListener(e -> mainController.switchTo("Store"));
+        openStoreButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainController.switchTo("Store");
+            }
+        });
         // 버튼 위치와 크기 설정
         openInventoryButton.setBounds(50, 20, 200, 50);
         openStoreButton.setBounds(50, 80, 200, 50);
@@ -316,8 +340,9 @@ public class GameScreen extends JPanel implements Screen {
 
     @Override
     public void initialize() {
-        player = Player.getInstance();
+        swords = MainController.swordList;
         popup();
+        player = Player.getInstance();
         money = new JLabel("돈:" + player.getMoney());
         finalDestination = new JLabel("목표까지 "+(20-player.getNowSword().getId())+"강");
         setLayout(new BorderLayout());
@@ -325,6 +350,7 @@ public class GameScreen extends JPanel implements Screen {
         midPanel();
         mainController.updateStoreScreen();
         mainController.updateInventoryScreen();
+
     }
 
 

@@ -12,4 +12,6 @@ public interface Item {
     void useItem();
 
     void setCount();
+    public String getType();
+    public int getPossibility();
 }

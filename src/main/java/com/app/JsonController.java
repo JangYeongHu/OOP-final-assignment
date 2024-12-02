@@ -1,6 +1,7 @@
 package com.app;
 
 import com.item.Ticket;
+import com.item.interfaces.Item;
 import com.player.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -156,6 +157,22 @@ public class JsonController {
            statistics.put(jo);
         }
         rowDatas.getJSONObject(index).put("statistics", statistics);
+
+
+        // 아이템 정보 저장
+        JSONArray items = new JSONArray();
+        ArrayList<Item> playerItems = player.getInventory(); // Player의 아이템 목록 가져오기
+        for (Item playerItem : playerItems) {
+            System.out.println(playerItem.getName());
+        }
+        for (Item ticket : playerItems) {
+            JSONObject itemObject = new JSONObject();
+            itemObject.put("type", ticket.getType());
+            itemObject.put("possibility", ticket.getPossibility()+1);
+            itemObject.put("count", ticket.getCount());
+            items.put(itemObject);
+        }
+        rowDatas.getJSONObject(index).put("item", items);
     }
 
     //파일 처리 분리 - 쓰기
@@ -177,6 +194,32 @@ public class JsonController {
         readJson();
         loadJsonDataWithIndex(index);
     }
+
+
+    //파일 처리 분리 - 쓰기
+    public void writeConfig() {
+        JSONObject sound = configData.getJSONObject("setting").getJSONObject("sound");
+        BgmController bc = BgmController.getInstance();
+        sound.put("volume", bc.getRoughVolume());
+        sound.put("bgm-on", bc.isBgmOn());
+
+        try {
+            for (int i = 0; i < configData.length(); i++) {
+                // JSON 데이터를 문자열로 변환
+                String jsonString = configData.toString(4);
+                // 파일에 저장
+                Files.write(Paths.get(CONFIG_FILE_PATH), jsonString.getBytes());
+                System.out.println("saved successfully");
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        configData.clear();
+        readConfigJson();
+
+    }
+
 
 
 //    public static void main(String[] args) {

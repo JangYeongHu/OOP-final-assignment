@@ -2,18 +2,20 @@ package com.screen;
 
 import com.app.MainController;
 import com.app.BgmController;
+import com.app.JsonController;
 import com.screen.interfaces.Screen;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Hashtable;
 
+
 public class SettingScreen extends JPanel implements Screen {
 
     private MainController mainController;
     private BgmController bgmController = BgmController.getInstance();
     private boolean isBgmOn = true;  // 초기값: BGM 켜짐
-    private static final String BGM_FILE_PATH = "src/main/resources/bgm.wav"; // BGM 파일 경로
+
 
     public SettingScreen(MainController mainController) {
         this.mainController = mainController;
@@ -25,6 +27,7 @@ public class SettingScreen extends JPanel implements Screen {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
+
 
         // 색상 지정
         Color backgroundColor = new Color(0x40534C);  // 배경색
@@ -56,7 +59,7 @@ public class SettingScreen extends JPanel implements Screen {
         bgmToggleButton.addActionListener(e -> {
             isBgmOn = !isBgmOn;
             if (isBgmOn) {
-                bgmController.play(BGM_FILE_PATH);  // BGM 재생
+                bgmController.play();  // BGM 재생
                 bgmToggleButton.setText("BGM 켜짐");
                 bgmToggleButton.setBackground(Color.GREEN);  // BGM 켜짐 상태 색상
             } else {
@@ -95,6 +98,7 @@ public class SettingScreen extends JPanel implements Screen {
 
         volumeSlider.addChangeListener(e -> {
             int volume = volumeSlider.getValue();
+            bgmController.setRoughVolume(volume);
             // 0일 경우 소리를 완전히 끄기 위해 -80.0f로 설정
             float volumeValue = volume == 0 ? -80.0f : (float) (volume - 100) / 10.0f;
             bgmController.setVolume(volumeValue);
@@ -113,7 +117,11 @@ public class SettingScreen extends JPanel implements Screen {
         backButton.setBorderPainted(false);
         backButton.setForeground(textColor);  // 텍스트 색상
         backButton.setFont(customFont);  // 폰트 설정
-        backButton.addActionListener(e -> mainController.switchTo("Start"));
+        backButton.addActionListener(e -> {
+            mainController.switchTo("Start");
+            JsonController.getInstance().writeConfig();
+                }
+        );
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 2;

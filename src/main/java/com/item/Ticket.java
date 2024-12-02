@@ -11,6 +11,7 @@ public class Ticket implements Item {
     String name = "";
     int price;
     int count = 0;
+    String type;
 
     @Override
     public int getCount() {//현재아이템갯수리턴
@@ -63,6 +64,14 @@ public class Ticket implements Item {
     public void setCount() {
     }
 
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public int getPossibility() {
+        return 0;
+    }
 }
 
 class PushTicket extends Ticket{//확정업
@@ -89,6 +98,11 @@ class PushTicket extends Ticket{//확정업
         else{
             JOptionPane.showMessageDialog(null, "아이템이부족합니다");
         }
+    }
+
+    @Override
+    public String getType() {
+        return "Push";
     }
 }
 
@@ -121,6 +135,16 @@ class UpgradeTicket extends Ticket {//워프권 10,12,14,16,18
             JOptionPane.showMessageDialog(null, "아이템이부족합니다");
         }
     }
+
+    @Override
+    public String getType() {
+        return "Upgrade";
+    }
+
+    @Override
+    public int getPossibility() {
+        return possibility;
+    }
 }
 class SaveTicket extends Ticket{//파괴방지권
     static String name = "파괴방지권";
@@ -150,6 +174,10 @@ class SaveTicket extends Ticket{//파괴방지권
         }
     }
 
+    @Override
+    public String getType() {
+        return "Save";
+    }
 }
 
 
