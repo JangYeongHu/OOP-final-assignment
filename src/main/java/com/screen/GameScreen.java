@@ -12,15 +12,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.InputStream;
+import java.util.ArrayList;
 
 public class GameScreen extends JPanel implements Screen {
 
     static Player player;
     private JLabel money;
+    private JLabel upSwordPrice;
     private JLabel finalDestination;
-    private JPanel successPanel = new JPanel(null);
     private MainController mainController;
+    private JLabel successProbability;//성공확률 표기
+    private JPanel endSwordCount;//엔딩카운트
+    private JButton endingButton;//엔딩버튼
+    private JButton resetButton;//엔딩버튼
     private static boolean isSaveTicketActive = false;
     private Sword[] swords;
 
@@ -49,18 +53,209 @@ public class GameScreen extends JPanel implements Screen {
         Panel.setBorder(BorderFactory.createLineBorder(new Color(26, 54, 54), 5));
         add(Panel);
 
-        // 성공 메시지 패널 설정
-        successPanel.setBounds(440, 20, 300, 60);
-        successPanel.setBackground(Color.orange);
-        JLabel successMessage = new JLabel("강화 성공");
-        successMessage.setBounds(80, 15, 200, 30);
-        successMessage.setFont(new Font("DungGeunMo",Font.PLAIN,30));
-        successPanel.add(successMessage);
-        successPanel.setVisible(false);
-        successPanel.setBorder(BorderFactory.createLineBorder(new Color(26, 54, 54), 5));
-        add(successPanel);
-
         menuPanel();
+        popup();
+    }
+    private void menuPanel() {
+        // 팝업 패널 인벤토리, 상점, 엔딩으로 향하는 버튼
+        JPanel popupPanel = new JPanel(null);
+
+        popupPanel.setBorder(BorderFactory.createLineBorder(new Color(214, 189, 152), 4));
+        popupPanel.setBackground(new Color(64, 83, 76)); //배경
+        popupPanel.setBounds(20, 110, 300, 180); // 위치와 크기 설정
+
+        JButton openInventoryButton = new JButton("인벤토리");
+        openInventoryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainController.updateInventoryScreen();
+                mainController.switchTo("Inventory");
+            }
+        });
+        JButton openStoreButton = new JButton("상점");
+        openStoreButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainController.updateStoreScreen();
+                mainController.switchTo("Store");
+            }
+        });
+        // 버튼 위치와 크기 설정
+        openInventoryButton.setBounds(50, 20, 200, 50);
+        openStoreButton.setBounds(50, 80, 200, 50);
+        popupPanel.add(openInventoryButton);
+        popupPanel.add(openStoreButton);
+
+
+        // 버튼 위치와 크기 설정
+        JButton openPopupButton = new JButton("상점 // 인벤토리");
+        openPopupButton.setBounds(20,140,300,100);
+        JButton closeButton = new JButton("닫기");
+        closeButton.setBounds(100, 140, 100, 30);
+        popupPanel.add(closeButton);
+
+        // 버튼으로 팝업 닫혀있음
+        closeButton.addActionListener(e -> {
+            popupPanel.setVisible(false);
+            openPopupButton.setVisible(true);
+        });
+        // 버튼으로 팝업 열기 팝업열림
+        openPopupButton.addActionListener(e -> {
+            popupPanel.setVisible(true);
+            openPopupButton.setVisible(false);
+            setComponentZOrder(popupPanel, 0); // popupPanel을 맨 앞으로 이동
+            revalidate();          // 레이아웃 갱신
+            repaint();
+        });
+
+        setButtonSize(openPopupButton,30);
+        popupPanel.setVisible(false); // 초기에는 숨김
+
+        closeButton.setOpaque(false);
+
+        setMenuButtonSetting(openInventoryButton,30);
+        setMenuButtonSetting(openStoreButton,30);
+        setMenuButtonSetting(closeButton,20);
+
+        // 게임 패널에 추가
+        add(openPopupButton);
+        add(popupPanel);
+
+
+        //검강화하기 목표
+        endSwordCount = new JPanel(new BorderLayout());
+        endSwordCount.setBounds(860,20,300,70);
+        endSwordCount.setOpaque(false);
+        finalDestination = new JLabel("목표까지 "+(20-player.getNowSword().getId())+"강");
+        //폰트조정, 중앙정렬
+        finalDestination.setFont(new Font("DungGeunMo",Font.PLAIN,35));
+        finalDestination.setHorizontalAlignment(JLabel.CENTER);
+        finalDestination.setVerticalAlignment(JLabel.CENTER);
+        finalDestination.setForeground(new Color(214, 189, 152));
+        endSwordCount.add(finalDestination);
+        endSwordCount.setBorder(BorderFactory.createLineBorder(new Color(26, 54, 54), 5));
+        add(endSwordCount);
+
+        //검강화비용
+        upSwordPrice = new JLabel("강화비용:"+player.getNowSword().getUpgradeFee()+"원");
+        //폰트조정, 중앙정렬
+        upSwordPrice.setBounds(880,520,280,100);
+        upSwordPrice.setFont(new Font("DungGeunMo",Font.PLAIN,25));
+        upSwordPrice.setHorizontalAlignment(JLabel.CENTER);
+        upSwordPrice.setVerticalAlignment(JLabel.CENTER);
+        upSwordPrice.setForeground(new Color(214, 189, 152));
+        upSwordPrice.setBorder(BorderFactory.createLineBorder(new Color(214, 189, 152), 5));
+        add(upSwordPrice);
+
+        // 성공 메시지 패널 설정
+        successProbability = new JLabel("강화 확률 : "+player.getNowSword().getpossibility()+"%");
+        successProbability.setBounds(460, 25, 350, 60);
+        successProbability.setFont(new Font("DungGeunMo",Font.PLAIN,35));
+        successProbability.setForeground(Color.yellow);
+        add(successProbability);
+
+        // 엔딩 버튼
+        endingButton = new JButton("엔딩으로");
+        endingButton.setBounds(440,620,300,140);
+        endingButton.setFont(new Font("DungGeunMo",Font.PLAIN,40));
+        endingButton.setBackground(new Color(192, 192, 192));
+        endingButton.setForeground(Color.red);
+        endingButton.setBorder(BorderFactory.createLineBorder(Color.red, 5));
+        add(endingButton);
+        endingButton.setVisible(false);
+        //엔딩스크린이동
+        endingButton.addActionListener(e -> {
+            player.setMoney(2147483647);
+            mainController.switchTo("END");
+        });
+        // 리셋 버튼
+        resetButton = new JButton("모두 초기화");
+        resetButton.setBounds(850,620,300,100);
+        resetButton.setFont(new Font("DungGeunMo",Font.PLAIN,30));
+        resetButton.setBackground(new Color(33, 150, 243));
+        resetButton.setForeground(new Color(244, 67, 54));
+        add(resetButton);
+        resetButton.setVisible(false);
+        resetButton.addActionListener(e -> {
+            resetButton();
+        });
+
+    }
+
+    private void popup() {
+        // 팝업 패널
+        JPanel popupPanel = new JPanel(null);
+
+        popupPanel.setBorder(BorderFactory.createLineBorder(new Color(214, 189, 152), 4));
+        popupPanel.setBackground(new Color(64, 83, 76)); //배경
+        popupPanel.setBounds(20, 260, 300, 230); // 위치와 크기 설정
+
+        JButton openStartButton = new JButton("메인");
+        openStartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainController.switchTo("Start");
+            }
+        });
+        JButton openSaveButton = new JButton("저장");
+        openSaveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoadScreen.getInstance().setLoadRequest(false);
+                mainController.switchTo("Load");
+            }
+        });
+
+        JButton openLoadButton = new JButton("불러오기");
+        openLoadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoadScreen.getInstance().setLoadRequest(true);
+                mainController.switchTo("Load");
+            }
+        });
+        // 버튼 위치와 크기 설정
+        openStartButton.setBounds(50, 10, 200, 50);
+        openSaveButton.setBounds(50, 70, 200, 50);
+        openLoadButton.setBounds(50, 130, 200, 50);
+        popupPanel.add(openLoadButton);
+        popupPanel.add(openSaveButton);
+        popupPanel.add(openStartButton);
+
+
+        // 버튼 위치와 크기 설정
+        JButton openPopupButton = new JButton("메뉴");
+        openPopupButton.setBounds(20,300,300,100);
+        JButton closeButton = new JButton("닫기");
+        closeButton.setBounds(100, 190, 100, 30);
+        closeButton.setFont(new Font("DungGeunMo",Font.PLAIN,20));
+        // 버튼으로 팝업 닫혀있음
+        closeButton.addActionListener(e -> {
+            popupPanel.setVisible(false);
+            openPopupButton.setVisible(true);
+        });
+        // 버튼으로 팝업 열기 팝업열림
+        openPopupButton.addActionListener(e -> {
+            popupPanel.setVisible(true);
+            openPopupButton.setVisible(false);
+            setComponentZOrder(popupPanel, 0); // popupPanel을 맨 앞으로 이동
+            revalidate();          // 레이아웃 갱신
+            repaint();
+        });
+        setButtonSize(openPopupButton,30);
+        popupPanel.setVisible(false); // 초기에는 숨김
+        popupPanel.add(closeButton, BorderLayout.PAGE_END);
+
+        closeButton.setOpaque(false);
+
+        setMenuButtonSetting(openStartButton,30);
+        setMenuButtonSetting(openSaveButton,30);
+        setMenuButtonSetting(openLoadButton,30);
+        setMenuButtonSetting(closeButton,20);
+
+        // 게임 패널에 추가
+        add(openPopupButton);
+        add(popupPanel);
     }
 
     public void gamePanelUpdate(){
@@ -71,8 +266,6 @@ public class GameScreen extends JPanel implements Screen {
     }
     public void moneyPanelUpdate(){
         money.setVisible(true);
-        revalidate();
-        repaint();
         textReplace();
     }
 
@@ -95,7 +288,7 @@ public class GameScreen extends JPanel implements Screen {
 
         JPanel swordName = new JPanel(new BorderLayout());//검이름
         swordNameLabel = new JLabel(player.getNowSword().getName());
-        swordNameLabel.setFont(new Font("DungGeunMo",Font.PLAIN,60));
+        swordNameLabel.setFont(new Font("DungGeunMo",Font.PLAIN,50));
         swordNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         swordNameLabel.setVerticalAlignment(SwingConstants.CENTER);
         swordName.add(swordNameLabel);
@@ -113,7 +306,7 @@ public class GameScreen extends JPanel implements Screen {
         swordUpgradeButton = new JButton("강화하기");
         buttonList.add(upgradeButtonEvent(swordImage));
 
-        swordSellButton = new JButton(MainController.swordList[player.getNowSword().getId()-1].getsellPrice() + "원 판매하기");
+        swordSellButton = new JButton("판매비용:"+MainController.swordList[player.getNowSword().getId()-1].getsellPrice() + "원");
         buttonList.add(sellButton(swordSellButton, swordImage));
 
         JPanel mainPanel = new JPanel(new BorderLayout(50,30));
@@ -193,11 +386,10 @@ public class GameScreen extends JPanel implements Screen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Sword nowSword = player.getNowSword();
-                if (player.getMoney() > nowSword.getUpgradeFee()){//player의 돈이 강화비용보닫 많을경우에만
+                if (player.getMoney() >= nowSword.getUpgradeFee()){//player의 돈이 강화비용보닫 많을경우에만
                     player.doUpgradeSword();//돈소모 현재쓰는방식은 임시방편
                     if (nowSword.upgradeProbability()) {
                         success(image,nowSword.getId());
-                        moneyPanelUpdate();
                     } else {
                         fall(image, nowSword.getId());
                     }
@@ -216,18 +408,13 @@ public class GameScreen extends JPanel implements Screen {
         player.setNowSword(nextSword);//플레이어검 업그레이드
 //        image.setIcon(nextSword.imageIcon());//이미지변경
         image.setIcon(nextSword.gifIcon());//이미지변경
-        successPanel.setVisible(true);
-        if(successPanel.isVisible()){
-            new javax.swing.Timer(3000, e -> {
-                successPanel.setVisible(false);
-            }).start();
-        }
+        moneyPanelUpdate();
     }
     private void fall(JLabel Image, int num) {
+        moneyPanelUpdate();
         if (saveTicketButton.getBackground() != Color.GREEN) {
 //            Image.setIcon(nextSword.imageIcon());
             Image.setIcon(swords[num-1].failedIcon());
-            fallImg();
             player.setNowSword(swords[0]);
             Image.setIcon(swords[0].gifIcon());
             moneyPanelUpdate();
@@ -241,9 +428,7 @@ public class GameScreen extends JPanel implements Screen {
             JOptionPane.showMessageDialog(null,"파괴방어", "파괴방지권", JOptionPane.WARNING_MESSAGE);
         }
     }
-    private void fallImg(){
-        JOptionPane.showMessageDialog(null,"검이 파괴되었습니다", "파괴", JOptionPane.ERROR_MESSAGE);
-    }
+
 
     private JButton sellButton(JButton button, JLabel Image) {
         setButtonSize(button,25);
@@ -259,102 +444,22 @@ public class GameScreen extends JPanel implements Screen {
         });
         return button;
     }
-
-    private void menuPanel() {
-        // 팝업 패널
-        JPanel popupPanel = new JPanel(null);
-
-        popupPanel.setBorder(BorderFactory.createLineBorder(new Color(214, 189, 152), 4));
-        popupPanel.setBackground(new Color(64, 83, 76)); //배경
-        popupPanel.setBounds(20, 110, 300, 180); // 위치와 크기 설정
-
-        JButton openInventoryButton = new JButton("인벤토리");
-        openInventoryButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainController.switchTo("Inventory");
-            }
-        });
-        JButton openStoreButton = new JButton("상점");
-        openStoreButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainController.switchTo("Store");
-            }
-        });
-        // 버튼 위치와 크기 설정
-        openInventoryButton.setBounds(50, 20, 200, 50);
-        openStoreButton.setBounds(50, 80, 200, 50);
-        popupPanel.add(openInventoryButton);
-        popupPanel.add(openStoreButton);
-
-
-        // 버튼 위치와 크기 설정
-        JButton openPopupButton = new JButton("상점 // 인벤토리");
-        openPopupButton.setBounds(20,140,300,100);
-        JButton closeButton = new JButton("닫기");
-        closeButton.setBounds(100, 140, 100, 30);
-        popupPanel.add(closeButton);
-
-        // 버튼으로 팝업 닫혀있음
-        closeButton.addActionListener(e -> {
-            popupPanel.setVisible(false);
-            openPopupButton.setVisible(true);
-        });
-        // 버튼으로 팝업 열기 팝업열림
-        openPopupButton.addActionListener(e -> {
-            popupPanel.setVisible(true);
-            openPopupButton.setVisible(false);
-            setComponentZOrder(popupPanel, 0); // popupPanel을 맨 앞으로 이동
-            revalidate();          // 레이아웃 갱신
-            repaint();
-        });
-
-        setButtonSize(openPopupButton,30);
-        popupPanel.setVisible(false); // 초기에는 숨김
-
-        closeButton.setOpaque(false);
-
-        setMenuButtonSetting(openInventoryButton,30);
-        setMenuButtonSetting(openStoreButton,30);
-        setMenuButtonSetting(closeButton,20);
-
-        // 게임 패널에 추가
-        add(openPopupButton);
-        add(popupPanel);
-
-
-        //검강화하기 목표
-        JPanel endSwordCount = new JPanel(new BorderLayout());
-        endSwordCount.setBounds(860,20,300,70);
-        endSwordCount.setOpaque(false);
-        finalDestination = new JLabel("목표까지 "+(20-player.getNowSword().getId())+"강");
-        //폰트조정, 중앙정렬
-        finalDestination.setFont(new Font("DungGeunMo",Font.PLAIN,35));
-        finalDestination.setHorizontalAlignment(JLabel.CENTER);
-        finalDestination.setVerticalAlignment(JLabel.CENTER);
-        finalDestination.setForeground(new Color(214, 189, 152));
-        endSwordCount.add(finalDestination);
-        endSwordCount.setBorder(BorderFactory.createLineBorder(new Color(26, 54, 54), 5));
-        add(endSwordCount);
-    }
-
     @Override
     public void initialize() {
+        gameSetting();
+        topPanel();
+        midPanel();
+        endingCheck();
+    }
+
+    public void gameSetting(){
         swords = MainController.swordList;
-        popup();
         player = Player.getInstance();
         money = new JLabel("돈:" + player.getMoney());
         finalDestination = new JLabel("목표까지 "+(20-player.getNowSword().getId())+"강");
+        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         setLayout(new BorderLayout());
-        topPanel();
-        midPanel();
-        mainController.updateStoreScreen();
-        mainController.updateInventoryScreen();
-
     }
-
-
     private void setButtonSize(JButton c,int size) {
         c.setPreferredSize(new Dimension(300, 100));
         c.setBackground(new Color(64, 83, 76));
@@ -377,83 +482,41 @@ public class GameScreen extends JPanel implements Screen {
     private void textReplace(){
         money.setText("돈:" + player.getMoney());
         swordNameLabel.setText(player.getNowSword().getName());
-        swordSellButton.setText(player.getNowSword().getsellPrice() + "원 판매하기");
+        successProbability.setText("강화 확률 : "+player.getNowSword().getpossibility()+"%");
+        swordSellButton.setText("판매비용:"+player.getNowSword().getsellPrice() + "원");
+        upSwordPrice.setText("강화비용:"+player.getNowSword().getUpgradeFee()+"원");
         finalDestination.setText("목표까지 "+(20-player.getNowSword().getId())+"강");
     }
-    private void popup() {
-        // 팝업 패널
-        JPanel popupPanel = new JPanel(null);
-
-        popupPanel.setBorder(BorderFactory.createLineBorder(new Color(214, 189, 152), 4));
-        popupPanel.setBackground(new Color(64, 83, 76)); //배경
-        popupPanel.setBounds(20, 260, 300, 230); // 위치와 크기 설정
-
-        JButton openStartButton = new JButton("메인");
-        openStartButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainController.switchTo("Start");
+    private void endingCheck(){
+        if(player.getNowSword().getId() >= 20){
+            endingButton.setVisible(true);
+            resetButton.setVisible(true);//리셋버튼
+            //나머지버튼 패널 비활성화
+            endSwordCount.setVisible(false);
+            swordSellButton.setVisible(false);
+            saveTicketButton.setVisible(false);
+            swordUpgradeButton.setVisible(false);
+            successProbability.setVisible(false);
+            upSwordPrice.setVisible(false);
+        }
+    }
+    private void resetButton(){
+        endSwordCount.setVisible(true);
+        swordSellButton.setVisible(true);
+        saveTicketButton.setVisible(true);
+        swordUpgradeButton.setVisible(true);
+        player.setMoney(0);
+        System.out.println(player.getInventory().size());
+        if(!player.getInventory().isEmpty()){
+            ArrayList<Item> emptyInventory = player.getInventory();
+            for (int i = 0; i < player.getInventory().size(); i++){
+                emptyInventory.clear();
             }
-        });
-        JButton openSaveButton = new JButton("저장");
-        openSaveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LoadScreen.getInstance().setLoadRequest(false);
-                mainController.switchTo("Load");
-            }
-        });
+            player.setInventory(emptyInventory);
+        }
+        player.setNowSword(MainController.swordList[0]);
+        gamePanelUpdate();
 
-        JButton openLoadButton = new JButton("불러오기");
-        openLoadButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LoadScreen.getInstance().setLoadRequest(true);
-                mainController.switchTo("Load");
-            }
-        });
-        // 버튼 위치와 크기 설정
-        openStartButton.setBounds(50, 10, 200, 50);
-        openSaveButton.setBounds(50, 70, 200, 50);
-        openLoadButton.setBounds(50, 130, 200, 50);
-        popupPanel.add(openLoadButton);
-        popupPanel.add(openSaveButton);
-        popupPanel.add(openStartButton);
-
-
-        // 버튼 위치와 크기 설정
-        JButton openPopupButton = new JButton("메뉴");
-        openPopupButton.setBounds(20,300,300,100);
-        JButton closeButton = new JButton("닫기");
-        closeButton.setBounds(100, 190, 100, 30);
-        closeButton.setFont(new Font("DungGeunMo",Font.PLAIN,20));
-        // 버튼으로 팝업 닫혀있음
-        closeButton.addActionListener(e -> {
-            popupPanel.setVisible(false);
-            openPopupButton.setVisible(true);
-        });
-        // 버튼으로 팝업 열기 팝업열림
-        openPopupButton.addActionListener(e -> {
-            popupPanel.setVisible(true);
-            openPopupButton.setVisible(false);
-            setComponentZOrder(popupPanel, 0); // popupPanel을 맨 앞으로 이동
-            revalidate();          // 레이아웃 갱신
-            repaint();
-        });
-        setButtonSize(openPopupButton,30);
-        popupPanel.setVisible(false); // 초기에는 숨김
-        popupPanel.add(closeButton, BorderLayout.PAGE_END);
-
-        closeButton.setOpaque(false);
-
-        setMenuButtonSetting(openStartButton,30);
-        setMenuButtonSetting(openSaveButton,30);
-        setMenuButtonSetting(openLoadButton,30);
-        setMenuButtonSetting(closeButton,20);
-
-        // 게임 패널에 추가
-        add(openPopupButton);
-        add(popupPanel);
     }
     private void setMenuButtonSetting(JButton button, int size){
         button.setBackground(new Color(64, 83, 76));

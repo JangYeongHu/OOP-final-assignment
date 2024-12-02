@@ -45,6 +45,7 @@ public class MainController extends JFrame {
         addScreen("Statistics", new StatisticsScreen(this));
         addScreen("Inventory", new InventoryScreen(this));
         addScreen("Collection", new CollectionScreen(this));
+        addScreen("END", new EndingScreen(this));
 
 
         add(mainPanel);
