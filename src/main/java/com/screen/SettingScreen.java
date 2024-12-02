@@ -13,7 +13,7 @@ public class SettingScreen extends JPanel implements Screen {
     private MainController mainController;
     private BgmController bgmController = BgmController.getInstance();
     private boolean isBgmOn = true;  // 초기값: BGM 켜짐
-    private static final String BGM_FILE_PATH = "src/main/resources/bgm.wav"; // BGM 파일 경로
+
 
     public SettingScreen(MainController mainController) {
         this.mainController = mainController;
@@ -25,6 +25,7 @@ public class SettingScreen extends JPanel implements Screen {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
+
 
         // 색상 지정
         Color backgroundColor = new Color(0x40534C);  // 배경색
@@ -56,7 +57,7 @@ public class SettingScreen extends JPanel implements Screen {
         bgmToggleButton.addActionListener(e -> {
             isBgmOn = !isBgmOn;
             if (isBgmOn) {
-                bgmController.play(BGM_FILE_PATH);  // BGM 재생
+                bgmController.play();  // BGM 재생
                 bgmToggleButton.setText("BGM 켜짐");
                 bgmToggleButton.setBackground(Color.GREEN);  // BGM 켜짐 상태 색상
             } else {
@@ -95,6 +96,7 @@ public class SettingScreen extends JPanel implements Screen {
 
         volumeSlider.addChangeListener(e -> {
             int volume = volumeSlider.getValue();
+            bgmController.setRoughVolume(volume);
             // 0일 경우 소리를 완전히 끄기 위해 -80.0f로 설정
             float volumeValue = volume == 0 ? -80.0f : (float) (volume - 100) / 10.0f;
             bgmController.setVolume(volumeValue);

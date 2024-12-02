@@ -52,7 +52,8 @@ public class MainController extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setResizable(false);
-        bgmController.play("src/main/resources/bgm.wav");
+//        bgmController.play();
+        loadSettingData();
         switchTo("Load");
     }
 
@@ -90,6 +91,11 @@ public class MainController extends JFrame {
     }
 
     public void loadSettingData() {
+        if(jsonController.isBgmOn()) bgmController.play();
+        int volume = jsonController.getBgmVolume();
+        float volumeValue = volume == 0 ? -80.0f : (float) (volume - 100) / 10.0f;
+        bgmController.setVolume(volumeValue);
+        bgmController.setRoughVolume(volume);
 
     }
     static void createSword(){
