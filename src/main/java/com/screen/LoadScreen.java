@@ -151,7 +151,7 @@ public class LoadScreen extends JPanel implements Screen {
         JLabel nameLabel = new JLabel("검 이름: " + player.getNowSword().getName());
         nameLabel.setFont(labelFont); // 폰트 크기 적용
 
-        JLabel strengthLabel = new JLabel("강화도 : " + player.getNowSword().getId());
+        JLabel strengthLabel = new JLabel("강화도 : " + player.getNowSword().getpossibility());
         strengthLabel.setFont(labelFont);
 
         JLabel moneyLabel = new JLabel("돈 : " + player.getMoney());

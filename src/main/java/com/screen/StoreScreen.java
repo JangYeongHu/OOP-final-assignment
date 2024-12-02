@@ -34,9 +34,6 @@ public class StoreScreen extends JPanel implements Screen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainController.switchTo("Game");
-                mainController.updateInventoryScreen();
-                mainController.updateGameScreenUI();
-
             }
         });
         add(GoGame, BorderLayout.PAGE_START);
@@ -104,11 +101,10 @@ public class StoreScreen extends JPanel implements Screen {
         buyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(player.getMoney()- i.getPrice() >= 0){
+                if(player.getMoney()- i.getPrice() > 0){
                     player.setMoney(player.getMoney()- i.getPrice());
-                    Item item = findItem(i);
-                    if (!item.equals(i)) {
-                        item.addCount();
+                    if (player.getInventory().contains(i)){
+                        i.addCount();
                     }else{
                         player.getInventory().add(i);
                     }
@@ -117,20 +113,16 @@ public class StoreScreen extends JPanel implements Screen {
                 else{
                     JOptionPane.showMessageDialog(null, "돈이부족합니다");
                 }
+                mainController.updateInventoryScreen();
+                mainController.updateGameScreenUI();
+
                 playerMoneyLabel.setText("돈 : "+player.getMoney());
             }
         });
         return buyButton;
     }
 
-    private Item findItem(Item i){
-        for (Item item : Player.getInstance().getInventory()) {
-            if (item.getName().equals(i.getName())) {
-                return item;
-            }
-        }
-        return i;
-    }
+
     private void setButtonSize(JButton c) {
         c.setPreferredSize(new Dimension(100, 100));
         c.setBackground(new Color(64, 83, 76));
@@ -183,6 +175,8 @@ public class StoreScreen extends JPanel implements Screen {
     }
 
     public void refreshStore() {
-        playerMoneyLabel.setText("돈 : "+Player.getInstance().getMoney());
+        initialize();
+        revalidate();
+        repaint();
     }
 }
