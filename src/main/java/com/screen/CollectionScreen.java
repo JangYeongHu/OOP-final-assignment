@@ -126,8 +126,10 @@ public class CollectionScreen extends JPanel implements Screen {
 
     private void generateLeftArrow(JPanel middlePanel) {
         ImageIcon leftImageIcon = new ImageIcon("src/main/resources/left-arrow-button.png");
-        Image leftImage = leftImageIcon.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH);
-        JLabel leftArrowLabel = new JLabel(new ImageIcon(leftImage));
+        ImageIcon leftImageIconClicked = new ImageIcon("src/main/resources/left-arrow-button-clicked.png");
+        ImageIcon leftImage = new ImageIcon(leftImageIcon.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
+        ImageIcon leftImageClicked = new ImageIcon(leftImageIconClicked.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
+        JLabel leftArrowLabel = new JLabel(leftImage);
         leftArrowLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -137,13 +139,27 @@ public class CollectionScreen extends JPanel implements Screen {
                 }
             }
         });
+
+        leftArrowLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                leftArrowLabel.setIcon(leftImageClicked);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                leftArrowLabel.setIcon(leftImage);
+            }
+        });
+
         middlePanel.add(leftArrowLabel,BorderLayout.WEST);
     }
 
     private void generateRightArrow(JPanel middlePanel) {
         ImageIcon rightImageIcon = new ImageIcon("src/main/resources/right-arrow-button.png");
-        Image rightImage = rightImageIcon.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH);
-        JLabel rightImageLabel = new JLabel(new ImageIcon(rightImage));
+        ImageIcon rightImageIconClicked = new ImageIcon("src/main/resources/right-arrow-button-clicked.png");
+        ImageIcon rightImage = new ImageIcon(rightImageIcon.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
+        ImageIcon rightImageClicked = new ImageIcon(rightImageIconClicked.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
+        JLabel rightImageLabel = new JLabel(rightImage);
         rightImageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -153,6 +169,19 @@ public class CollectionScreen extends JPanel implements Screen {
                 }
             }
         });
+
+        rightImageLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                rightImageLabel.setIcon(rightImageClicked);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                rightImageLabel.setIcon(rightImage);
+            }
+        });
+
+
         middlePanel.add(rightImageLabel,BorderLayout.EAST);
     }
 
