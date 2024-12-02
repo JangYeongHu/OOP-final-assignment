@@ -2,11 +2,13 @@ package com.screen;
 
 import com.app.MainController;
 import com.app.BgmController;
+import com.app.JsonController;
 import com.screen.interfaces.Screen;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Hashtable;
+
 
 public class SettingScreen extends JPanel implements Screen {
 
@@ -115,7 +117,11 @@ public class SettingScreen extends JPanel implements Screen {
         backButton.setBorderPainted(false);
         backButton.setForeground(textColor);  // 텍스트 색상
         backButton.setFont(customFont);  // 폰트 설정
-        backButton.addActionListener(e -> mainController.switchTo("Start"));
+        backButton.addActionListener(e -> {
+            mainController.switchTo("Start");
+            JsonController.getInstance().writeConfig();
+                }
+        );
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 2;

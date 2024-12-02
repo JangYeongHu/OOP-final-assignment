@@ -96,8 +96,9 @@ public class MainController extends JFrame {
         float volumeValue = volume == 0 ? -80.0f : (float) (volume - 100) / 10.0f;
         bgmController.setVolume(volumeValue);
         bgmController.setRoughVolume(volume);
-
     }
+
+
     static void createSword(){
         JSONArray swords = jsonController.getSwords();
 

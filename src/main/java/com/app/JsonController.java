@@ -196,6 +196,32 @@ public class JsonController {
     }
 
 
+    //파일 처리 분리 - 쓰기
+    public void writeConfig() {
+        JSONObject sound = configData.getJSONObject("setting").getJSONObject("sound");
+        BgmController bc = BgmController.getInstance();
+        sound.put("volume", bc.getRoughVolume());
+        sound.put("bgm-on", bc.isBgmOn());
+
+        try {
+            for (int i = 0; i < configData.length(); i++) {
+                // JSON 데이터를 문자열로 변환
+                String jsonString = configData.toString(4);
+                // 파일에 저장
+                Files.write(Paths.get(CONFIG_FILE_PATH), jsonString.getBytes());
+                System.out.println("saved successfully");
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        configData.clear();
+        readConfigJson();
+
+    }
+
+
+
 //    public static void main(String[] args) {
 //        // 테스트를 위한 메인
 //        // UTF-8 출력 스트림 강제 설정 - 콘솔에 계속 한글이 깨져서 설정함
