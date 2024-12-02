@@ -13,6 +13,11 @@ import java.awt.event.MouseEvent;
 
 public class CollectionScreen extends JPanel implements Screen {
 
+    private final Color COLOR_DARK_GREEN = new Color(0x1A3636); // #1a3636
+    private final Color COLOR_GREEN = new Color(0x40534C); // #40534c
+    private final Color COLOR_LIGHT_GREEN = new Color(0x677D6A); // #677d6a
+    private final Color COLOR_YELLOW = new Color(0xD6BD98); // #d6bd98
+
     private MainController mainController;
 
     private Player player = Player.getInstance();
@@ -23,6 +28,9 @@ public class CollectionScreen extends JPanel implements Screen {
     private int nowIndex = 0;
 
     private JLabel centerImage;
+    private JPanel centerLabelBox;
+    private JLabel centerLabel;
+    private JLabel centerDescription;
     private JLabel leftImage;
     private JLabel rightImage;
 
@@ -33,20 +41,21 @@ public class CollectionScreen extends JPanel implements Screen {
     @Override
     public void initialize() {
         setLayout(new BorderLayout());
-        setBackground(new Color(0x40534C));
+        setBackground(COLOR_GREEN);
         generateUpperButton();
         loadSwordImages();
         generateMiddleImages();
         generateLowArrow();
+        showSwordImages();
     }
 
     private void generateUpperButton() {
         JButton exitButton = new JButton("돌아가기");
-        exitButton.setForeground(new Color(214, 189, 152));
+        exitButton.setForeground(COLOR_YELLOW);
         exitButton.setFont(new Font("DungGeunMo", Font.PLAIN, 16));
-        exitButton.setBackground(new Color(64, 83, 76));
+        exitButton.setBackground(COLOR_GREEN);
         exitButton.setBounds(50,25,200,50);
-        exitButton.setBorder(BorderFactory.createLineBorder(new Color(0x677d6a), 3));;
+        exitButton.setBorder(BorderFactory.createLineBorder(COLOR_LIGHT_GREEN, 3));;
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,11 +65,11 @@ public class CollectionScreen extends JPanel implements Screen {
         exitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                exitButton.setBackground(new Color(103, 125, 106));
+                exitButton.setBackground(COLOR_LIGHT_GREEN);
             }
             @Override
             public void mouseExited(MouseEvent e) {
-                exitButton.setBackground(new Color(64, 83, 76));
+                exitButton.setBackground(COLOR_GREEN);
             }
         });
 
@@ -85,15 +94,33 @@ public class CollectionScreen extends JPanel implements Screen {
         middleImages.add(centerImage);
         middleImages.add(leftImage);
         middleImages.add(rightImage);
-        showSwordImages();
         add(middleImages);
     }
 
     private void generateLowArrow() {
         JPanel LowPanel = new JPanel(new BorderLayout());
-        LowPanel.setBackground(this.getBackground());
+        LowPanel.setOpaque(false);
         generateLeftArrow(LowPanel);
         generateRightArrow(LowPanel);
+
+        centerLabelBox = new JPanel(new BorderLayout());
+        centerLabelBox.setBounds(450,650,200,50);
+        centerLabelBox.setOpaque(false);
+        centerLabel = new JLabel();
+        centerLabel.setFont(new Font("DungGeunMo",Font.PLAIN,35));
+        centerLabel.setForeground(COLOR_YELLOW);
+        centerLabel.setHorizontalAlignment(JLabel.CENTER);
+        centerLabel.setVerticalAlignment(JLabel.CENTER);
+        centerLabelBox.add(centerLabel,BorderLayout.NORTH);
+
+        centerDescription = new JLabel();
+        centerDescription.setFont(new Font("DungGeunMo",Font.PLAIN,15));
+        centerDescription.setForeground(COLOR_YELLOW);
+        centerDescription.setHorizontalAlignment(JLabel.CENTER);
+        centerDescription.setVerticalAlignment(JLabel.CENTER);
+        centerLabelBox.add(centerDescription,BorderLayout.CENTER);
+
+        LowPanel.add(centerLabelBox,BorderLayout.CENTER);
         add(LowPanel,BorderLayout.PAGE_END);
     }
 
@@ -131,6 +158,7 @@ public class CollectionScreen extends JPanel implements Screen {
 
     @Override
     public void showScreen() {
+        showSwordImages();
         setVisible(true);
     }
 
@@ -148,6 +176,7 @@ public class CollectionScreen extends JPanel implements Screen {
 
     private void showSwordImages() {
         centerImage.setIcon(new ImageIcon(isSwordShow(nowIndex).getImage().getScaledInstance(400,400,Image.SCALE_SMOOTH)));
+        isTextShow(nowIndex);
         if(nowIndex > 0)
             leftImage.setIcon(new ImageIcon(isSwordShow(nowIndex-1).getImage().getScaledInstance(300,300,Image.SCALE_SMOOTH)));
         else leftImage.setIcon(new ImageIcon());
@@ -159,5 +188,15 @@ public class CollectionScreen extends JPanel implements Screen {
     private ImageIcon isSwordShow(int index) {
         if(player.getBestSword() >= index) return swordImages[index];
         return blackSwordImages[index];
+    }
+
+    private void isTextShow(int index) {
+        if(player.getBestSword() >= index) {
+            centerLabel.setText(MainController.swordList[nowIndex].getName());
+            centerDescription.setText(MainController.swordList[nowIndex].getDescription());
+        } else {
+            centerLabel.setText("?????");
+            centerDescription.setText("??????????????????????????");
+        }
     }
 }
