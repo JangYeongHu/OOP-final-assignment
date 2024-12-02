@@ -212,6 +212,7 @@ public class GameScreen extends JPanel implements Screen {
 
     private void success(JLabel image, int number){
         Sword nextSword = MainController.swordList[number];//다음검뽑아오기
+        if(number > player.getBestSword()) player.setBestSword(number);
         player.setNowSword(nextSword);//플레이어검 업그레이드
 //        image.setIcon(nextSword.imageIcon());//이미지변경
         image.setIcon(nextSword.gifIcon());//이미지변경

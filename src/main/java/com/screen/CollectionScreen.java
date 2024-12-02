@@ -22,11 +22,9 @@ public class CollectionScreen extends JPanel implements Screen {
 
     private int nowIndex = 0;
 
-    private Image centerImage;
-    private Image leftImage;
-    private Image rightImage;
-
-    private ImageDisplayPanel imageDisplayPanel;
+    private JLabel centerImage;
+    private JLabel leftImage;
+    private JLabel rightImage;
 
     public CollectionScreen(MainController mainController) {
         this.mainController = mainController;
@@ -38,8 +36,8 @@ public class CollectionScreen extends JPanel implements Screen {
         setBackground(new Color(0x40534C));
         generateUpperButton();
         loadSwordImages();
+        generateMiddleImages();
         generateLowArrow();
-        genereateMiddleImage();
     }
 
     private void generateUpperButton() {
@@ -69,18 +67,34 @@ public class CollectionScreen extends JPanel implements Screen {
         add(exitButton);
     }
 
+    private void generateMiddleImages() {
+        JPanel middleImages = new JPanel(null);
+        middleImages.setBackground(this.getBackground());
+        int centerX = (1200-400)/2;
+        int centerY = (800-400)/2;
+
+        centerImage = new JLabel();
+        centerImage.setBounds(centerX,centerY,400,400);
+
+        leftImage = new JLabel();
+        leftImage.setBounds(centerX-300-40,centerY+20,300,300);
+
+        rightImage = new JLabel();
+        rightImage.setBounds(centerX+400+40,centerY+20,300,300);
+
+        middleImages.add(centerImage);
+        middleImages.add(leftImage);
+        middleImages.add(rightImage);
+        showSwordImages();
+        add(middleImages);
+    }
+
     private void generateLowArrow() {
         JPanel LowPanel = new JPanel(new BorderLayout());
         LowPanel.setBackground(this.getBackground());
         generateLeftArrow(LowPanel);
         generateRightArrow(LowPanel);
         add(LowPanel,BorderLayout.PAGE_END);
-    }
-
-    private void genereateMiddleImage() {
-        imageDisplayPanel = new ImageDisplayPanel();
-        imageDisplayPanel.setBackground(this.getBackground());
-        add(imageDisplayPanel);
     }
 
     private void generateLeftArrow(JPanel middlePanel) {
@@ -92,7 +106,7 @@ public class CollectionScreen extends JPanel implements Screen {
             public void mouseClicked(MouseEvent e) {
                 if(nowIndex > 0) {
                     nowIndex--;
-                    imageDisplayPanel.repaint();
+                    showSwordImages();
                 }
             }
         });
@@ -108,7 +122,7 @@ public class CollectionScreen extends JPanel implements Screen {
             public void mouseClicked(MouseEvent e) {
                 if(nowIndex < 19) {
                     nowIndex++;
-                    imageDisplayPanel.repaint();
+                    showSwordImages();
                 }
             }
         });
@@ -117,17 +131,12 @@ public class CollectionScreen extends JPanel implements Screen {
 
     @Override
     public void showScreen() {
-        update();
         setVisible(true);
     }
 
     @Override
     public void hideScreen() {
         setVisible(false);
-    }
-
-    public void update() {
-
     }
 
     private void loadSwordImages() {
@@ -137,46 +146,18 @@ public class CollectionScreen extends JPanel implements Screen {
             blackSwordImages[i] = new ImageIcon("src/main/resources/collectionScreen/"+(i+1)+".png");
     }
 
-    private class ImageDisplayPanel extends JPanel {
-        @Override
-        protected void paintComponent(Graphics g) {
-            System.out.println(nowIndex);
-            super.paintComponent(g);
+    private void showSwordImages() {
+        centerImage.setIcon(new ImageIcon(isSwordShow(nowIndex).getImage().getScaledInstance(400,400,Image.SCALE_SMOOTH)));
+        if(nowIndex > 0)
+            leftImage.setIcon(new ImageIcon(isSwordShow(nowIndex-1).getImage().getScaledInstance(300,300,Image.SCALE_SMOOTH)));
+        else leftImage.setIcon(new ImageIcon());
+        if(nowIndex < 19)
+            rightImage.setIcon(new ImageIcon(isSwordShow(nowIndex+1).getImage().getScaledInstance(300,300,Image.SCALE_SMOOTH)));
+        else rightImage.setIcon(new ImageIcon());
+    }
 
-            // 패널 크기 가져오기
-            int width = getWidth();
-            int height = getHeight();
-
-            // 가운데 이미지 크기와 위치
-            int centerSize = 400;
-            int centerX = (width - centerSize) / 2;
-            int centerY = (height - centerSize) / 2;
-
-            // 양쪽 이미지 크기와 위치
-            int sideSize = 300;
-            int leftIndex = nowIndex-1;
-            int rightIndex = nowIndex+1;
-
-            int leftX = centerX - sideSize - 40;
-            int leftY = centerY + 20;
-            int rightX = centerX + centerSize + 40;
-            int rightY = centerY + 20;
-
-            // 이미지 그리기
-            if(nowIndex != 0)
-                if(player.getBestSword() < leftIndex)
-                    g.drawImage(blackSwordImages[leftIndex].getImage(), leftX, leftY, sideSize, sideSize, this);
-                else
-                    g.drawImage(swordImages[leftIndex].getImage(), leftX, leftY, sideSize, sideSize, this);
-            if(player.getBestSword() < nowIndex)
-                g.drawImage(blackSwordImages[nowIndex].getImage(), centerX, centerY, centerSize, centerSize, this);
-            else
-                g.drawImage(swordImages[nowIndex].getImage(), centerX, centerY, centerSize, centerSize, this);
-            if(nowIndex != 19)
-                if(player.getBestSword() < rightIndex)
-                    g.drawImage(blackSwordImages[rightIndex].getImage(), rightX, rightY, sideSize, sideSize, this);
-                else
-                    g.drawImage(swordImages[rightIndex].getImage(), rightX, rightY, sideSize, sideSize, this);
-        }
+    private ImageIcon isSwordShow(int index) {
+        if(player.getBestSword() >= index) return swordImages[index];
+        return blackSwordImages[index];
     }
 }
