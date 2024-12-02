@@ -22,7 +22,7 @@ public class GameScreen extends JPanel implements Screen {
     private JPanel successPanel = new JPanel(null);
     private MainController mainController;
     private static boolean isSaveTicketActive = false;
-
+    private Sword[] swords;
 
     public static boolean getIsSaveTicketActive() {
         return isSaveTicketActive;
@@ -90,7 +90,8 @@ public class GameScreen extends JPanel implements Screen {
     private void setMidbutton(Container c) {
         JPanel imagePanel = new JPanel(new BorderLayout());//검이미지
         Sword sword = player.getNowSword();
-        JLabel swordImage = new JLabel(sword.imageIcon());
+//        JLabel swordImage = new JLabel(sword.imageIcon());
+        JLabel swordImage = new JLabel(sword.gifIcon());
 
         JPanel swordName = new JPanel(new BorderLayout());//검이름
         swordNameLabel = new JLabel(player.getNowSword().getName());
@@ -198,7 +199,7 @@ public class GameScreen extends JPanel implements Screen {
                         success(image,nowSword.getId());
                         moneyPanelUpdate();
                     } else {
-                        fall(image);
+                        fall(image, nowSword.getId());
                     }
                 }
                 else{
@@ -212,7 +213,8 @@ public class GameScreen extends JPanel implements Screen {
     private void success(JLabel image, int number){
         Sword nextSword = MainController.swordList[number];//다음검뽑아오기
         player.setNowSword(nextSword);//플레이어검 업그레이드
-        image.setIcon(nextSword.imageIcon());//이미지변경
+//        image.setIcon(nextSword.imageIcon());//이미지변경
+        image.setIcon(nextSword.gifIcon());//이미지변경
         successPanel.setVisible(true);
         if(successPanel.isVisible()){
             new javax.swing.Timer(3000, e -> {
@@ -220,13 +222,14 @@ public class GameScreen extends JPanel implements Screen {
             }).start();
         }
     }
-    private void fall(JLabel Image) {
+    private void fall(JLabel Image, int num) {
         if (saveTicketButton.getBackground() != Color.GREEN) {
-            Sword nextSword = MainController.swordList[0];
-            player.setNowSword(MainController.swordList[0]);
-            Image.setIcon(nextSword.imageIcon());
-            moneyPanelUpdate();
+//            Image.setIcon(nextSword.imageIcon());
+            Image.setIcon(swords[num-1].failedIcon());
             fallImg();
+            player.setNowSword(swords[0]);
+            Image.setIcon(swords[0].gifIcon());
+            moneyPanelUpdate();
         } else {
             saveTicketButton.setBackground(Color.gray);
             saveTicketButton.setText("파괴방지 비활성화");
@@ -247,7 +250,8 @@ public class GameScreen extends JPanel implements Screen {
             @Override
             public void actionPerformed(ActionEvent e) {//player에 돈넣어주는것추가하기
                 player.soldSword(MainController.swordList[0]);//n번째검 판매 > 0번째검으로 초기화
-                Image.setIcon(player.getNowSword().imageIcon());
+//                Image.setIcon(player.getNowSword().imageIcon());
+                Image.setIcon(player.getNowSword().gifIcon());
                 moneyPanelUpdate();
                 mainController.updateStoreScreen();
             }
@@ -336,6 +340,7 @@ public class GameScreen extends JPanel implements Screen {
 
     @Override
     public void initialize() {
+        swords = MainController.swordList;
         popup();
         player = Player.getInstance();
         money = new JLabel("돈:" + player.getMoney());
@@ -345,6 +350,7 @@ public class GameScreen extends JPanel implements Screen {
         midPanel();
         mainController.updateStoreScreen();
         mainController.updateInventoryScreen();
+
     }
 
 
