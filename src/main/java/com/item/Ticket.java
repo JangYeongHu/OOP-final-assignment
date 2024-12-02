@@ -78,7 +78,7 @@ class PushTicket extends Ticket{//확정업
     static String name = "확정업 티켓";
 
     public PushTicket(int count){
-        price = 1000000000;
+        price = 150000000;
         if(count == 0) addCount();
         else {
             this.count = count;

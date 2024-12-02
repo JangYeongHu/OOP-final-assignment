@@ -151,7 +151,7 @@ public class InventoryScreen extends JPanel implements Screen {
     }
     public void refreshInventory() {
         removeAll();
-        initialize();//다시그리기
+        initialize();
         revalidate();
         repaint();
     }
