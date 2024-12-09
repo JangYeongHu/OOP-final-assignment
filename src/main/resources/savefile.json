@@ -1,37 +1,11 @@
 [
     {
-        "item": [
-            {
-                "count": 1,
-                "type": "Save",
-                "possibility": 1
-            },
-            {
-                "count": 6,
-                "type": "Push",
-                "possibility": 1
-            },
-            {
-                "count": 5,
-                "type": "Upgrade",
-                "possibility": 10
-            },
-            {
-                "count": 1,
-                "type": "Upgrade",
-                "possibility": 16
-            },
-            {
-                "count": 1,
-                "type": "Upgrade",
-                "possibility": 18
-            }
-        ],
+        "item": [],
         "player_data": {
-            "money": 999999999,
+            "money": 0,
             "sword_id": 1,
-            "latest_date": "2024-12-02 21:15",
-            "best_sword": 0
+            "latest_date": "2024-12-03 19:40",
+            "best_sword": 6
         },
         "index": 0,
         "statistics": [

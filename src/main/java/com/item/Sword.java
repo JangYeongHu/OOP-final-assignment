@@ -31,7 +31,6 @@ public class Sword {
     public boolean upgradeProbability() {// 현재 강화율과 비교해서 강화확률조정
         Random rand = new Random();
         int n = rand.nextInt(1,101);// 성공
-        System.out.println(n + " " + possibility);
         if(n > possibility){
             failureCount++;
             return false;
