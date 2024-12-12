@@ -106,10 +106,15 @@ public class StoreScreen extends JPanel implements Screen {
             public void actionPerformed(ActionEvent e) {
                 if(player.getMoney()- i.getPrice() >= 0){
                     player.setMoney(player.getMoney()- i.getPrice());
-                    Item item = findItem(i);
-                    if (!item.equals(i)) {
-                        item.addCount();
-                    }else{
+                    int check = 0;
+                    for (Item item :player.getInventory()) {
+                        if (item.getName().equals(i.getName())) {
+                            item.addCount();
+                            check =1;
+                            break;
+                        }
+                    }
+                    if(check == 0){
                         player.getInventory().add(i);
                     }
                     JOptionPane.showMessageDialog(null, i.getName() + " 아이템을 구매하셨습니다");
@@ -123,14 +128,6 @@ public class StoreScreen extends JPanel implements Screen {
         return buyButton;
     }
 
-    private Item findItem(Item i){
-        for (Item item : Player.getInstance().getInventory()) {
-            if (item.getName().equals(i.getName())) {
-                return item;
-            }
-        }
-        return i;
-    }
     private void setButtonSize(JButton c) {
         c.setPreferredSize(new Dimension(100, 100));
         c.setBackground(new Color(64, 83, 76));
