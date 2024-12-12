@@ -10,7 +10,7 @@ public class BgmController {
     private Clip clip;
     private FloatControl volumeControl;
     private boolean isBgmOn = true;  // 초기값: BGM 켜짐
-    private static final String BGM_FILE_PATH = "src/main/resources/bgm.wav"; // BGM 파일 경로
+    private static final String BGM_FILE_PATH = "resources/bgm.wav"; // BGM 파일 경로
     private int roughVolume = 100;
 
     public static BgmController getInstance() {

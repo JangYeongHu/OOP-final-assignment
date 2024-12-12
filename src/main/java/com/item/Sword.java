@@ -31,7 +31,6 @@ public class Sword {
     public boolean upgradeProbability() {// 현재 강화율과 비교해서 강화확률조정
         Random rand = new Random();
         int n = rand.nextInt(1,101);// 성공
-        System.out.println(n + " " + possibility);
         if(n > possibility){
             failureCount++;
             return false;
@@ -60,8 +59,8 @@ public class Sword {
     public Sword (String img, int i){//검만들기 검아이디와 이미지파일 이름을넣는다
         imageSourcePath = img;
         id = i;
-        gifIcon = new ImageIcon("src/main/resources/game/" + id + ".gif");
-        failedIcon = new ImageIcon("src/main/resources/failed/" + id + ".gif");
+        gifIcon = new ImageIcon("resources/game/" + id + ".gif");
+        failedIcon = new ImageIcon("resources/failed/" + id + ".gif");
 
     }
 

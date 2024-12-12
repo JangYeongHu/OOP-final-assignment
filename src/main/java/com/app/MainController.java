@@ -47,13 +47,11 @@ public class MainController extends JFrame {
         addScreen("Collection", new CollectionScreen(this));
         addScreen("END", new EndingScreen(this));
 
-
         add(mainPanel);
         setSize(1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setResizable(false);
-//        bgmController.play();
         loadSettingData();
         switchTo("Load");
     }
@@ -105,13 +103,12 @@ public class MainController extends JFrame {
 
         for (int i = 0; i < swords.length(); i++){
             JSONObject sword = swords.getJSONObject(i);
-            swordList[i] = new Sword("src/main/resources/"+(i+1)+".png", i+1);
+            swordList[i] = new Sword("resources/"+(i+1)+".png", i+1);
             swordList[i].setSwordName(sword.getString("name"));
             swordList[i].setSellPrice(sword.getInt("sell-price"));
             swordList[i].setUpgradeFee(sword.getInt("update-fee"));
             swordList[i].setPossibility(sword.getInt("possibility"));
             swordList[i].setSwordDescription(sword.getString("description"));
-
         }
 
         jsonController.init();

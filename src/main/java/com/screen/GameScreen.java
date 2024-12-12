@@ -374,7 +374,6 @@ public class GameScreen extends JPanel implements Screen {
         if(MainController.swordList.length > pSword){
             player.setNowSword(MainController.swordList[pSword]);
         }else{
-            System.out.println("maxPossibility");
         }
     }
     public static void upgradeTicketActive(int i){
@@ -506,7 +505,6 @@ public class GameScreen extends JPanel implements Screen {
         saveTicketButton.setVisible(true);
         swordUpgradeButton.setVisible(true);
         player.setMoney(0);
-        System.out.println(player.getInventory().size());
         if(!player.getInventory().isEmpty()){
             ArrayList<Item> emptyInventory = player.getInventory();
             for (int i = 0; i < player.getInventory().size(); i++){

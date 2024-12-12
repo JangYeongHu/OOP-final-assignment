@@ -134,15 +134,12 @@ public class StatisticsScreen extends JPanel implements Screen {
             // 스크롤 팬 생성 및 패널에 추가
             statisticsScrollPane = new JScrollPane(statisticsTable);
             statisticsScrollPane.setBounds(50,75,1100,650);
-
             class CustomScrollBarUI extends BasicScrollBarUI {
                 @Override
                 protected void configureScrollBarColors() {
                     this.thumbColor = new Color(103, 125, 106);
                     this.trackColor = new Color(214, 189, 152);
                 }
-
-
 
                 @Override
                 protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {

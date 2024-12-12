@@ -125,8 +125,8 @@ public class CollectionScreen extends JPanel implements Screen {
     }
 
     private void generateLeftArrow(JPanel middlePanel) {
-        ImageIcon leftImageIcon = new ImageIcon("src/main/resources/left-arrow-button.png");
-        ImageIcon leftImageIconClicked = new ImageIcon("src/main/resources/left-arrow-button-clicked.png");
+        ImageIcon leftImageIcon = new ImageIcon("resources/left-arrow-button.png");
+        ImageIcon leftImageIconClicked = new ImageIcon("resources/left-arrow-button-clicked.png");
         ImageIcon leftImage = new ImageIcon(leftImageIcon.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
         ImageIcon leftImageClicked = new ImageIcon(leftImageIconClicked.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
         JLabel leftArrowLabel = new JLabel(leftImage);
@@ -155,8 +155,8 @@ public class CollectionScreen extends JPanel implements Screen {
     }
 
     private void generateRightArrow(JPanel middlePanel) {
-        ImageIcon rightImageIcon = new ImageIcon("src/main/resources/right-arrow-button.png");
-        ImageIcon rightImageIconClicked = new ImageIcon("src/main/resources/right-arrow-button-clicked.png");
+        ImageIcon rightImageIcon = new ImageIcon("resources/right-arrow-button.png");
+        ImageIcon rightImageIconClicked = new ImageIcon("resources/right-arrow-button-clicked.png");
         ImageIcon rightImage = new ImageIcon(rightImageIcon.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
         ImageIcon rightImageClicked = new ImageIcon(rightImageIconClicked.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
         JLabel rightImageLabel = new JLabel(rightImage);
@@ -198,9 +198,9 @@ public class CollectionScreen extends JPanel implements Screen {
 
     private void loadSwordImages() {
         for (int i = 0; i < 20; i++)
-            swordImages[i] = new ImageIcon("src/main/resources/"+(i+1)+".png");
+            swordImages[i] = new ImageIcon("resources/"+(i+1)+".png");
         for (int i = 0; i < 20; i++)
-            blackSwordImages[i] = new ImageIcon("src/main/resources/collectionScreen/"+(i+1)+".png");
+            blackSwordImages[i] = new ImageIcon("resources/collectionScreen/"+(i+1)+".png");
     }
 
     private void showSwordImages() {

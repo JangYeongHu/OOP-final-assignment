@@ -41,7 +41,6 @@ public class Player {
         }
         return instances[index];
     }
-
     //플레이어가 선택한 프로필을 갱신
     public static void setSelectedIdx(int changePlayer) {
         selectedIdx = changePlayer;

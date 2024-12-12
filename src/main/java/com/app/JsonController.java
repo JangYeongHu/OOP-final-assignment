@@ -22,8 +22,8 @@ import java.util.ArrayList;
 public class JsonController {
 
     private static JsonController singletonJsonController;
-    private static final String FILE_PATH = "src/main/resources/savefile.json";
-    private static final String CONFIG_FILE_PATH = "src/main/resources/config.json"; // config.json 경로
+    private static final String FILE_PATH = "resources/savefile.json";
+    private static final String CONFIG_FILE_PATH = "resources/config.json"; // config.json 경로
     private JSONArray rowDatas;
     private JSONObject configData;
 
@@ -146,15 +146,15 @@ public class JsonController {
         playerData.put("latest_date", formattedDateTime);
         rowDatas.getJSONObject(index).put("player_data", playerData);
 
-        // 통계 정보 가져오기 
+        // 통계 정보 가져오기
         JSONArray statistics = new JSONArray();
         ArrayList<int[]> playerStatics = player.getStatics();
         for (int i = 0; i < playerStatics.size(); i++) {
-           JSONObject jo = new JSONObject();
-           jo.put("sword_id", i+1);
-           jo.put("success", playerStatics.get(i)[0]);
-           jo.put("fail", playerStatics.get(i)[1]);
-           statistics.put(jo);
+            JSONObject jo = new JSONObject();
+            jo.put("sword_id", i+1);
+            jo.put("success", playerStatics.get(i)[0]);
+            jo.put("fail", playerStatics.get(i)[1]);
+            statistics.put(jo);
         }
         rowDatas.getJSONObject(index).put("statistics", statistics);
 
@@ -186,7 +186,7 @@ public class JsonController {
                 Files.write(Paths.get(FILE_PATH), jsonString.getBytes());
                 System.out.println("saved successfully");
 
-        }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -219,14 +219,4 @@ public class JsonController {
         readConfigJson();
 
     }
-
-
-
-//    public static void main(String[] args) {
-//        // 테스트를 위한 메인
-//        // UTF-8 출력 스트림 강제 설정 - 콘솔에 계속 한글이 깨져서 설정함
-//        System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
-//
-//
-//    }
-}
+    }
